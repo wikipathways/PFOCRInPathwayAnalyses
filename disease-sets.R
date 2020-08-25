@@ -3,6 +3,8 @@
 
 library(tidyverse)
 
+###############################################################################
+
 ## Identify disease terms used for WikiPathways
 library(rWikiPathways)
 
@@ -12,7 +14,7 @@ hs.pathways <- rWikiPathways::listPathwayIds("Homo sapiens")
 hs.disease.pathways <- intersect(disease.pathways, hs.pathways)
 
 # examine disease terms among these pathways
-all.terms <- lapply(hs.disease.pathways, function(p){
+all.wp.terms <- lapply(hs.disease.pathways, function(p){
   ont <- getOntologyTerms(p)
   # transform into desired df
   df <- as.data.frame(unlist(ont), stringsAsFactors = F)
@@ -29,7 +31,30 @@ all.terms <- lapply(hs.disease.pathways, function(p){
 
 })
 # combine into single df of WikiPathways-associated disease terms
-all.wp.terms <- bind_rows(all.terms)
+all.wp.terms <- bind_rows(all.wp.terms)
 
 # 56 unique disease terms annotating WikiPathways
-unique(all.terms$name)
+unique(all.wp.terms$name)
+
+###############################################################################
+
+## Identify disease terms used for PFOCR
+# retreive disease annotations 
+enr.annots <- read.table("./enriched_annots.tsv", header=T, sep="\t", stringsAsFactors = F, quote = c("\""))
+
+# transform into useful df
+enr.annots.sub <- enr.annots %>%
+  dplyr::select(c(1,2))%>%
+  dplyr::filter(!is.na(.[2]))  
+all.pf.terms <- enr.annots.sub %>%
+  mutate(name = strsplit(!!as.name(names(enr.annots.sub)[2]), " | ", fixed = T),
+         ontology = "Disease") %>% 
+  unnest(name) %>%
+  select(c(1,3,4))
+
+# 151 unique disease terms annotating WikiPathways
+unique(all.pf.terms$name)
+
+###############################################################################
+
+# Intersection of disease terms for WP and PFOCR
