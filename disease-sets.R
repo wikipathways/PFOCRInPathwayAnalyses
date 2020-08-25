@@ -36,6 +36,9 @@ all.wp.terms <- bind_rows(all.wp.terms)
 # 56 unique disease terms annotating WikiPathways
 unique(all.wp.terms$name)
 
+## Also get human pathway titles
+hs.pathways.names <- rWikiPathways::listPathwayNames("Homo sapiens")
+
 ###############################################################################
 
 ## Identify disease terms used for PFOCR
@@ -58,3 +61,18 @@ unique(all.pf.terms$name)
 ###############################################################################
 
 # Intersection of disease terms for WP and PFOCR
+
+# wp.pf.terms <- intersect(all.pf.terms$name, all.wp.terms$name)
+
+wp.pf.terms.1 <- lapply(unique(all.wp.terms$name), function(p){
+  hits <- agrep(p, unique(all.pf.terms$name), max = 1, ignore.case = T)
+  if(length(hits) > 0){
+  data.frame(wp.term = p, pf.term.index = hits) %>%
+    mutate(pf.term.name =  unique(all.pf.terms$name)[pf.term.index]) %>%
+    select(c(1,3))
+  }
+})
+wp.pf.terms.1 <- bind_rows(wp.pf.terms.1)
+
+wp.pf.terms.selected <- wp.pf.terms.1 %>%
+  filter(!wp.term %in% c("cancer","SIDS", "ALS", "disease"))
