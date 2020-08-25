@@ -55,15 +55,25 @@ all.pf.terms <- enr.annots.sub %>%
   unnest(name) %>%
   select(c(1,3,4))
 
-# 151 unique disease terms annotating WikiPathways
+# 151 unique disease terms annotating PFOCR
 unique(all.pf.terms$name)
 
 ###############################################################################
 
-# Intersection of disease terms for WP and PFOCR
+# Identify disease annotations for GEO datasets
+setwd("../bioinformatics-datasets/")
+source("query-gene-sets.R")
 
-# wp.pf.terms <- intersect(all.pf.terms$name, all.wp.terms$name)
+ds <- listHarmonizomeSets()
 
+#163 unique disease terms annotating harmonizome datasets
+unique(ds$dataset_annot)
+
+###############################################################################
+
+# Intersection of disease terms
+
+## WP and PFOCR
 wp.pf.terms.1 <- lapply(unique(all.wp.terms$name), function(p){
   hits <- agrep(p, unique(all.pf.terms$name), max = 1, ignore.case = T)
   if(length(hits) > 0){
@@ -76,3 +86,34 @@ wp.pf.terms.1 <- bind_rows(wp.pf.terms.1)
 
 wp.pf.terms.selected <- wp.pf.terms.1 %>%
   filter(!wp.term %in% c("cancer","SIDS", "ALS", "disease"))
+
+## WP and Data
+wp.data.terms.1 <- lapply(unique(all.wp.terms$name), function(p){
+  hits <- agrep(p, unique(ds$dataset_annot), max = 1, ignore.case = T)
+  if(length(hits) > 0){
+    data.frame(wp.term = p, data.term.index = hits) %>%
+      mutate(data.term.name =  unique(ds$dataset_annot)[data.term.index]) %>%
+      select(c(1,3))
+  }
+})
+wp.data.terms.1 <- bind_rows(wp.data.terms.1)
+
+# 9 unique wp.terms overlap with 9 unique data.terms
+wp.data.terms.selected <- wp.data.terms.1 %>%
+  filter(!wp.term %in% c("cancer","SIDS", "ALS", "disease"))
+
+## PFOCR and Data
+pf.data.terms.1 <- lapply(unique(all.pf.terms$name), function(p){
+  hits <- agrep(p, unique(ds$dataset_annot), max = 1, ignore.case = T)
+  if(length(hits) > 0){
+    data.frame(pf.term = p, data.term.index = hits) %>%
+      mutate(data.term.name =  unique(ds$dataset_annot)[data.term.index]) %>%
+      select(c(1,3))
+  }
+})
+pf.data.terms.1 <- bind_rows(pf.data.terms.1)
+
+# 28 unique pf.terms overlap with 34 unique data.terms
+pf.data.terms.selected <- pf.data.terms.1 %>%
+  filter(!pf.term %in% c("cancer","Myopathy")) %>%
+  filter(!data.term.name %in% c("Nephroblastoma"))
