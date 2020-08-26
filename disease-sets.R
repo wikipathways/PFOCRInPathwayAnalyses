@@ -36,31 +36,38 @@ all.wp.terms <- bind_rows(all.wp.terms)
 # 56 unique disease terms annotating WikiPathways
 unique(all.wp.terms$name)
 
-## Also get human pathway titles
-hs.pathways.names <- rWikiPathways::listPathwayNames("Homo sapiens")
+####################
+
+## Alternative source for disease terms for WikiPathways,
+##  using same enrichment method used for PFOCR
+
+gmt.wp.overlaps <- readRDS("gmt-wp-overlaps.RDS")
+gmt.wp.overlaps.2 <- filter(gmt.wp.overlaps, wp.overlap.cnt >= 2)
+all.wp.terms.2 <- gmt.wp.overlaps.2 %>%
+  select(c(term,wpid)) %>%
+  mutate(ontology = "Disease") %>%
+  droplevels()
+unique(all.wp.terms.2$term)
 
 ###############################################################################
 
 ## Identify disease terms used for PFOCR
-# retreive disease annotations 
-enr.annots <- read.table("./enriched_annots.tsv", header=T, sep="\t", stringsAsFactors = F, quote = c("\""))
 
-# transform into useful df
-enr.annots.sub <- enr.annots %>%
-  dplyr::select(c(1,2))%>%
-  dplyr::filter(!is.na(.[2]))  
-all.pf.terms <- enr.annots.sub %>%
-  mutate(name = strsplit(!!as.name(names(enr.annots.sub)[2]), " | ", fixed = T),
-         ontology = "Disease") %>% 
-  unnest(name) %>%
-  select(c(1,3,4))
-
-# 151 unique disease terms annotating PFOCR
-unique(all.pf.terms$name)
+gmt.pfocr.overlaps <- readRDS("gmt-pfocr-overlaps.RDS")
+gmt.pfocr.overlaps.2 <- filter(gmt.pfocr.overlaps, pf.overlap.cnt >= 2)
+all.pf.terms.2 <- gmt.pfocr.overlaps.2 %>%
+  select(c(term,figid)) %>%
+  mutate(ontology = "Disease") %>%
+  droplevels()
+unique(all.pf.terms.2$term)
 
 ###############################################################################
 
 # Identify disease annotations for GEO datasets
+
+## NOTE: First clone the gladstone-institutes/bioinformatics-datasets repo in 
+##       the same parent dir as this repo, such that the following line works.
+
 setwd("../bioinformatics-datasets/")
 source("query-gene-sets.R")
 
