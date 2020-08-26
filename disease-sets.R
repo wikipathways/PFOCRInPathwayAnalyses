@@ -81,11 +81,11 @@ unique(ds$dataset_annot)
 # Intersection of disease terms
 
 ## WP and PFOCR
-wp.pf.terms.1 <- lapply(unique(all.wp.terms$name), function(p){
-  hits <- agrep(p, unique(all.pf.terms$name), max = 1, ignore.case = T)
+wp.pf.terms.1 <- lapply(unique(all.wp.terms.2$name), function(p){
+  hits <- agrep(p, unique(all.pf.terms.2$name), max = 1, ignore.case = T)
   if(length(hits) > 0){
   data.frame(wp.term = p, pf.term.index = hits) %>%
-    mutate(pf.term.name =  unique(all.pf.terms$name)[pf.term.index]) %>%
+    mutate(pf.term.name =  unique(all.pf.terms.2$name)[pf.term.index]) %>%
     select(c(1,3))
   }
 })
@@ -95,7 +95,7 @@ wp.pf.terms.selected <- wp.pf.terms.1 %>%
   filter(!wp.term %in% c("cancer","SIDS", "ALS", "disease"))
 
 ## WP and Data
-wp.data.terms.1 <- lapply(unique(all.wp.terms$name), function(p){
+wp.data.terms.1 <- lapply(unique(all.wp.terms.2$term), function(p){
   hits <- agrep(p, unique(ds$dataset_annot), max = 1, ignore.case = T)
   if(length(hits) > 0){
     data.frame(wp.term = p, data.term.index = hits) %>%
@@ -105,12 +105,12 @@ wp.data.terms.1 <- lapply(unique(all.wp.terms$name), function(p){
 })
 wp.data.terms.1 <- bind_rows(wp.data.terms.1)
 
-# 9 unique wp.terms overlap with 9 unique data.terms
+# 23 unique wp.terms overlap with 25 unique data.terms
 wp.data.terms.selected <- wp.data.terms.1 %>%
-  filter(!wp.term %in% c("cancer","SIDS", "ALS", "disease"))
+  filter(!wp.term %in% c("cancer","Cancer", "SIDS", "ALS", "disease"))
 
 ## PFOCR and Data
-pf.data.terms.1 <- lapply(unique(all.pf.terms$name), function(p){
+pf.data.terms.1 <- lapply(unique(all.pf.terms.2$term), function(p){
   hits <- agrep(p, unique(ds$dataset_annot), max = 1, ignore.case = T)
   if(length(hits) > 0){
     data.frame(pf.term = p, data.term.index = hits) %>%
@@ -120,7 +120,7 @@ pf.data.terms.1 <- lapply(unique(all.pf.terms$name), function(p){
 })
 pf.data.terms.1 <- bind_rows(pf.data.terms.1)
 
-# 28 unique pf.terms overlap with 34 unique data.terms
+# 26 unique pf.terms overlap with 29 unique data.terms
 pf.data.terms.selected <- pf.data.terms.1 %>%
-  filter(!pf.term %in% c("cancer","Myopathy")) %>%
+  filter(!pf.term %in% c("cancer","Cancer", "Myopathy")) %>%
   filter(!data.term.name %in% c("Nephroblastoma"))
