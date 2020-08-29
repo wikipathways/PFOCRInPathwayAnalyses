@@ -1,0 +1,40 @@
+"dataset_annot","dataset_id","unique_genes"
+"Alzheimer's Disease","GSE1297",750
+"Alzheimer's Disease","GSE5281",630
+"Arrhythmogenic Right Ventricular Cardiomyopathy","GSE4120",609
+"Breast Cancer","GSE1378",725
+"Breast Cancer","GSE1379",753
+"Breast Cancer","GSE1872",835
+"Breast Cancer","GSE2429",506
+"Breast Cancer","GSE2528",571
+"Breast Cancer","GSE3744",598
+"Cardiomyopathy","GSE1869",727
+"Cardiomyopathy","GSE5406",761
+"Cardiomyopathy, Dilated","GSE3586",755
+"Crohn's disease","GSE6731",810
+"Diabetic Neuropathy","GSE11343",588
+"Epilepsy","GSE7486",754
+"In situ melanoma of skin","GSE4587",530
+"JRA - Juvenile rheumatoid arthritis","GSE7753",660
+"Leber congenital amaurosis","GSE3249",634
+"Obesity","GSE4692",329
+"Obesity","GSE474",800
+"Obesity","GSE5109",377
+"Parkinson's Disease","GSE7621",686
+"Peripheral motor neuropathy","GSE1947",703
+"Polycystic Ovary Syndrome","GSE5090",718
+"Polycystic Ovary Syndrome","GSE6798",681
+"Retinitis Pigmentosa","GSE128",802
+"Schizophrenia","GSE4036",687
+"SCID - Severe combined immunodeficiency","GSE3414",421
+"Type 1 diabetes mellitus","GSE10586",778
+"Type 1 diabetes mellitus","GSE11",443
+"Type 1 diabetes mellitus","GSE1659",634
+"Type 1 diabetes mellitus","GSE2254",723
+"Type 1 diabetes mellitus","GSE4616",524
+"Type 2 diabetes mellitus","GSE12643",820
+"Type 2 diabetes mellitus","GSE2470",314
+"Type 2 diabetes mellitus","GSE2899",696
+"Type 2 diabetes mellitus","GSE642",664
+"Type 2 diabetes mellitus","GSE6428",829
+"Viral cardiomyopathy","GSE4172",716
