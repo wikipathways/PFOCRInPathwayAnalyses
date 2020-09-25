@@ -1,4 +1,50 @@
 $group1
+[1] "ID01.Input" "ID56.Input" "ID75.Input" "ID44.Input" "ID57.Input" "ID60.Input"
+
+$group2
+[1] "ID01.siCTRL" "ID56.siCTRL" "ID75.siCTRL" "ID44.siCTRL" "ID57.siCTRL" "ID60.siCTRL"
+
+$failed_samples
+ [1] "ID01.E2F1"     "ID56.E2F1"     "ID75.E2F1"     "ID44.E2F1"     "ID57.E2F1"     "ID60.E2F1"     "ID01.H3K27ac"  "ID56.H3K27ac"  "ID75.H3K27ac"  "ID44.H3K27ac" 
+[11] "ID57.H3K27ac"  "ID60.H3K27ac"  "ID01.H3K27me3" "ID56.H3K27me3" "ID75.H3K27me3" "ID44.H3K27me3" "ID57.H3K27me3" "ID60.H3K27me3" "ID01.H3K36me3" "ID56.H3K36me3"
+[21] "ID75.H3K36me3" "ID44.H3K36me3" "ID57.H3K36me3" "ID60.H3K36me3" "ID01.H3K4me1"  "ID56.H3K4me1"  "ID75.H3K4me1"  "ID44.H3K4me1"  "ID57.H3K4me1"  "ID60.H3K4me1" 
+[31] "ID01.H3K4me3"  "ID56.H3K4me3"  "ID75.H3K4me3"  "ID44.H3K4me3"  "ID57.H3K4me3"  "ID60.H3K4me3"  "ID01.siE2F1"   "ID56.siE2F1"   "ID75.siE2F1"   "ID44.siE2F1"  
+[41] "ID57.siE2F1"   "ID60.siE2F1"  
+
+$GSE
+[1] "GSE77260"
+
+
+
+$group1
+[1] "Adrenal_10wk" "Adrenal_16wk" "Adrenal_18wk"
+
+$group2
+[1] "Heart_10wk" "Heart_11wk" "Heart_17wk" "Heart_18wk"
+
+$group3
+[1] "Intestine_11wk" "Intestine_15wk" "Intestine_17wk"
+
+$group4
+[1] "Kidney_10wk" "Kidney_16wk" "Kidney_20wk"
+
+$group5
+[1] "Lung_10wkA" "Lung_17wkA" "Lung_20wkA"
+
+$group6
+[1] "Lung_10wkB" "Lung_17wkB" "Lung_20wkB"
+
+$failed_samples
+ [1] "Adrenal_20wkA"   "Adrenal_20wkB"   "Heart_20wkA"     "Heart_20wkB"     "Heart_20wkC"     "Intestine_10wkA" "Intestine_10wkB" "Intestine_20wkA" "Intestine_20wkB"
+[10] "Stomach_10wkA"   "Stomach_10wkB"   "Stomach_16wk"    "Stomach_18wk"    "Stomach_20wkA"   "Stomach_20wkB"   "Stomach_20wkC"  
+
+$GSE
+[1] "GSE64283"
+
+
+
+
+$group1
 [1] "H3K27ac Hour 0"  "H3K27ac Hour 1"  "H3K27ac Hour 4"  "H3K27ac Hour 12"
 
 $group2
