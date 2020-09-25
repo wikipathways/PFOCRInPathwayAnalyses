@@ -143,6 +143,86 @@ tb
 
 #distinguish sample names
 
+
+
+########## match additional terms
+terms=read.table("87disease",header=FALSE)
+terms=as.character(unlist((terms)))
+terms=c(terms, dieases,"knock-out", "knock out", "knockout","siRNA","knockdown", "knock down", "knock-down", "crispr-i", "variant","pathway")
+terms=unique(terms)
+match_gse_terms<-function(gse_id){
+  print(gse_id)
+  
+  
+  
+  tryCatch({
+    
+    data <- getGEO(gse_id)
+    
+  }, error = function(err) {
+    
+
+    return(NULL)
+    
+  }) # END tryCatch
+  
+  
+  title=data[[1]]@experimentData@title
+  abstract=data[[1]]@experimentData@abstract
+  
+  matched_disease_title=apply(as.matrix(terms),1,function(x) grep(x,title,ignore.case=TRUE) )
+  matched_disease_abstract=apply(as.matrix(terms),1,function(x) grep(x,abstract,ignore.case=TRUE) )
+  
+  if(length(matched_disease_title)>0 | length(matched_disease_abstract)>0){
+    if(length(matched_disease_title)>0){
+      which_disease=which(matched_disease_title>0)
+    }else{
+      which_disease=which(matched_disease_abstract>0)
+    }
+    return(disease[which_disease]) 
+  }else{
+    return(NULL)
+  }
+  if(which_disease>0){print(disease[which_disease])}
+  
+}
+
+
+match_gse_terms2<-function(description,abstract){
+
+ 
+  matched_disease_title=apply(as.matrix(terms),1,function(x) grep(x,title,ignore.case=TRUE) )
+  matched_disease_abstract=apply(as.matrix(terms),1,function(x) grep(x,abstract,ignore.case=TRUE) )
+  
+  if(length(matched_disease_title)>0 | length(matched_disease_abstract)>0){
+    if(length(matched_disease_title)>0){
+      which_disease=which(matched_disease_title>0)
+    }else{
+      which_disease=which(matched_disease_abstract>0)
+    }
+    return(disease[which_disease]) 
+  }else{
+    return(NULL)
+  }
+  if(which_disease>0){print(disease[which_disease])}
+  
+}
+
+
+matched_terms=apply(unique_gse,1,match_gse_terms)
+
+matched_terms_unlisted=as.matrix(unlist(lapply(matched_terms, `[[`, 1)))
+
+length(which(matched_terms_unlisted>0))
+1480
+
+tb=table(matched_terms_unlisted)
+names(tb)=c("NA",terms)
+tb
+
+#knockout    siRNA crispr-i=>knockdown  variant  pathway 
+#   105      216        1      158     1000 
+
 save.image(file="15disease_parsed.RData")
 
 data <- getGEO("GSE67492")
@@ -299,12 +379,6 @@ for(i in 1:length(gr)){
 return(sample_groups)
 }
 
-
-
-
-for(i in 1:length(uniques))
-
-
 group_samples2<-function(titles){
   
   library(stringdist)
@@ -455,9 +529,6 @@ group_samples2<-function(titles){
   return(sample_groups)
 }
 
-
-
-
 get_rep_keys<-function(query){
   
 inferCondition <- sub("(?![-+}\\]\\)])(\\W|_)*((bio[A-z]*)|(tech[A-z]*))?[ .#_-]*((rep.*)|(r)|(set.*)|(sample)|(exp.*)|(case))[ .#_-]*\\d+(\\W|_)*", "", query, ignore.case = TRUE, perl = TRUE)
@@ -513,6 +584,7 @@ get_rep_keys3<-function(query){
   
   return(as.character(as.matrix(uniques)))
 }
+
 group_samples3<-function(gse,titles){
   
   library(stringdist)
@@ -714,7 +786,6 @@ group_samples3<-function(gse,titles){
   
   return(sample_groups)
 }
-
 
 group_samples4<-function(gse,titles){
   
@@ -933,11 +1004,589 @@ group_samples4<-function(gse,titles){
   
 }
 
+group_samples5<-function(gse,titles){
+  
+  library(stringdist)
+  library(igraph)
+  library(raster)
+  
+  
+  
+  tryCatch({
+    
+    controls=NULL
+    controls=c(controls,grep("control",titles,ignore.case = TRUE))
+    controls=c(controls,grep("wild",titles,ignore.case = TRUE))
+    controls=c(controls,grep("untreated",titles,ignore.case = TRUE))
+    controls=c(controls,which(regexpr("[^a-z]wt[^a-z]",titles,ignore.case = TRUE) >0))
+    controls=c(controls,which(regexpr("wt[^a-z]",titles,ignore.case = TRUE) >0))
+    controls=c(controls,which(regexpr("[^a-z]wt$",titles,ignore.case = TRUE) >0))
+    controls=c(controls,which(regexpr("[^a-z]healthy",titles,ignore.case = TRUE) >0))
+    controls=c(controls,which(regexpr("^healthy",titles,ignore.case = TRUE) >0))
+    controls=c(controls,which(regexpr("uninfected",titles,ignore.case = TRUE) >0))
+    controls=c(controls,which(regexpr("^standard",titles,ignore.case = TRUE) >0))
+    controls=c(controls,which(regexpr("[^a-z]standard",titles,ignore.case = TRUE) >0))
+    controls=c(controls,which(regexpr("ctrl",titles,ignore.case = TRUE) >0))
+    controls=c(controls,which(regexpr("[^a-z]normal",titles,ignore.case = TRUE) >0))
+    controls=c(controls,which(regexpr("^normal",titles,ignore.case = TRUE) >0))
+    
+    
+    
+    
+    pre_post_flag=0
+    if( length(which(regexpr("[^a-z]pre[^a-z]",titles,ignore.case = TRUE) >0))>0 & length(which(regexpr("[^a-z]post[^a-z]",titles,ignore.case = TRUE) >0))>0 ){
+      pre_post_flag=1
+    }
+    
+    if(pre_post_flag){
+      controls=c(controls,which(regexpr("[^a-z]pre[^a-z]",titles,ignore.case = TRUE) >0))
+    }
+    titles[controls]
+    
+    if(length(controls)==0){
+      print("No control samples")
+      return(list())
+    }else if(length(controls)==1){
+      print("Only one control sample")
+      return(list())
+    }
+    
+    if(length(titles)-length(controls)==0){
+      print("No case samples")
+      return(list())
+    }else if(length(titles)-length(controls)==1){
+      print("Only one case sample")
+      return(list())
+    }
+    ###case
+    
+    titles_cases=titles[-controls]
+    rep_keys=get_rep_keys3(titles_cases)
+    
+    sample_groups=list()
+    
+    last_case=0
+    
+    if(length(rep_keys)>0){
+      
+      if(rep_keys!=""){
+        rep_keys=rep_keys[order(nchar(rep_keys), rep_keys,decreasing=TRUE)]
+        if(length(which(nchar(rep_keys)==0))){
+          rep_keys=rep_keys[-which(nchar(rep_keys)==0)]
+        }
+        for(i in 1:length(rep_keys)){
+          #print(gr[[i]])
+          rep_keys[i]=gsub("\\+","\\\\+",rep_keys[i])
+          rep_keys[i]=gsub("\\(","\\\\(",rep_keys[i])
+          rep_keys[i]=gsub("\\?","\\\\?",rep_keys[i])
+          rep_keys[i]=gsub("\\*","\\\\*",rep_keys[i])
+          rep_keys[i]=gsub("\\{","\\\\{",rep_keys[i])
+          rep_keys[i]=gsub("\\[","\\\\[",rep_keys[i])
+          rep_keys[i]=gsub("\\|","\\\\|",rep_keys[i])
+          
+          matched=grep(rep_keys[i],titles_cases)
+          sample_groups<-c(sample_groups,list(titles_cases[matched]))
+          titles_cases=titles_cases[-matched]
+          names(sample_groups)[i]=paste("case",i,sep="")
+          last_case=i
+        }
+      }
+      
+    }
+    
+    if(length(titles_cases)>1){
+      
+      distm=as.matrix(stringdist::stringdistmatrix(titles_cases,method="lv"))
+      colnames(distm)=titles_cases
+      rownames(distm)=titles_cases
+      distm
+      
+      
+      # s.a <- strsplit(titles[1], "")[[1]]
+      # s.b <- strsplit(titles[2], "")[[1]]
+      # paste(s.a[s.a != s.b], collapse = "")
+      
+      
+      distm[which(distm>1)]=0
+      
+      g  <- graph.adjacency(distm) 
+      #plot(g)
+      clu <- components(g)
+      gr=igraph::groups(clu)
+      
+      gr=gr[which(lengths(gr)>1)]
+      
+      if(length(gr)==0&last_case==0){
+        print("No case samples")
+        return(list())
+      }else if(length(gr)>0){
+        for(i in 1:length(gr)){
+          #print(gr[[i]])
+          sample_groups<-c(sample_groups,list(gr[[i]]))
+          names(sample_groups)[length(sample_groups)]=paste("case",last_case+i,sep="")
+          
+        }
+      }
+      
+      
+      
+      
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    ###control
+    
+    titles_controls=titles[controls]
+    
+    rep_keys=get_rep_keys3(titles_controls)
+    
+    
+    
+    last_control=0
+    
+    if(length(rep_keys)>0){
+      
+      if(rep_keys!=""){
+        rep_keys=rep_keys[order(nchar(rep_keys), rep_keys,decreasing=TRUE)]
+        if(length(which(nchar(rep_keys)==0))){
+          rep_keys=rep_keys[-which(nchar(rep_keys)==0)]
+        }
+        
+        for(i in 1:length(rep_keys)){
+          #print(gr[[i]])
+          rep_keys[i]=gsub("\\+","\\\\+",rep_keys[i])
+          rep_keys[i]=gsub("\\(","\\\\(",rep_keys[i])
+          rep_keys[i]=gsub("\\?","\\\\?",rep_keys[i])
+          rep_keys[i]=gsub("\\*","\\\\*",rep_keys[i])
+          rep_keys[i]=gsub("\\{","\\\\{",rep_keys[i])
+          rep_keys[i]=gsub("\\[","\\\\[",rep_keys[i])
+          rep_keys[i]=gsub("\\|","\\\\|",rep_keys[i])
+          matched=grep(rep_keys[i],titles_controls)
+          sample_groups<-c(sample_groups,list(titles_controls[matched]))
+          titles_controls=titles_controls[-matched]
+          names(sample_groups)[length(sample_groups)]=paste("control",i,sep="")
+          last_control=i
+        }
+      }
+      
+    }
+    
+    if(length(titles_controls)>1){
+      
+      distm=as.matrix(stringdist::stringdistmatrix(titles_controls,method="lv"))
+      colnames(distm)=titles_controls
+      rownames(distm)=titles_controls
+      distm
+      
+      
+      # s.a <- strsplit(titles[1], "")[[1]]
+      # s.b <- strsplit(titles[2], "")[[1]]
+      # paste(s.a[s.a != s.b], collapse = "")
+      
+      
+      distm[which(distm>1)]=0
+      
+      g  <- graph.adjacency(distm) 
+      #plot(g)
+      clu <- components(g)
+      gr=igraph::groups(clu)
+      
+      gr=gr[which(lengths(gr)>1)]
+      
+      if(length(gr)==0&last_control==0){
+        print("No control samples")
+        return(list())
+      }else if(length(gr)>0){
+        for(i in 1:length(gr)){
+          #print(gr[[i]])
+          sample_groups<-c(sample_groups,list(gr[[i]]))
+          names(sample_groups)[length(sample_groups)]=paste("control",last_control+i,sep="")
+          
+        }
+      }
+      
+      
+      
+      
+    }
+    sample_groups<-c(sample_groups,list(GSE=gse))
+    sample_groups<-c(sample_groups,list(titles=titles))
+    sample_groups<-c(sample_groups,list(total_sample_count=length(titles)))
+    sample_groups<-c(sample_groups,list(parsed_sample_count=length(unlist(sample_groups))-length(titles)-2))
+    
+    return(sample_groups)
+    
+  }, error = function(err) {
+    
+    
+    
+    return(list())
+    
+  }) # END tryCatch
+  
+  
+  
+}
+
+group_samples6<-function(gse,titles){
+  
+  library(stringdist)
+  library(igraph)
+  library(raster)
+  
+  
+  
+  tryCatch({
+    
+   
+    
+    titles_cases=titles
+    rep_keys=get_rep_keys3(titles_cases)
+    
+    sample_groups=list()
+    
+    last_case=0
+    
+    if(length(rep_keys)>0){
+      
+      if(rep_keys!=""){
+        rep_keys=rep_keys[order(nchar(rep_keys), rep_keys,decreasing=TRUE)]
+        if(length(which(nchar(rep_keys)==0))){
+          rep_keys=rep_keys[-which(nchar(rep_keys)==0)]
+        }
+        
+        for(i in 1:length(rep_keys)){
+          #print(gr[[i]])
+          rep_keys[i]=gsub("\\+","\\\\+",rep_keys[i])
+          rep_keys[i]=gsub("\\(","\\\\(",rep_keys[i])
+          rep_keys[i]=gsub("\\?","\\\\?",rep_keys[i])
+          rep_keys[i]=gsub("\\*","\\\\*",rep_keys[i])
+          rep_keys[i]=gsub("\\{","\\\\{",rep_keys[i])
+          rep_keys[i]=gsub("\\[","\\\\[",rep_keys[i])
+          rep_keys[i]=gsub("\\|","\\\\|",rep_keys[i])
+          
+          matched=grep(rep_keys[i],titles_cases)
+          if(length(matched)>2){
+            last_case=last_case+1
+            sample_groups<-c(sample_groups,list(titles_cases[matched]))
+            titles_cases=titles_cases[-matched]
+            names(sample_groups)[last_case]=paste("group",last_case,sep="")
+            
+          }
+
+        }
+      }
+      
+    }
+    
+    if(length(titles_cases)>2){
+      
+      distm=as.matrix(stringdist::stringdistmatrix(titles_cases,method="lv"))
+      colnames(distm)=titles_cases
+      rownames(distm)=titles_cases
+      distm
+      
+
+      distm[which(distm>1)]=0
+      
+      g  <- graph.adjacency(distm) 
+
+      clu <- components(g)
+      gr=igraph::groups(clu)
+      
+      gr=gr[which(lengths(gr)>2)]
+      
+      if(length(gr)==0&last_case==0){
+        print("No enough samples")
+        return(list())
+      }else if(length(gr)>0){
+        for(i in 1:length(gr)){
+          #print(gr[[i]])
+          sample_groups<-c(sample_groups,list(gr[[i]]))
+          names(sample_groups)[length(sample_groups)]=paste("group",last_case+i,sep="")
+          
+        }
+      }
+      
+      
+      
+      
+    }
+    
+    if(length(sample_groups) >1){
+      
+      sample_groups<-c(sample_groups,list(failed_samples=setdiff(titles,unlist(sample_groups))))
+      sample_groups<-c(sample_groups,list(GSE=gse))
+      sample_groups<-c(sample_groups,list(matched_term=match_gse_terms(gse)))
+      sample_groups<-c(sample_groups,list(titles=titles))
+      sample_groups<-c(sample_groups,list(total_sample_count=length(titles)))
+      sample_groups<-c(sample_groups,list(parsed_sample_count=length(unlist(sample_groups))-length(titles)-2))
+      
+      return(sample_groups)
+    }else{
+      print("Not enough groups")
+      return(list())
+    }
+    
+    
+   
+
+    
+  }, error = function(err) {
+    
+    
+    
+    return(list())
+    
+  }) # END tryCatch
+  
+  
+  
+}
+
+group_samples7<-function(gse,titles,description,abstract){
+  
+  library(stringdist)
+  library(igraph)
+  library(raster)
+  library(stringr)
+  
+ 
+  
+  tryCatch({
+    
+    titles_original=titles
+    
+    located=str_locate_all(titles,"[0-9]+")
+    
+    if( length( which(lengths(located)>0) ) <6 ){ # there should be at least 3 reps for at least two conditions
+      print("Didn't meet the criteria:there should be at least 3 reps for at least two conditions ")
+      return(list())
+    }else{
+      
+      sample_groups_past=NULL
+      mean_lengths_past=100
+     
+      while(1){
+        titles_temp=apply(as.matrix( 1:length(titles)),1,function(x){
+        p1=substr(titles[x],1,located[[x]][dim(located[[x]])[1],1]-1);
+        p2=substr(titles[x],located[[x]][dim(located[[x]])[1],2]+1,nchar(titles[x]));
+        paste0(p1,p2)})
+        
+        sample_groups=list()
+        
+        distm=as.matrix(stringdist::stringdistmatrix(titles_temp,method="lv"))
+        colnames(distm)=titles
+        rownames(distm)=titles
+        distm
+        
+        
+        distm[which(distm>0)]=100
+        distm[which(distm==0)]=1
+        distm[which(distm==100)]=0
+        
+        g  <- graph.adjacency(distm) 
+        
+        clu <- components(g)
+        gr=igraph::groups(clu)
+        
+        gr=gr[which(lengths(gr)>2)]
+        
+        if(length(gr)<2 ){
+          print("Not enough samples")
+          return(list())
+        }else if(length( which(lengths(gr)>2)) >1){
+          for(i in 1:length(gr)){
+            #print(gr[[i]])
+            sample_groups<-c(sample_groups,list(gr[[i]]))
+            names(sample_groups)[length(sample_groups)]=paste("group",last_case+i,sep="")
+            
+          }
+        }else{ print("Not enough samples") }
+        
+        if(mean_lengths_past > mean(lengths(sample_groups))){ #splitted better or equal
+          
+          break
+
+        }else{
+          
+          sample_groups_past=sample_groups
+          mean_lengths_past=mean(lengths(sample_groups))
+          
+        }
+    }
+        
+
+      
+      if(length(sample_groups) >2){
+        
+        sample_groups<-c(sample_groups,list(failed_samples=setdiff(titles,unlist(sample_groups))))
+        sample_groups<-c(sample_groups,list(GSE=gse))
+        sample_groups<-c(sample_groups,list(matched_term=match_gse_terms2(description, abstract)))
+        sample_groups<-c(sample_groups,list(titles=titles))
+        sample_groups<-c(sample_groups,list(total_sample_count=length(titles)))
+        sample_groups<-c(sample_groups,list(parsed_sample_count=length(unlist(sample_groups))-length(titles)-2))
+        
+        return(sample_groups)
+      }else{
+        print("Not enough groups")
+        return(list())
+      }
+      
+      
+    }
+    #end
+ 
+    
+    
+    
+    
+  }, error = function(err) {
+    
+    
+    
+    return(list())
+    
+  }) # END tryCatch
+  
+  
+  
+}
 #######################run the function
 #result_1: successed datasets
 #result_2: failed results
 #results: successful results
 #among 507 disease matched samples, 75 succeeded
+
+
+
+result_1_7=list()
+result_0_7=list()
+results7=list()
+chipseq=NULL
+scRNAseq=NULL
+for(i in 1:91){#length(unique_gse)){
+  print(i)
+  
+  error_flag=0
+  
+  tryCatch({
+    
+    data <- getGEO(unique_gse[i])
+    titles=as.character(data[[1]]@phenoData@data$title)
+    description=data[[1]]@experimentData@title
+    abstract=data[[1]]@experimentData@abstract
+   
+  }, error = function(err) {
+    
+    
+    
+    error_flag=1
+    
+  }) # END tryCatch
+  
+  
+  if(error_flag==1){
+    result_0_7<-c(result_0_7,list(list(gse_id=unique_gse[i],titles="Failed read")))
+  }else{
+    if(length(grep("chipseq",paste(titles,description),ignore.case = TRUE))>0 | length(grep("chip-seq",paste(titles,description),ignore.case = TRUE))>0){
+      chipseq=c(chipseq,i)
+      next
+      
+    }
+    if(length(grep("single-cell",paste(titles,description),ignore.case = TRUE))>0  | length(grep("single cell",paste(titles,description),ignore.case = TRUE))>0  | length(grep("scRNAseq",paste(titles,description),ignore.case = TRUE))>0 | length(grep("scRNA-seq",paste(titles,description),ignore.case = TRUE))>0){
+      chipseq=c(chipseq,i)
+      next
+      
+    }
+    
+    group_samples_result=group_samples7(unique_gse[i],description,abstract)
+    
+    
+    if(length(group_samples_result)>0){
+      results7<-c(results7,list(group_samples_result))
+      result_1_7<-rbind(result_1_7,c(i,unique_gse[i]))
+      
+    }else{
+      
+      result_0_7<-c(result_0_7,list(list(gse_id=unique_gse[i],titles=titles)))
+    }
+  }
+  
+  
+  
+  
+}
+
+
+
+
+
+result_1_6=list()
+result_0_6=list()
+results6=list()
+chipseq=NULL
+scRNAseq=NULL
+for(i in 1:length(unique_gse)){
+  print(i)
+  
+  error_flag=0
+  
+  tryCatch({
+    
+    data <- getGEO(unique_gse[i])
+    titles=as.character(data[[1]]@phenoData@data$title)
+    titles
+    description=as.character(data[[1]]@phenoData@data$description)
+    
+  }, error = function(err) {
+    
+    
+    
+    error_flag=1
+    
+  }) # END tryCatch
+  
+  
+  if(error_flag==1){
+    result_0_6<-c(result_0_6,list(list(gse_id=unique_gse[i],titles="Failed read")))
+  }else{
+    if(length(grep("chipseq",paste(titles,description),ignore.case = TRUE))>0 | length(grep("chip-seq",paste(titles,description),ignore.case = TRUE))>0){
+      chipseq=c(chipseq,i)
+      next
+      
+    }
+    if(length(grep("single-cell",paste(titles,description),ignore.case = TRUE))>0  | length(grep("single cell",paste(titles,description),ignore.case = TRUE))>0  | length(grep("scRNAseq",paste(titles,description),ignore.case = TRUE))>0 | length(grep("scRNA-seq",paste(titles,description),ignore.case = TRUE))>0){
+      chipseq=c(chipseq,i)
+      next
+      
+    }
+    
+    group_samples_result=group_samples6(unique_gse[i],titles)
+    
+    
+    if(length(group_samples_result)>0){
+      results6<-c(results6,list(group_samples_result))
+      result_1_6<-rbind(result_1_6,c(i,unique_gse[i]))
+      
+    }else{
+      
+      result_0_6<-c(result_0_6,list(list(gse_id=unique_gse[i],titles=titles)))
+    }
+  }
+  
+  
+  
+  
+}
+
 
 
 
@@ -1028,7 +1677,7 @@ if(error_flag==1){
     
   }
   
-  group_samples_result=group_samples4(unique_gse[i],titles)
+  group_samples_result=group_samples6(unique_gse[i],titles)
   
   
   if(length(group_samples_result)>0){
@@ -1045,6 +1694,11 @@ if(error_flag==1){
   
   
 }
+
+
+
+
+
 
 
 
