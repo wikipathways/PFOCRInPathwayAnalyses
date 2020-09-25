@@ -1,0 +1,799 @@
+First few grouping results after removing control-keyword restrictions
+
+
+> results6[1:1]
+[[1]]
+[[1]]$group1
+[1] "Oocyte #1" "Oocyte #2" "Oocyte #3"
+
+[[1]]$group2
+[1] "Zygote #1" "Zygote #2" "Zygote #3"
+
+[[1]]$group3
+ [1] "2-cell embryo#1 -Cell#1" "2-cell embryo#1 -Cell#2" "2-cell embryo#2 -Cell#1" "2-cell embryo#2 -Cell#2" "2-cell embryo#3 -Cell#1" "2-cell embryo#3 -Cell#2"
+ [7] "4-cell embryo#1 -Cell#1" "4-cell embryo#1 -Cell#2" "4-cell embryo#1 -Cell#3" "4-cell embryo#1 -Cell#4" "4-cell embryo#2 -Cell#1" "4-cell embryo#2 -Cell#2"
+[13] "4-cell embryo#2 -Cell#3" "4-cell embryo#2 -Cell#4" "4-cell embryo#3 -Cell#1" "4-cell embryo#3 -Cell#2" "4-cell embryo#3 -Cell#3" "4-cell embryo#3 -Cell#4"
+[19] "8-cell embryo#1 -Cell#1" "8-cell embryo#1 -Cell#2" "8-cell embryo#1 -Cell#3" "8-cell embryo#1 -Cell#4" "8-cell embryo#2 -Cell#1" "8-cell embryo#2 -Cell#2"
+[25] "8-cell embryo#2 -Cell#3" "8-cell embryo#2 -Cell#4" "8-cell embryo#2 -Cell#5" "8-cell embryo#2 -Cell#6" "8-cell embryo#2 -Cell#7" "8-cell embryo#2 -Cell#8"
+[31] "8-cell embryo#3 -Cell#1" "8-cell embryo#3 -Cell#2" "8-cell embryo#3 -Cell#3" "8-cell embryo#3 -Cell#4" "8-cell embryo#3 -Cell#5" "8-cell embryo#3 -Cell#6"
+[37] "8-cell embryo#3 -Cell#7" "8-cell embryo#3 -Cell#8"
+
+[[1]]$group4
+ [1] "hESC passage#0 -Cell#1"   "hESC passage#0 -Cell#2"   "hESC passage#0 -Cell#4"   "hESC passage#0 -Cell#5"   "hESC passage#0 -Cell#6"   "hESC passage#0 -Cell#7"  
+ [7] "hESC passage#0 -Cell#8"   "hESC passage#0 -Cell#10"  "hESC passage#10 -Cell#1"  "hESC passage#10 -Cell#2"  "hESC passage#10 -Cell#3"  "hESC passage#10 -Cell#4" 
+[13] "hESC passage#10 -Cell#5"  "hESC passage#10 -Cell#6"  "hESC passage#10 -Cell#7"  "hESC passage#10 -Cell#8"  "hESC passage#10 -Cell#9"  "hESC passage#10 -Cell#10"
+[19] "hESC passage#10 -Cell#11" "hESC passage#10 -Cell#12" "hESC passage#10 -Cell#13" "hESC passage#10 -Cell#14" "hESC passage#10 -Cell#15" "hESC passage#10 -Cell#16"
+[25] "hESC passage#10 -Cell#17" "hESC passage#10 -Cell#18" "hESC passage#10 -Cell#19" "hESC passage#10 -Cell#20" "hESC passage#10 -Cell#21" "hESC passage#10 -Cell#22"
+[31] "hESC passage#10 -Cell#23" "hESC passage#10 -Cell#24" "hESC passage#10 -Cell#25" "hESC passage#10 -Cell#26"
+
+[[1]]$group5
+ [1] "Morulae #1 -Cell#1" "Morulae #1 -Cell#2" "Morulae #1 -Cell#3" "Morulae #1 -Cell#4" "Morulae #1 -Cell#5" "Morulae #1 -Cell#6" "Morulae #1 -Cell#7" "Morulae #1 -Cell#8"
+ [9] "Morulae #2 -Cell#1" "Morulae #2 -Cell#2" "Morulae #2 -Cell#3" "Morulae #2 -Cell#4" "Morulae #2 -Cell#5" "Morulae #2 -Cell#6" "Morulae #2 -Cell#7" "Morulae #2 -Cell#8"
+
+[[1]]$group6
+ [1] "Late blastocyst #1 -Cell#1"  "Late blastocyst #1 -Cell#2"  "Late blastocyst #1 -Cell#3"  "Late blastocyst #1 -Cell#4"  "Late blastocyst #1 -Cell#5" 
+ [6] "Late blastocyst #1 -Cell#6"  "Late blastocyst #1 -Cell#7"  "Late blastocyst #1 -Cell#8"  "Late blastocyst #1 -Cell#9"  "Late blastocyst #1 -Cell#10"
+[11] "Late blastocyst #1 -Cell#11" "Late blastocyst #1 -Cell#12" "Late blastocyst #2 -Cell#1"  "Late blastocyst #2 -Cell#2"  "Late blastocyst #2 -Cell#3" 
+[16] "Late blastocyst #2 -Cell#4"  "Late blastocyst #2 -Cell#5"  "Late blastocyst #2 -Cell#6"  "Late blastocyst #2 -Cell#7"  "Late blastocyst #2 -Cell#8" 
+[21] "Late blastocyst #2 -Cell#9"  "Late blastocyst #2 -Cell#10" "Late blastocyst #3 -Cell#1"  "Late blastocyst #3 -Cell#2"  "Late blastocyst #3 -Cell#3" 
+[26] "Late blastocyst #3 -Cell#4"  "Late blastocyst #3 -Cell#5"  "Late blastocyst #3 -Cell#6"  "Late blastocyst #3 -Cell#7"  "Late blastocyst #3 -Cell#8" 
+
+[[1]]$failed_samples
+character(0)
+
+[[1]]$GSE
+[1] "GSE36552"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+  [1] "Oocyte #1"                   "Oocyte #2"                   "Oocyte #3"                   "Zygote #1"                   "Zygote #2"                  
+  [6] "Zygote #3"                   "2-cell embryo#1 -Cell#1"     "2-cell embryo#1 -Cell#2"     "2-cell embryo#2 -Cell#1"     "2-cell embryo#2 -Cell#2"    
+ [11] "2-cell embryo#3 -Cell#1"     "2-cell embryo#3 -Cell#2"     "hESC passage#0 -Cell#1"      "hESC passage#0 -Cell#2"      "4-cell embryo#1 -Cell#1"    
+ [16] "4-cell embryo#1 -Cell#2"     "4-cell embryo#1 -Cell#3"     "4-cell embryo#1 -Cell#4"     "4-cell embryo#2 -Cell#1"     "4-cell embryo#2 -Cell#2"    
+ [21] "4-cell embryo#2 -Cell#3"     "4-cell embryo#2 -Cell#4"     "4-cell embryo#3 -Cell#1"     "4-cell embryo#3 -Cell#2"     "4-cell embryo#3 -Cell#3"    
+ [26] "4-cell embryo#3 -Cell#4"     "8-cell embryo#1 -Cell#1"     "8-cell embryo#1 -Cell#2"     "8-cell embryo#1 -Cell#3"     "8-cell embryo#1 -Cell#4"    
+ [31] "8-cell embryo#2 -Cell#1"     "8-cell embryo#2 -Cell#2"     "8-cell embryo#2 -Cell#3"     "8-cell embryo#2 -Cell#4"     "8-cell embryo#2 -Cell#5"    
+ [36] "8-cell embryo#2 -Cell#6"     "8-cell embryo#2 -Cell#7"     "8-cell embryo#2 -Cell#8"     "8-cell embryo#3 -Cell#1"     "8-cell embryo#3 -Cell#2"    
+ [41] "8-cell embryo#3 -Cell#3"     "8-cell embryo#3 -Cell#4"     "8-cell embryo#3 -Cell#5"     "8-cell embryo#3 -Cell#6"     "8-cell embryo#3 -Cell#7"    
+ [46] "8-cell embryo#3 -Cell#8"     "Morulae #1 -Cell#1"          "Morulae #1 -Cell#2"          "Morulae #1 -Cell#3"          "Morulae #1 -Cell#4"         
+ [51] "Morulae #1 -Cell#5"          "Morulae #1 -Cell#6"          "Morulae #1 -Cell#7"          "Morulae #1 -Cell#8"          "Morulae #2 -Cell#1"         
+ [56] "Morulae #2 -Cell#2"          "Morulae #2 -Cell#3"          "Morulae #2 -Cell#4"          "Morulae #2 -Cell#5"          "Morulae #2 -Cell#6"         
+ [61] "Morulae #2 -Cell#7"          "Morulae #2 -Cell#8"          "Late blastocyst #1 -Cell#1"  "Late blastocyst #1 -Cell#2"  "Late blastocyst #1 -Cell#3" 
+ [66] "Late blastocyst #1 -Cell#4"  "Late blastocyst #1 -Cell#5"  "Late blastocyst #1 -Cell#6"  "Late blastocyst #1 -Cell#7"  "Late blastocyst #1 -Cell#8" 
+ [71] "Late blastocyst #1 -Cell#9"  "Late blastocyst #1 -Cell#10" "Late blastocyst #1 -Cell#11" "Late blastocyst #1 -Cell#12" "Late blastocyst #2 -Cell#1" 
+ [76] "Late blastocyst #2 -Cell#2"  "Late blastocyst #2 -Cell#3"  "Late blastocyst #2 -Cell#4"  "Late blastocyst #2 -Cell#5"  "Late blastocyst #2 -Cell#6" 
+ [81] "Late blastocyst #2 -Cell#7"  "Late blastocyst #2 -Cell#8"  "Late blastocyst #2 -Cell#9"  "Late blastocyst #2 -Cell#10" "Late blastocyst #3 -Cell#1" 
+ [86] "Late blastocyst #3 -Cell#2"  "Late blastocyst #3 -Cell#3"  "Late blastocyst #3 -Cell#4"  "Late blastocyst #3 -Cell#5"  "Late blastocyst #3 -Cell#6" 
+ [91] "Late blastocyst #3 -Cell#7"  "Late blastocyst #3 -Cell#8"  "hESC passage#0 -Cell#4"      "hESC passage#0 -Cell#5"      "hESC passage#0 -Cell#6"     
+ [96] "hESC passage#0 -Cell#7"      "hESC passage#0 -Cell#8"      "hESC passage#0 -Cell#10"     "hESC passage#10 -Cell#1"     "hESC passage#10 -Cell#2"    
+[101] "hESC passage#10 -Cell#3"     "hESC passage#10 -Cell#4"     "hESC passage#10 -Cell#5"     "hESC passage#10 -Cell#6"     "hESC passage#10 -Cell#7"    
+[106] "hESC passage#10 -Cell#8"     "hESC passage#10 -Cell#9"     "hESC passage#10 -Cell#10"    "hESC passage#10 -Cell#11"    "hESC passage#10 -Cell#12"   
+[111] "hESC passage#10 -Cell#13"    "hESC passage#10 -Cell#14"    "hESC passage#10 -Cell#15"    "hESC passage#10 -Cell#16"    "hESC passage#10 -Cell#17"   
+[116] "hESC passage#10 -Cell#18"    "hESC passage#10 -Cell#19"    "hESC passage#10 -Cell#20"    "hESC passage#10 -Cell#21"    "hESC passage#10 -Cell#22"   
+[121] "hESC passage#10 -Cell#23"    "hESC passage#10 -Cell#24"    "hESC passage#10 -Cell#25"    "hESC passage#10 -Cell#26"   
+
+[[1]]$total_sample_count
+[1] 124
+
+[[1]]$parsed_sample_count
+[1] 124
+
+
+> results6[2]
+[[1]]
+[[1]]$group1
+ [1] "human_01_M" "human_02_M" "human_05_M" "human_06_M" "human_07_M" "human_08_M" "human_09_M" "human_10_M" "human_14_M" "human_16_M" "human_17_M" "human_21_M" "human_23_M"
+[14] "human_24_M" "human_25_M" "human_28_M" "human_29_M" "human_30_M" "human_32_M" "human_35_M" "human_36_M" "human_37_M" "human_38_M" "human_39_M" "human_40_M"
+
+[[1]]$group2
+ [1] "human_03_F" "human_04_F" "human_11_F" "human_12_F" "human_13_F" "human_15_F" "human_18_F" "human_19_F" "human_31_F" "human_33_F"
+
+[[1]]$failed_samples
+[1] "human_20_U" "human_26_F" "human_27_F"
+
+[[1]]$GSE
+[1] "GSE51264"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+ [1] "human_01_M" "human_02_M" "human_03_F" "human_04_F" "human_05_M" "human_06_M" "human_07_M" "human_08_M" "human_09_M" "human_10_M" "human_11_F" "human_12_F" "human_13_F"
+[14] "human_14_M" "human_15_F" "human_16_M" "human_17_M" "human_18_F" "human_19_F" "human_20_U" "human_21_M" "human_23_M" "human_24_M" "human_25_M" "human_26_F" "human_27_F"
+[27] "human_28_M" "human_29_M" "human_30_M" "human_31_F" "human_32_M" "human_33_F" "human_35_M" "human_36_M" "human_37_M" "human_38_M" "human_39_M" "human_40_M"
+
+[[1]]$total_sample_count
+[1] 38
+
+[[1]]$parsed_sample_count
+[1] 38
+
+
+> results6[3]
+[[1]]
+[[1]]$group1
+ [1] "HEK_100" "HEK_101" "HEK_102" "HEK_103" "HEK_106" "HEK_107" "HEK_108" "HEK_113" "HEK_114" "HEK_120" "HEK_122" "HEK_123" "HEK_124"
+
+[[1]]$group2
+ [1] "HEK_35" "HEK_38" "HEK_39" "HEK_40" "HEK_55" "HEK_56" "HEK_57" "HEK_58" "HEK_62" "HEK_63" "HEK_64" "HEK_65" "HEK_66" "HEK_67" "HEK_69" "HEK_70" "HEK_79" "HEK_82" "HEK_84"
+[20] "HEK_97" "HEK_98" "HEK_99"
+
+[[1]]$group3
+[1] "HEK_SMRT_1" "HEK_SMRT_3" "HEK_SMRT_5" "HEK_SMRT_6"
+
+[[1]]$group4
+[1] "ds_HEK_1ng_1" "ds_HEK_1ng_2" "ds_HEK_1ng_3"
+
+[[1]]$group5
+[1] "ds_HEK_100pg_1" "ds_HEK_100pg_3" "ds_HEK_100pg_4" "ds_HEK_10pg_1"  "ds_HEK_10pg_2" 
+
+[[1]]$group6
+[1] "HEK100cells_1" "HEK100cells_2" "HEK100cells_3" "HEK50cells_1"  "HEK50cells_2"  "HEK50cells_3"  "HEK10cells_1"  "HEK10cells_2"  "HEK10cells_3" 
+
+[[1]]$group7
+[1] "BC_1"  "BC_10" "BC_11" "BC_12" "BC_15" "BC_3"  "BC_8" 
+
+[[1]]$failed_samples
+character(0)
+
+[[1]]$GSE
+[1] "GSE49321"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+ [1] "HEK_100"        "HEK_101"        "HEK_102"        "HEK_103"        "HEK_106"        "HEK_107"        "HEK_108"        "HEK_113"        "HEK_114"        "HEK_120"       
+[11] "HEK_122"        "HEK_123"        "HEK_124"        "HEK_35"         "HEK_38"         "HEK_39"         "HEK_40"         "HEK_55"         "HEK_56"         "HEK_57"        
+[21] "HEK_58"         "HEK_62"         "HEK_63"         "HEK_64"         "HEK_65"         "HEK_66"         "HEK_67"         "HEK_69"         "HEK_70"         "HEK_79"        
+[31] "HEK_82"         "HEK_84"         "HEK_97"         "HEK_98"         "HEK_99"         "HEK_SMRT_1"     "HEK_SMRT_3"     "HEK_SMRT_5"     "HEK_SMRT_6"     "ds_HEK_1ng_1"  
+[41] "ds_HEK_1ng_2"   "ds_HEK_1ng_3"   "ds_HEK_100pg_1" "ds_HEK_100pg_3" "ds_HEK_100pg_4" "ds_HEK_10pg_1"  "ds_HEK_10pg_2"  "HEK100cells_1"  "HEK100cells_2"  "HEK100cells_3" 
+[51] "HEK50cells_1"   "HEK50cells_2"   "HEK50cells_3"   "HEK10cells_1"   "HEK10cells_2"   "HEK10cells_3"   "BC_1"           "BC_10"          "BC_11"          "BC_12"         
+[61] "BC_15"          "BC_3"           "BC_8"          
+
+[[1]]$total_sample_count
+[1] 63
+
+[[1]]$parsed_sample_count
+[1] 63
+
+
+> results6[4]
+[[1]]
+[[1]]$group1
+[1] "METSIM482"  "METSIM490"  "METSIM492"  "METSIM4990" "METSIM7482"
+
+[[1]]$group2
+ [1] "METSIM520"  "METSIM522"  "METSIM1223" "METSIM1228" "METSIM1263" "METSIM1264" "METSIM1764" "METSIM1768" "METSIM1784" "METSIM1921" "METSIM1924" "METSIM1984" "METSIM5203"
+[14] "METSIM5263" "METSIM5273"
+
+[[1]]$group3
+[1] "METSIM951"  "METSIM4951" "METSIM5901" "METSIM5909" "METSIM5951"
+
+[[1]]$group4
+[1] "METSIM1019"  "METSIM1619"  "METSIM2019"  "METSIM10419"
+
+[[1]]$group5
+[1] "METSIM1092" "METSIM1840" "METSIM1841" "METSIM1891" "METSIM1892" "METSIM1896"
+
+[[1]]$group6
+[1] "METSIM1160" "METSIM1162" "METSIM1165" "METSIM1167" "METSIM1180" "METSIM2165"
+
+[[1]]$group7
+[1] "METSIM1303" "METSIM1343" "METSIM1353" "METSIM1653" "METSIM7343"
+
+[[1]]$group8
+[1] "METSIM1504" "METSIM1574" "METSIM1674" "METSIM1678"
+
+[[1]]$group9
+[1] "METSIM1702" "METSIM1722" "METSIM1725" "METSIM6725"
+
+[[1]]$group10
+[1] "METSIM1932" "METSIM1937" "METSIM1942"
+
+[[1]]$group11
+[1] "METSIM2126" "METSIM2176" "METSIM2426"
+
+[[1]]$group12
+[1] "METSIM4542" "METSIM4572" "METSIM6572"
+
+[[1]]$group13
+[1] "METSIM5510" "METSIM5530" "METSIM5538" "METSIM7530"
+
+[[1]]$group14
+[1] "METSIM5680" "METSIM6484" "METSIM6664" "METSIM6680" "METSIM6684"
+
+[[1]]$group15
+[1] "METSIM6083" "METSIM6183" "METSIM6283"
+
+[[1]]$group16
+[1] "METSIM6515" "METSIM6517" "METSIM6557"
+
+[[1]]$group17
+[1] "METSIM6611" "METSIM6671" "METSIM6675" "METSIM7611"
+
+[[1]]$failed_samples
+  [1] "METSIM388"   "METSIM473"   "METSIM575"   "METSIM598"   "METSIM783"   "METSIM803"   "METSIM817"   "METSIM833"   "METSIM844"   "METSIM874"   "METSIM888"   "METSIM906"  
+ [13] "METSIM908"   "METSIM964"   "METSIM1086"  "METSIM1111"  "METSIM1247"  "METSIM1366"  "METSIM1452"  "METSIM1483"  "METSIM1516"  "METSIM1518"  "METSIM1599"  "METSIM1666" 
+ [25] "METSIM1757"  "METSIM1777"  "METSIM1885"  "METSIM1915"  "METSIM2044"  "METSIM2057"  "METSIM2100"  "METSIM2261"  "METSIM2338"  "METSIM2392"  "METSIM2415"  "METSIM2474" 
+ [37] "METSIM2488"  "METSIM2495"  "METSIM2570"  "METSIM2620"  "METSIM2655"  "METSIM2656"  "METSIM2687"  "METSIM2692"  "METSIM2704"  "METSIM2735"  "METSIM2760"  "METSIM2775" 
+ [49] "METSIM2786"  "METSIM2869"  "METSIM2950"  "METSIM3923"  "METSIM4137"  "METSIM4245"  "METSIM4257"  "METSIM4336"  "METSIM4403"  "METSIM4485"  "METSIM4644"  "METSIM5015" 
+ [61] "METSIM5157"  "METSIM5352"  "METSIM5381"  "METSIM5441"  "METSIM5446"  "METSIM5458"  "METSIM5470"  "METSIM5521"  "METSIM5571"  "METSIM5606"  "METSIM5708"  "METSIM5812" 
+ [73] "METSIM5845"  "METSIM5859"  "METSIM5877"  "METSIM5935"  "METSIM6006"  "METSIM6051"  "METSIM6101"  "METSIM6200"  "METSIM6419"  "METSIM6433"  "METSIM6589"  "METSIM6648" 
+ [85] "METSIM6741"  "METSIM6781"  "METSIM6835"  "METSIM6849"  "METSIM6959"  "METSIM6969"  "METSIM6978"  "METSIM7024"  "METSIM7080"  "METSIM7421"  "METSIM7436"  "METSIM7693" 
+ [97] "METSIM7717"  "METSIM7897"  "METSIM7927"  "METSIM7948"  "METSIM7954"  "METSIM7988"  "METSIM8054"  "METSIM8067"  "METSIM8135"  "METSIM8305"  "METSIM10062" "METSIM10252"
+[109] "METSIM10271" "METSIM10277" "METSIM10346" "METSIM10381" "METSIM10389" "METSIM10691" "METSIM10830" "METSIM11138" "METSIM11295" "METSIM11401"
+
+[[1]]$GSE
+[1] "GSE45159"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+  [1] "METSIM388"   "METSIM473"   "METSIM482"   "METSIM490"   "METSIM492"   "METSIM520"   "METSIM522"   "METSIM575"   "METSIM598"   "METSIM783"   "METSIM803"   "METSIM817"  
+ [13] "METSIM833"   "METSIM844"   "METSIM874"   "METSIM888"   "METSIM906"   "METSIM908"   "METSIM951"   "METSIM964"   "METSIM1019"  "METSIM1086"  "METSIM1092"  "METSIM1111" 
+ [25] "METSIM1160"  "METSIM1162"  "METSIM1165"  "METSIM1167"  "METSIM1180"  "METSIM1223"  "METSIM1228"  "METSIM1247"  "METSIM1263"  "METSIM1264"  "METSIM1303"  "METSIM1343" 
+ [37] "METSIM1353"  "METSIM1366"  "METSIM1452"  "METSIM1483"  "METSIM1504"  "METSIM1516"  "METSIM1518"  "METSIM1574"  "METSIM1599"  "METSIM1619"  "METSIM1653"  "METSIM1666" 
+ [49] "METSIM1674"  "METSIM1678"  "METSIM1702"  "METSIM1722"  "METSIM1725"  "METSIM1757"  "METSIM1764"  "METSIM1768"  "METSIM1777"  "METSIM1784"  "METSIM1840"  "METSIM1841" 
+ [61] "METSIM1885"  "METSIM1891"  "METSIM1892"  "METSIM1896"  "METSIM1915"  "METSIM1921"  "METSIM1924"  "METSIM1932"  "METSIM1937"  "METSIM1942"  "METSIM1984"  "METSIM2019" 
+ [73] "METSIM2044"  "METSIM2057"  "METSIM2100"  "METSIM2126"  "METSIM2165"  "METSIM2176"  "METSIM2261"  "METSIM2338"  "METSIM2392"  "METSIM2415"  "METSIM2426"  "METSIM2474" 
+ [85] "METSIM2488"  "METSIM2495"  "METSIM2570"  "METSIM2620"  "METSIM2655"  "METSIM2656"  "METSIM2687"  "METSIM2692"  "METSIM2704"  "METSIM2735"  "METSIM2760"  "METSIM2775" 
+ [97] "METSIM2786"  "METSIM2869"  "METSIM2950"  "METSIM3923"  "METSIM4137"  "METSIM4245"  "METSIM4257"  "METSIM4336"  "METSIM4403"  "METSIM4485"  "METSIM4542"  "METSIM4572" 
+[109] "METSIM4644"  "METSIM4951"  "METSIM4990"  "METSIM5015"  "METSIM5157"  "METSIM5203"  "METSIM5263"  "METSIM5273"  "METSIM5352"  "METSIM5381"  "METSIM5441"  "METSIM5446" 
+[121] "METSIM5458"  "METSIM5470"  "METSIM5510"  "METSIM5521"  "METSIM5530"  "METSIM5538"  "METSIM5571"  "METSIM5606"  "METSIM5680"  "METSIM5708"  "METSIM5812"  "METSIM5845" 
+[133] "METSIM5859"  "METSIM5877"  "METSIM5901"  "METSIM5909"  "METSIM5935"  "METSIM5951"  "METSIM6006"  "METSIM6051"  "METSIM6083"  "METSIM6101"  "METSIM6183"  "METSIM6200" 
+[145] "METSIM6283"  "METSIM6419"  "METSIM6433"  "METSIM6484"  "METSIM6515"  "METSIM6517"  "METSIM6557"  "METSIM6572"  "METSIM6589"  "METSIM6611"  "METSIM6648"  "METSIM6664" 
+[157] "METSIM6671"  "METSIM6675"  "METSIM6680"  "METSIM6684"  "METSIM6725"  "METSIM6741"  "METSIM6781"  "METSIM6835"  "METSIM6849"  "METSIM6959"  "METSIM6969"  "METSIM6978" 
+[169] "METSIM7024"  "METSIM7080"  "METSIM7343"  "METSIM7421"  "METSIM7436"  "METSIM7482"  "METSIM7530"  "METSIM7611"  "METSIM7693"  "METSIM7717"  "METSIM7897"  "METSIM7927" 
+[181] "METSIM7948"  "METSIM7954"  "METSIM7988"  "METSIM8054"  "METSIM8067"  "METSIM8135"  "METSIM8305"  "METSIM10062" "METSIM10252" "METSIM10271" "METSIM10277" "METSIM10346"
+[193] "METSIM10381" "METSIM10389" "METSIM10419" "METSIM10691" "METSIM10830" "METSIM11138" "METSIM11295" "METSIM11401"
+
+[[1]]$total_sample_count
+[1] 200
+
+[[1]]$parsed_sample_count
+[1] 200
+
+
+> save.image("no_control_restriction.RData")
+> results6[5]
+[[1]]
+[[1]]$group1
+[1] "METSIM482"  "METSIM490"  "METSIM492"  "METSIM4990" "METSIM7482"
+
+[[1]]$group2
+ [1] "METSIM520"  "METSIM522"  "METSIM1223" "METSIM1228" "METSIM1263" "METSIM1264" "METSIM1764" "METSIM1768" "METSIM1784" "METSIM1921" "METSIM1924" "METSIM1984" "METSIM5203"
+[14] "METSIM5263" "METSIM5273"
+
+[[1]]$group3
+[1] "METSIM951"  "METSIM4951" "METSIM5901" "METSIM5909" "METSIM5951"
+
+[[1]]$group4
+[1] "METSIM1019"  "METSIM1619"  "METSIM2019"  "METSIM10419"
+
+[[1]]$group5
+[1] "METSIM1092" "METSIM1840" "METSIM1841" "METSIM1891" "METSIM1892" "METSIM1896"
+
+[[1]]$group6
+[1] "METSIM1160" "METSIM1162" "METSIM1165" "METSIM1167" "METSIM1180" "METSIM2165"
+
+[[1]]$group7
+[1] "METSIM1303" "METSIM1343" "METSIM1353" "METSIM1653" "METSIM7343"
+
+[[1]]$group8
+[1] "METSIM1504" "METSIM1574" "METSIM1674" "METSIM1678"
+
+[[1]]$group9
+[1] "METSIM1702" "METSIM1722" "METSIM1725" "METSIM6725"
+
+[[1]]$group10
+[1] "METSIM1932" "METSIM1937" "METSIM1942"
+
+[[1]]$group11
+[1] "METSIM2126" "METSIM2176" "METSIM2426"
+
+[[1]]$group12
+[1] "METSIM4542" "METSIM4572" "METSIM6572"
+
+[[1]]$group13
+[1] "METSIM5510" "METSIM5530" "METSIM5538" "METSIM7530"
+
+[[1]]$group14
+[1] "METSIM5680" "METSIM6484" "METSIM6664" "METSIM6680" "METSIM6684"
+
+[[1]]$group15
+[1] "METSIM6083" "METSIM6183" "METSIM6283"
+
+[[1]]$group16
+[1] "METSIM6515" "METSIM6517" "METSIM6557"
+
+[[1]]$group17
+[1] "METSIM6611" "METSIM6671" "METSIM6675" "METSIM7611"
+
+[[1]]$failed_samples
+  [1] "METSIM388"   "METSIM473"   "METSIM575"   "METSIM598"   "METSIM783"   "METSIM803"   "METSIM817"   "METSIM833"   "METSIM844"   "METSIM874"   "METSIM888"   "METSIM906"  
+ [13] "METSIM908"   "METSIM964"   "METSIM1086"  "METSIM1111"  "METSIM1247"  "METSIM1366"  "METSIM1452"  "METSIM1483"  "METSIM1516"  "METSIM1518"  "METSIM1599"  "METSIM1666" 
+ [25] "METSIM1757"  "METSIM1777"  "METSIM1885"  "METSIM1915"  "METSIM2044"  "METSIM2057"  "METSIM2100"  "METSIM2261"  "METSIM2338"  "METSIM2392"  "METSIM2415"  "METSIM2474" 
+ [37] "METSIM2488"  "METSIM2495"  "METSIM2570"  "METSIM2620"  "METSIM2655"  "METSIM2656"  "METSIM2687"  "METSIM2692"  "METSIM2704"  "METSIM2735"  "METSIM2760"  "METSIM2775" 
+ [49] "METSIM2786"  "METSIM2869"  "METSIM2950"  "METSIM3923"  "METSIM4137"  "METSIM4245"  "METSIM4257"  "METSIM4336"  "METSIM4403"  "METSIM4485"  "METSIM4644"  "METSIM5015" 
+ [61] "METSIM5157"  "METSIM5352"  "METSIM5381"  "METSIM5441"  "METSIM5446"  "METSIM5458"  "METSIM5470"  "METSIM5521"  "METSIM5571"  "METSIM5606"  "METSIM5708"  "METSIM5812" 
+ [73] "METSIM5845"  "METSIM5859"  "METSIM5877"  "METSIM5935"  "METSIM6006"  "METSIM6051"  "METSIM6101"  "METSIM6200"  "METSIM6419"  "METSIM6433"  "METSIM6589"  "METSIM6648" 
+ [85] "METSIM6741"  "METSIM6781"  "METSIM6835"  "METSIM6849"  "METSIM6959"  "METSIM6969"  "METSIM6978"  "METSIM7024"  "METSIM7080"  "METSIM7421"  "METSIM7436"  "METSIM7693" 
+ [97] "METSIM7717"  "METSIM7897"  "METSIM7927"  "METSIM7948"  "METSIM7954"  "METSIM7988"  "METSIM8054"  "METSIM8067"  "METSIM8135"  "METSIM8305"  "METSIM10062" "METSIM10252"
+[109] "METSIM10271" "METSIM10277" "METSIM10346" "METSIM10381" "METSIM10389" "METSIM10691" "METSIM10830" "METSIM11138" "METSIM11295" "METSIM11401"
+
+[[1]]$GSE
+[1] "GSE50760"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+  [1] "METSIM388"   "METSIM473"   "METSIM482"   "METSIM490"   "METSIM492"   "METSIM520"   "METSIM522"   "METSIM575"   "METSIM598"   "METSIM783"   "METSIM803"   "METSIM817"  
+ [13] "METSIM833"   "METSIM844"   "METSIM874"   "METSIM888"   "METSIM906"   "METSIM908"   "METSIM951"   "METSIM964"   "METSIM1019"  "METSIM1086"  "METSIM1092"  "METSIM1111" 
+ [25] "METSIM1160"  "METSIM1162"  "METSIM1165"  "METSIM1167"  "METSIM1180"  "METSIM1223"  "METSIM1228"  "METSIM1247"  "METSIM1263"  "METSIM1264"  "METSIM1303"  "METSIM1343" 
+ [37] "METSIM1353"  "METSIM1366"  "METSIM1452"  "METSIM1483"  "METSIM1504"  "METSIM1516"  "METSIM1518"  "METSIM1574"  "METSIM1599"  "METSIM1619"  "METSIM1653"  "METSIM1666" 
+ [49] "METSIM1674"  "METSIM1678"  "METSIM1702"  "METSIM1722"  "METSIM1725"  "METSIM1757"  "METSIM1764"  "METSIM1768"  "METSIM1777"  "METSIM1784"  "METSIM1840"  "METSIM1841" 
+ [61] "METSIM1885"  "METSIM1891"  "METSIM1892"  "METSIM1896"  "METSIM1915"  "METSIM1921"  "METSIM1924"  "METSIM1932"  "METSIM1937"  "METSIM1942"  "METSIM1984"  "METSIM2019" 
+ [73] "METSIM2044"  "METSIM2057"  "METSIM2100"  "METSIM2126"  "METSIM2165"  "METSIM2176"  "METSIM2261"  "METSIM2338"  "METSIM2392"  "METSIM2415"  "METSIM2426"  "METSIM2474" 
+ [85] "METSIM2488"  "METSIM2495"  "METSIM2570"  "METSIM2620"  "METSIM2655"  "METSIM2656"  "METSIM2687"  "METSIM2692"  "METSIM2704"  "METSIM2735"  "METSIM2760"  "METSIM2775" 
+ [97] "METSIM2786"  "METSIM2869"  "METSIM2950"  "METSIM3923"  "METSIM4137"  "METSIM4245"  "METSIM4257"  "METSIM4336"  "METSIM4403"  "METSIM4485"  "METSIM4542"  "METSIM4572" 
+[109] "METSIM4644"  "METSIM4951"  "METSIM4990"  "METSIM5015"  "METSIM5157"  "METSIM5203"  "METSIM5263"  "METSIM5273"  "METSIM5352"  "METSIM5381"  "METSIM5441"  "METSIM5446" 
+[121] "METSIM5458"  "METSIM5470"  "METSIM5510"  "METSIM5521"  "METSIM5530"  "METSIM5538"  "METSIM5571"  "METSIM5606"  "METSIM5680"  "METSIM5708"  "METSIM5812"  "METSIM5845" 
+[133] "METSIM5859"  "METSIM5877"  "METSIM5901"  "METSIM5909"  "METSIM5935"  "METSIM5951"  "METSIM6006"  "METSIM6051"  "METSIM6083"  "METSIM6101"  "METSIM6183"  "METSIM6200" 
+[145] "METSIM6283"  "METSIM6419"  "METSIM6433"  "METSIM6484"  "METSIM6515"  "METSIM6517"  "METSIM6557"  "METSIM6572"  "METSIM6589"  "METSIM6611"  "METSIM6648"  "METSIM6664" 
+[157] "METSIM6671"  "METSIM6675"  "METSIM6680"  "METSIM6684"  "METSIM6725"  "METSIM6741"  "METSIM6781"  "METSIM6835"  "METSIM6849"  "METSIM6959"  "METSIM6969"  "METSIM6978" 
+[169] "METSIM7024"  "METSIM7080"  "METSIM7343"  "METSIM7421"  "METSIM7436"  "METSIM7482"  "METSIM7530"  "METSIM7611"  "METSIM7693"  "METSIM7717"  "METSIM7897"  "METSIM7927" 
+[181] "METSIM7948"  "METSIM7954"  "METSIM7988"  "METSIM8054"  "METSIM8067"  "METSIM8135"  "METSIM8305"  "METSIM10062" "METSIM10252" "METSIM10271" "METSIM10277" "METSIM10346"
+[193] "METSIM10381" "METSIM10389" "METSIM10419" "METSIM10691" "METSIM10830" "METSIM11138" "METSIM11295" "METSIM11401"
+
+[[1]]$total_sample_count
+[1] 200
+
+[[1]]$parsed_sample_count
+[1] 200
+
+
+> results6[7]
+[[1]]
+[[1]]$group1
+[1] "Human_EU_1"  "Human_EU_3"  "Human_EU_4"  "Human_EU_11" "Human_EU_14"
+
+[[1]]$group2
+[1] "Human_AF_2"  "Human_AF_6"  "Human_AF_8"  "Human_AF_12"
+
+[[1]]$group3
+[1] "Human_AS_5" "Human_AS_7" "Human_AS_9"
+
+[[1]]$failed_samples
+[1] "Human_AS_10" "Human_AS_13"
+
+[[1]]$GSE
+[1] "GSE45263"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+ [1] "Human_EU_1"  "Human_AF_2"  "Human_EU_3"  "Human_EU_4"  "Human_AS_5"  "Human_AF_6"  "Human_AS_7"  "Human_AF_8"  "Human_AS_9"  "Human_AS_10" "Human_EU_11" "Human_AF_12"
+[13] "Human_AS_13" "Human_EU_14"
+
+[[1]]$total_sample_count
+[1] 14
+
+[[1]]$parsed_sample_count
+[1] 14
+
+
+> results6[6]
+[[1]]
+[[1]]$group1
+[1] "Control 24h - Adenoma 1" "Control 24h - Adenoma 2" "Control 24h - Adenoma 3"
+
+[[1]]$group2
+[1] "Control 48h - Adenoma 1" "Control 48h - Adenoma 2" "Control 48h - Adenoma 3" "Control 48h - Adenoma 4"
+
+[[1]]$group3
+[1] "DPN 24h - Adenoma 1" "DPN 24h - Adenoma 2" "DPN 24h - Adenoma 3" "DPN 24h - Adenoma 4"
+
+[[1]]$group4
+[1] "DPN 48h - Adenoma 1" "DPN 48h - Adenoma 2" "DPN 48h - Adenoma 3" "DPN 48h - Adenoma 4"
+
+[[1]]$group5
+[1] "OHT 24h - Adenoma 1" "OHT 24h - Adenoma 2" "OHT 24h - Adenoma 3" "OHT 24h - Adenoma 4"
+
+[[1]]$group6
+[1] "OHT 48h - Adenoma 1" "OHT 48h - Adenoma 2" "OHT 48h - Adenoma 3" "OHT 48h - Adenoma 4"
+
+[[1]]$failed_samples
+character(0)
+
+[[1]]$GSE
+[1] "GSE37211"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+ [1] "Control 24h - Adenoma 1" "Control 48h - Adenoma 1" "DPN 24h - Adenoma 1"     "DPN 48h - Adenoma 1"     "OHT 24h - Adenoma 1"     "OHT 48h - Adenoma 1"    
+ [7] "Control 24h - Adenoma 2" "Control 48h - Adenoma 2" "DPN 24h - Adenoma 2"     "DPN 48h - Adenoma 2"     "OHT 24h - Adenoma 2"     "OHT 48h - Adenoma 2"    
+[13] "Control 24h - Adenoma 3" "Control 48h - Adenoma 3" "DPN 24h - Adenoma 3"     "DPN 48h - Adenoma 3"     "OHT 24h - Adenoma 3"     "OHT 48h - Adenoma 3"    
+[19] "Control 48h - Adenoma 4" "DPN 24h - Adenoma 4"     "DPN 48h - Adenoma 4"     "OHT 24h - Adenoma 4"     "OHT 48h - Adenoma 4"    
+
+[[1]]$total_sample_count
+[1] 23
+
+[[1]]$parsed_sample_count
+[1] 23
+
+
+> results6[7]
+[[1]]
+[[1]]$group1
+[1] "Human_EU_1"  "Human_EU_3"  "Human_EU_4"  "Human_EU_11" "Human_EU_14"
+
+[[1]]$group2
+[1] "Human_AF_2"  "Human_AF_6"  "Human_AF_8"  "Human_AF_12"
+
+[[1]]$group3
+[1] "Human_AS_5" "Human_AS_7" "Human_AS_9"
+
+[[1]]$failed_samples
+[1] "Human_AS_10" "Human_AS_13"
+
+[[1]]$GSE
+[1] "GSE45263"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+ [1] "Human_EU_1"  "Human_AF_2"  "Human_EU_3"  "Human_EU_4"  "Human_AS_5"  "Human_AF_6"  "Human_AS_7"  "Human_AF_8"  "Human_AS_9"  "Human_AS_10" "Human_EU_11" "Human_AF_12"
+[13] "Human_AS_13" "Human_EU_14"
+
+[[1]]$total_sample_count
+[1] 14
+
+[[1]]$parsed_sample_count
+[1] 14
+
+
+> results6[8]
+[[1]]
+[[1]]$group1
+[1] "NF1_RNASeq" "NF2_RNASeq" "NF3_RNASeq" "NF4_RNASeq" "NF5_RNASeq" "NF6_RNASeq" "NF7_RNASeq" "NF8_RNASeq"
+
+[[1]]$group2
+ [1] "ICM1_RNASeq"  "ICM2_RNASeq"  "ICM3_RNASeq"  "ICM4_RNASeq"  "ICM5_RNASeq"  "ICM6_RNASeq"  "ICM7_RNASeq"  "ICM8_RNASeq"  "NICM1_RNASeq" "NICM2_RNASeq" "NICM3_RNASeq"
+[12] "NICM4_RNASeq" "NICM5_RNASeq" "NICM6_RNASeq" "NICM7_RNASeq" "NICM8_RNASeq"
+
+[[1]]$group3
+ [1] "ICM+LVAD1_RNASeq"  "ICM+LVAD2_RNASeq"  "ICM+LVAD3_RNASeq"  "ICM+LVAD4_RNASeq"  "ICM+LVAD5_RNASeq"  "ICM+LVAD6_RNASeq"  "ICM+LVAD7_RNASeq"  "ICM+LVAD8_RNASeq" 
+ [9] "NICM+LVAD1_RNASeq" "NICM+LVAD2_RNASeq" "NICM+LVAD3_RNASeq" "NICM+LVAD4_RNASeq" "NICM+LVAD5_RNASeq" "NICM+LVAD6_RNASeq" "NICM+LVAD7_RNASeq" "NICM+LVAD8_RNASeq"
+
+[[1]]$group4
+[1] "NF1_miRNASeq" "NF2_miRNASeq" "NF3_miRNASeq" "NF4_miRNASeq" "NF5_miRNASeq" "NF6_miRNASeq" "NF7_miRNASeq" "NF8_miRNASeq"
+
+[[1]]$group5
+ [1] "ICM1_miRNASeq"  "ICM2_miRNASeq"  "ICM3_miRNASeq"  "ICM4_miRNASeq"  "ICM5_miRNASeq"  "ICM6_miRNASeq"  "ICM7_miRNASeq"  "ICM8_miRNASeq"  "NICM1_miRNASeq" "NICM2_miRNASeq"
+[11] "NICM3_miRNASeq" "NICM4_miRNASeq" "NICM5_miRNASeq" "NICM6_miRNASeq" "NICM7_miRNASeq" "NICM8_miRNASeq"
+
+[[1]]$group6
+ [1] "ICM+LVAD1_miRNASeq"  "ICM+LVAD2_miRNASeq"  "ICM+LVAD3_miRNASeq"  "ICM+LVAD4_miRNASeq"  "ICM+LVAD5_miRNASeq"  "ICM+LVAD6_miRNASeq"  "ICM+LVAD7_miRNASeq" 
+ [8] "ICM+LVAD8_miRNASeq"  "NICM+LVAD1_miRNASeq" "NICM+LVAD2_miRNASeq" "NICM+LVAD3_miRNASeq" "NICM+LVAD4_miRNASeq" "NICM+LVAD5_miRNASeq" "NICM+LVAD6_miRNASeq"
+[15] "NICM+LVAD7_miRNASeq" "NICM+LVAD8_miRNASeq"
+
+[[1]]$failed_samples
+character(0)
+
+[[1]]$GSE
+[1] "GSE46224"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+ [1] "NF1_RNASeq"          "NF2_RNASeq"          "NF3_RNASeq"          "NF4_RNASeq"          "NF5_RNASeq"          "NF6_RNASeq"          "NF7_RNASeq"         
+ [8] "NF8_RNASeq"          "ICM1_RNASeq"         "ICM2_RNASeq"         "ICM3_RNASeq"         "ICM4_RNASeq"         "ICM5_RNASeq"         "ICM6_RNASeq"        
+[15] "ICM7_RNASeq"         "ICM8_RNASeq"         "NICM1_RNASeq"        "NICM2_RNASeq"        "NICM3_RNASeq"        "NICM4_RNASeq"        "NICM5_RNASeq"       
+[22] "NICM6_RNASeq"        "NICM7_RNASeq"        "NICM8_RNASeq"        "ICM+LVAD1_RNASeq"    "ICM+LVAD2_RNASeq"    "ICM+LVAD3_RNASeq"    "ICM+LVAD4_RNASeq"   
+[29] "ICM+LVAD5_RNASeq"    "ICM+LVAD6_RNASeq"    "ICM+LVAD7_RNASeq"    "ICM+LVAD8_RNASeq"    "NICM+LVAD1_RNASeq"   "NICM+LVAD2_RNASeq"   "NICM+LVAD3_RNASeq"  
+[36] "NICM+LVAD4_RNASeq"   "NICM+LVAD5_RNASeq"   "NICM+LVAD6_RNASeq"   "NICM+LVAD7_RNASeq"   "NICM+LVAD8_RNASeq"   "NF1_miRNASeq"        "NF2_miRNASeq"       
+[43] "NF3_miRNASeq"        "NF4_miRNASeq"        "NF5_miRNASeq"        "NF6_miRNASeq"        "NF7_miRNASeq"        "NF8_miRNASeq"        "ICM1_miRNASeq"      
+[50] "ICM2_miRNASeq"       "ICM3_miRNASeq"       "ICM4_miRNASeq"       "ICM5_miRNASeq"       "ICM6_miRNASeq"       "ICM7_miRNASeq"       "ICM8_miRNASeq"      
+[57] "NICM1_miRNASeq"      "NICM2_miRNASeq"      "NICM3_miRNASeq"      "NICM4_miRNASeq"      "NICM5_miRNASeq"      "NICM6_miRNASeq"      "NICM7_miRNASeq"     
+[64] "NICM8_miRNASeq"      "ICM+LVAD1_miRNASeq"  "ICM+LVAD2_miRNASeq"  "ICM+LVAD3_miRNASeq"  "ICM+LVAD4_miRNASeq"  "ICM+LVAD5_miRNASeq"  "ICM+LVAD6_miRNASeq" 
+[71] "ICM+LVAD7_miRNASeq"  "ICM+LVAD8_miRNASeq"  "NICM+LVAD1_miRNASeq" "NICM+LVAD2_miRNASeq" "NICM+LVAD3_miRNASeq" "NICM+LVAD4_miRNASeq" "NICM+LVAD5_miRNASeq"
+[78] "NICM+LVAD6_miRNASeq" "NICM+LVAD7_miRNASeq" "NICM+LVAD8_miRNASeq"
+
+[[1]]$total_sample_count
+[1] 80
+
+[[1]]$parsed_sample_count
+[1] 80
+
+
+> results6[9]
+[[1]]
+[[1]]$group1
+[1] "NB1 shSCR controlplasmid biol repl A" "NB1 shSCR controlplasmid biol repl B" "NB1 shSCR controlplasmid biol repl C"
+
+[[1]]$group2
+[1] "NB1 shSCR KIF1Bbeta biol repl A" "NB1 shSCR KIF1Bbeta biol repl B" "NB1 shSCR KIF1Bbeta biol repl C"
+
+[[1]]$group3
+[1] "NB1 shDHX9 controlplasmid biol repl A" "NB1 shDHX9 controlplasmid biol repl B" "NB1 shDHX9 controlplasmid biol repl C"
+
+[[1]]$group4
+[1] "NB1 shDHX9 KIF1Bbeta biol repl A" "NB1 shDHX9 KIF1Bbeta biol repl B" "NB1 shDHX9 KIF1Bbeta biol repl C"
+
+[[1]]$failed_samples
+character(0)
+
+[[1]]$GSE
+[1] "GSE44585"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+ [1] "NB1 shSCR controlplasmid biol repl A"  "NB1 shSCR controlplasmid biol repl B"  "NB1 shSCR controlplasmid biol repl C"  "NB1 shSCR KIF1Bbeta biol repl A"      
+ [5] "NB1 shSCR KIF1Bbeta biol repl B"       "NB1 shSCR KIF1Bbeta biol repl C"       "NB1 shDHX9 controlplasmid biol repl A" "NB1 shDHX9 controlplasmid biol repl B"
+ [9] "NB1 shDHX9 controlplasmid biol repl C" "NB1 shDHX9 KIF1Bbeta biol repl A"      "NB1 shDHX9 KIF1Bbeta biol repl B"      "NB1 shDHX9 KIF1Bbeta biol repl C"     
+
+[[1]]$total_sample_count
+[1] 12
+
+[[1]]$parsed_sample_count
+[1] 12
+
+
+> results6[10]
+[[1]]
+[[1]]$group1
+[1] "MethylC-Seq_hs_mfg_12yr" "MethylC-Seq_hs_mfg_16yr" "MethylC-Seq_hs_mfg_25yr" "MethylC-Seq_hs_mfg_5yr"  "MethylC-Seq_hs_mfg_2yr" 
+
+[[1]]$group2
+[1] "RNA-Seq_hs_mfg_2yr"  "RNA-Seq_hs_mfg_5yr"  "RNA-Seq_hs_mfg_12yr" "RNA-Seq_hs_mfg_16yr" "RNA-Seq_hs_mfg_25yr"
+
+[[1]]$failed_samples
+ [1] "MethylC-Seq_hs_fc_fetal"                "MethylC-Seq_hs_mfg_35do"                "MethylC-Seq_hs_fc_64yr"                 "MethylC-Seq_hs_fc_female_53yr_NeuN_pos"
+ [5] "MethylC-Seq_hs_fc_female_53yr_NeuN_neg" "MethylC-Seq_hs_fc_male_55yr_tissue"     "MethylC-Seq_hs_fc_male_55yr_NeuN_pos"   "MethylC-Seq_hs_fc_male_55yr_NeuN_neg"  
+ [9] "MethylC-Seq_hs_hues6"                   "RNA-Seq_hs_mfg_35do"                    "RNA-Seq_hs_fc_53yr"                    
+
+[[1]]$GSE
+[1] "GSE47966"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+ [1] "MethylC-Seq_hs_fc_fetal"                "MethylC-Seq_hs_mfg_12yr"                "MethylC-Seq_hs_mfg_16yr"                "MethylC-Seq_hs_mfg_25yr"               
+ [5] "MethylC-Seq_hs_mfg_5yr"                 "MethylC-Seq_hs_mfg_35do"                "MethylC-Seq_hs_mfg_2yr"                 "MethylC-Seq_hs_fc_64yr"                
+ [9] "MethylC-Seq_hs_fc_female_53yr_NeuN_pos" "MethylC-Seq_hs_fc_female_53yr_NeuN_neg" "MethylC-Seq_hs_fc_male_55yr_tissue"     "MethylC-Seq_hs_fc_male_55yr_NeuN_pos"  
+[13] "MethylC-Seq_hs_fc_male_55yr_NeuN_neg"   "MethylC-Seq_hs_hues6"                   "RNA-Seq_hs_mfg_35do"                    "RNA-Seq_hs_mfg_2yr"                    
+[17] "RNA-Seq_hs_mfg_5yr"                     "RNA-Seq_hs_mfg_12yr"                    "RNA-Seq_hs_mfg_16yr"                    "RNA-Seq_hs_mfg_25yr"                   
+[21] "RNA-Seq_hs_fc_53yr"                    
+
+[[1]]$total_sample_count
+[1] 21
+
+[[1]]$parsed_sample_count
+[1] 21
+
+
+> results6[11]
+[[1]]
+[[1]]$group1
+[1] "Control_Rep1" "Control_Rep2" "Control_Rep3" "Control_Rep4" "Control_Rep5" "Control_Rep6" "Control_Rep7"
+
+[[1]]$group2
+[1] "E2_Rep1" "E2_Rep2" "E2_Rep3" "E2_Rep4" "E2_Rep5" "E2_Rep6" "E2_Rep7"
+
+[[1]]$failed_samples
+character(0)
+
+[[1]]$GSE
+[1] "GSE51403"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+ [1] "E2_Rep1"      "E2_Rep2"      "E2_Rep3"      "E2_Rep4"      "E2_Rep5"      "E2_Rep6"      "E2_Rep7"      "Control_Rep1" "Control_Rep2" "Control_Rep3" "Control_Rep4"
+[12] "Control_Rep5" "Control_Rep6" "Control_Rep7"
+
+[[1]]$total_sample_count
+[1] 14
+
+[[1]]$parsed_sample_count
+[1] 14
+
+
+> results6[12]
+[[1]]
+[[1]]$group1
+[1] "d0_RNAseq"  "d3_RNAseq"  "d7_RNAseq"  "d10_RNAseq"
+
+[[1]]$group2
+[1] "d0 5hmC Affinity pull-down"  "d3 5hmC Affinity pull-down"  "d7 5hmC Affinity pull-down"  "d10 5hmC Affinity pull-down"
+
+[[1]]$group3
+[1] "d0 input"  "d3 input"  "d7 input"  "d10 input"
+
+[[1]]$failed_samples
+character(0)
+
+[[1]]$GSE
+[1] "GSE40243"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+ [1] "d0_RNAseq"                   "d3_RNAseq"                   "d7_RNAseq"                   "d10_RNAseq"                  "d0 5hmC Affinity pull-down" 
+ [6] "d3 5hmC Affinity pull-down"  "d7 5hmC Affinity pull-down"  "d10 5hmC Affinity pull-down" "d0 input"                    "d3 input"                   
+[11] "d7 input"                    "d10 input"                  
+
+[[1]]$total_sample_count
+[1] 12
+
+[[1]]$parsed_sample_count
+[1] 12
+
+
+> results6[13]
+[[1]]
+[[1]]$group1
+[1] "S1L-PS" "S1P-PS" "S2L-PS" "S2P-PS" "S3L-PS" "S3P-PS" "S4L-PS" "S4P-PS"
+
+[[1]]$group2
+[1] "S1L-SCLB" "S1P-SCLB" "S2L-SCLB" "S2P-SCLB" "S3L-SCLB" "S3P-SCLB" "S4L-SCLB" "S4P-SCLB"
+
+[[1]]$failed_samples
+character(0)
+
+[[1]]$GSE
+[1] "GSE43586"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+ [1] "S1L-PS"   "S1L-SCLB" "S1P-PS"   "S1P-SCLB" "S2L-PS"   "S2L-SCLB" "S2P-PS"   "S2P-SCLB" "S3L-PS"   "S3L-SCLB" "S3P-PS"   "S3P-SCLB" "S4L-PS"   "S4L-SCLB" "S4P-PS"  
+[16] "S4P-SCLB"
+
+[[1]]$total_sample_count
+[1] 16
+
+[[1]]$parsed_sample_count
+[1] 16
+
+
+> results6[14]
+[[1]]
+[[1]]$group1
+[1] "SSP1" "SSP2" "SSP3" "SSP4" "SSP5" "SSP6" "SSP7"
+
+[[1]]$group2
+[1] "CTRL1" "CTRL2" "CTRL3" "CTRL4" "CTRL5" "CTRL6" "CTRL7" "CTRL8"
+
+[[1]]$failed_samples
+character(0)
+
+[[1]]$GSE
+[1] "GSE46513"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+ [1] "SSP1"  "SSP2"  "SSP3"  "SSP4"  "SSP5"  "SSP6"  "SSP7"  "CTRL1" "CTRL2" "CTRL3" "CTRL4" "CTRL5" "CTRL6" "CTRL7" "CTRL8"
+
+[[1]]$total_sample_count
+[1] 15
+
+[[1]]$parsed_sample_count
+[1] 15
+
+
+> results6[15]
+[[1]]
+[[1]]$group1
+[1] "KYSE70 shSOX2(2) Day 0" "KYSE70 shSOX2(2) Day 4" "KYSE70 shSOX2(1) Day 4"
+
+[[1]]$group2
+[1] "KYSE70 shTP63(2) Day 0" "KYSE70 shTP63(2) Day 4" "KYSE70 shTP63(1) Day 4"
+
+[[1]]$failed_samples
+character(0)
+
+[[1]]$GSE
+[1] "GSE47058"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+[1] "KYSE70 shSOX2(2) Day 0" "KYSE70 shSOX2(2) Day 4" "KYSE70 shSOX2(1) Day 4" "KYSE70 shTP63(2) Day 0" "KYSE70 shTP63(2) Day 4" "KYSE70 shTP63(1) Day 4"
+
+[[1]]$total_sample_count
+[1] 6
+
+[[1]]$parsed_sample_count
+[1] 6
+
+
+> results6[16]
+[[1]]
+[[1]]$group1
+[1] "LCL__BM1_riboMinus" "LCL__BM2_riboMinus" "LCL__BM3_riboMinus"
+
+[[1]]$group2
+[1] "LCL__BM1_4SU__1" "LCL__BM1_4SU__2" "LCL__BM2_4SU__1" "LCL__BM2_4SU__2"
+
+[[1]]$failed_samples
+ [1] "HiSeq_IsoG-CPT__D6-26_c10" "HiSeq_IsoG-CPT__D6-26_CPT" "HiSeq_IsoG-CPT__D7-10_c10" "HiSeq_IsoG-CPT__D7-10_CPT" "HiSeq_IsoG-CPT__D6-26_c60" "HiSeq_IsoG-CPT__D6-26_IsG"
+ [7] "HiSeq_IsoG-CPT__D8-01_c60" "HiSeq_IsoG-CPT__D8-01_IsG" "HiSeq_IsoG-CPT__D9-19_c60" "HiSeq_IsoG-CPT__D9-19_IsG" "LCL__BM3_4SU"             
+
+[[1]]$GSE
+[1] "GSE48889"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+ [1] "HiSeq_IsoG-CPT__D6-26_c10" "HiSeq_IsoG-CPT__D6-26_CPT" "HiSeq_IsoG-CPT__D7-10_c10" "HiSeq_IsoG-CPT__D7-10_CPT" "HiSeq_IsoG-CPT__D6-26_c60" "HiSeq_IsoG-CPT__D6-26_IsG"
+ [7] "HiSeq_IsoG-CPT__D8-01_c60" "HiSeq_IsoG-CPT__D8-01_IsG" "HiSeq_IsoG-CPT__D9-19_c60" "HiSeq_IsoG-CPT__D9-19_IsG" "LCL__BM1_riboMinus"        "LCL__BM2_riboMinus"       
+[13] "LCL__BM3_riboMinus"        "LCL__BM1_4SU__1"           "LCL__BM1_4SU__2"           "LCL__BM2_4SU__1"           "LCL__BM2_4SU__2"           "LCL__BM3_4SU"             
+
+[[1]]$total_sample_count
+[1] 18
+
+[[1]]$parsed_sample_count
+[1] 18
+
+
+> results6[17]
+[[1]]
+[[1]]$group1
+ [1] "Ribosome profiling rep1-SiControl-RPF C1"             "Ribosome profiling rep1-SiControl-input-polyA C2"     "Ribosome profiling rep1-SiYTHDF2-RPF C3"             
+ [4] "Ribosome profiling rep1-SiYTHDF2-input-polyA C4"      "Ribosome profiling rep2-SiControl-input-ribominus C7" "Ribosome profiling rep2-SiControl-input-polyA C6"    
+ [7] "Ribosome profiling rep2-SiControl-RPF C5"             "Ribosome profiling rep2-SiYTHDF2-input-ribominus C10" "Ribosome profiling rep2-SiYTHDF2-input-polyA C9"     
+[10] "Ribosome profiling rep2-SiYTHDF2-RPF C8"             
+
+[[1]]$group2
+[1] "YTHDF2-PAR-CLIP-rep1 A1" "YTHDF2-PAR-CLIP-rep2 A2" "YTHDF2-PAR-CLIP-rep3 A3"
+
+[[1]]$failed_samples
+ [1] "YTHDF2-RIP-IP-rep1 B1"            "YTHDF2-RIP-IP-rep2 B2"            "YTHDF2-RIP-input polyA B3"        "YTHDF2-RIP-input ribominus B4"   
+ [5] "mRNA lifetime-SiControl-TI-0h D1" "mRNA lifetime-SiControl-TI-3h D2" "mRNA lifetime-SiControl-TI-6h D3" "mRNA lifetime-SiYTHDF2-TI-0h D4" 
+ [9] "mRNA lifetime-SiYTHDF2-TI-3h D5"  "mRNA lifetime-SiYTHDF2-TI-6h D6"  "mRNA lifetime-SiControl-TI-0h E1" "mRNA lifetime-SiControl-TI-3h E2"
+[13] "mRNA lifetime-SiControl-TI-6h E3" "mRNA lifetime-SiYTHDF2-TI-0h E4"  "mRNA lifetime-SiYTHDF2-TI-3h E5"  "mRNA lifetime-SiYTHDF2-TI-6h E6" 
+
+[[1]]$GSE
+[1] "GSE49339"
+
+[[1]]$matched_term
+NULL
+
+[[1]]$titles
+ [1] "YTHDF2-PAR-CLIP-rep1 A1"                              "YTHDF2-PAR-CLIP-rep2 A2"                              "YTHDF2-PAR-CLIP-rep3 A3"                             
+ [4] "YTHDF2-RIP-IP-rep1 B1"                                "YTHDF2-RIP-IP-rep2 B2"                                "YTHDF2-RIP-input polyA B3"                           
+ [7] "YTHDF2-RIP-input ribominus B4"                        "Ribosome profiling rep1-SiControl-RPF C1"             "Ribosome profiling rep1-SiControl-input-polyA C2"    
+[10] "Ribosome profiling rep1-SiYTHDF2-RPF C3"              "Ribosome profiling rep1-SiYTHDF2-input-polyA C4"      "Ribosome profiling rep2-SiControl-input-ribominus C7"
+[13] "Ribosome profiling rep2-SiControl-input-polyA C6"     "Ribosome profiling rep2-SiControl-RPF C5"             "Ribosome profiling rep2-SiYTHDF2-input-ribominus C10"
+[16] "Ribosome profiling rep2-SiYTHDF2-input-polyA C9"      "Ribosome profiling rep2-SiYTHDF2-RPF C8"              "mRNA lifetime-SiControl-TI-0h D1"                    
+[19] "mRNA lifetime-SiControl-TI-3h D2"                     "mRNA lifetime-SiControl-TI-6h D3"                     "mRNA lifetime-SiYTHDF2-TI-0h D4"                     
+[22] "mRNA lifetime-SiYTHDF2-TI-3h D5"                      "mRNA lifetime-SiYTHDF2-TI-6h D6"                      "mRNA lifetime-SiControl-TI-0h E1"                    
+[25] "mRNA lifetime-SiControl-TI-3h E2"                     "mRNA lifetime-SiControl-TI-6h E3"                     "mRNA lifetime-SiYTHDF2-TI-0h E4"                     
+[28] "mRNA lifetime-SiYTHDF2-TI-3h E5"                      "mRNA lifetime-SiYTHDF2-TI-6h E6"                     
+
+[[1]]$total_sample_count
+[1] 29
+
+[[1]]$parsed_sample_count
+[1] 29

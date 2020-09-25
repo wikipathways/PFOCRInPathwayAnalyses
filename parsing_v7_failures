@@ -1,0 +1,111 @@
+$group1
+[1] "H3K27ac Hour 0"  "H3K27ac Hour 1"  "H3K27ac Hour 4"  "H3K27ac Hour 12"
+
+$group2
+[1] "RNA-seq Hour 0"  "RNA-seq Hour 1"  "RNA-seq Hour 4"  "RNA-seq Hour 12"
+
+$group3
+[1] "ETS1 Hour 1"  "ETS1 Hour 4"  "ETS1 Hour 12"
+
+$failed_samples
+ [1] "p300 Hour 0 Rep 1"  "p300 Hour 1 Rep 1"  "p300 Hour 4 Rep 1"  "p300 Hour 12 Rep 1" "p300 Hour 0 Rep 2"  "p300 Hour 1 Rep 2"  "p300 Hour 4 Rep 2" 
+ [8] "p300 Hour 12 Rep 2" "DHS Hour 0 Rep 1"   "DHS Hour 1 Rep 1"   "DHS Hour 4 Rep 1"   "DHS Hour 12 Rep 1"  "DHS Hour 0 Rep 2"   "DHS Hour 1 Rep 2"  
+[15] "DHS Hour 4 Rep 2"   "DHS Hour 12 Rep 2"  "ETS Hour 0"         "Histone Input 1"    "Histone Input 2"    "ETS1 Input"         "p300 Input"        
+
+$GSE
+[1] "GSE41166"
+
+$matched_term
+NULL
+
+$titles
+ [1] "H3K27ac Hour 0"     "H3K27ac Hour 1"     "H3K27ac Hour 4"     "H3K27ac Hour 12"    "p300 Hour 0 Rep 1"  "p300 Hour 1 Rep 1"  "p300 Hour 4 Rep 1" 
+ [8] "p300 Hour 12 Rep 1" "p300 Hour 0 Rep 2"  "p300 Hour 1 Rep 2"  "p300 Hour 4 Rep 2"  "p300 Hour 12 Rep 2" "RNA-seq Hour 0"     "RNA-seq Hour 1"    
+[15] "RNA-seq Hour 4"     "RNA-seq Hour 12"    "DHS Hour 0 Rep 1"   "DHS Hour 1 Rep 1"   "DHS Hour 4 Rep 1"   "DHS Hour 12 Rep 1"  "DHS Hour 0 Rep 2"  
+[22] "DHS Hour 1 Rep 2"   "DHS Hour 4 Rep 2"   "DHS Hour 12 Rep 2"  "ETS Hour 0"         "ETS1 Hour 1"        "ETS1 Hour 4"        "ETS1 Hour 12"      
+[29] "Histone Input 1"    "Histone Input 2"    "ETS1 Input"         "p300 Input"        
+
+$total_sample_count
+[1] 32
+
+
+
+
+
+
+
+$group1
+[1] "LPS_Neonate1_0hr" "LPS_Neonate1_1hr" "LPS_Neonate1_6hr"
+
+$group2
+[1] "LPS_Neonate2_0hr" "LPS_Neonate2_1hr" "LPS_Neonate2_6hr"
+
+$group3
+[1] "LPS_Neonate3_0hr" "LPS_Neonate3_1hr" "LPS_Neonate3_6hr"
+
+$group4
+[1] "LPS_Adult1_0hr" "LPS_Adult1_1hr" "LPS_Adult1_6hr"
+
+$group5
+[1] "LPS_Adult2_0hr" "LPS_Adult2_1hr" "LPS_Adult2_6hr"
+
+$group6
+[1] "LPS_Adult3_0hr" "LPS_Adult3_1hr" "LPS_Adult3_6hr"
+
+$group7
+[1] "LPS_OlderAdult1_0hr" "LPS_OlderAdult1_1hr" "LPS_OlderAdult1_6hr"
+
+$group8
+[1] "LPS_OlderAdult2_0hr" "LPS_OlderAdult2_1hr" "LPS_OlderAdult2_6hr"
+
+$group9
+[1] "LPS_OlderAdult3_0hr" "LPS_OlderAdult3_1hr" "LPS_OlderAdult3_6hr"
+
+$group10
+[1] "Lm_Neonate1_0hr" "Lm_Neonate1_2hr" "Lm_Neonate1_6hr"
+
+$group11
+[1] "Lm_Neonate2_0hr" "Lm_Neonate2_2hr" "Lm_Neonate2_6hr"
+
+$group12
+[1] "Lm_Neonate3_0hr" "Lm_Neonate3_2hr" "Lm_Neonate3_6hr"
+
+$group13
+[1] "Lm_Adult1_0hr" "Lm_Adult1_2hr" "Lm_Adult1_6hr"
+
+$group14
+[1] "Lm_Adult2_0hr" "Lm_Adult2_2hr" "Lm_Adult2_6hr"
+
+$group15
+[1] "Lm_Adult3_0hr" "Lm_Adult3_2hr" "Lm_Adult3_6hr"
+
+$group16
+[1] "Lm_OlderAdult1_0hr" "Lm_OlderAdult1_2hr" "Lm_OlderAdult1_6hr"
+
+$group17
+[1] "Lm_OlderAdult2_0hr" "Lm_OlderAdult2_2hr" "Lm_OlderAdult2_6hr"
+
+$group18
+[1] "Lm_OlderAdult3_0hr" "Lm_OlderAdult3_2hr" "Lm_OlderAdult3_6hr"
+
+$failed_samples
+character(0)
+
+$GSE
+[1] "GSE60216"
+
+$matched_term
+NULL
+
+$titles
+ [1] "LPS_Neonate1_0hr"    "LPS_Neonate1_1hr"    "LPS_Neonate1_6hr"    "LPS_Neonate2_0hr"    "LPS_Neonate2_1hr"    "LPS_Neonate2_6hr"    "LPS_Neonate3_0hr"   
+ [8] "LPS_Neonate3_1hr"    "LPS_Neonate3_6hr"    "LPS_Adult1_0hr"      "LPS_Adult1_1hr"      "LPS_Adult1_6hr"      "LPS_Adult2_0hr"      "LPS_Adult2_1hr"     
+[15] "LPS_Adult2_6hr"      "LPS_Adult3_0hr"      "LPS_Adult3_1hr"      "LPS_Adult3_6hr"      "LPS_OlderAdult1_0hr" "LPS_OlderAdult1_1hr" "LPS_OlderAdult1_6hr"
+[22] "LPS_OlderAdult2_0hr" "LPS_OlderAdult2_1hr" "LPS_OlderAdult2_6hr" "LPS_OlderAdult3_0hr" "LPS_OlderAdult3_1hr" "LPS_OlderAdult3_6hr" "Lm_Neonate1_0hr"    
+[29] "Lm_Neonate1_2hr"     "Lm_Neonate1_6hr"     "Lm_Neonate2_0hr"     "Lm_Neonate2_2hr"     "Lm_Neonate2_6hr"     "Lm_Neonate3_0hr"     "Lm_Neonate3_2hr"    
+[36] "Lm_Neonate3_6hr"     "Lm_Adult1_0hr"       "Lm_Adult1_2hr"       "Lm_Adult1_6hr"       "Lm_Adult2_0hr"       "Lm_Adult2_2hr"       "Lm_Adult2_6hr"      
+[43] "Lm_Adult3_0hr"       "Lm_Adult3_2hr"       "Lm_Adult3_6hr"       "Lm_OlderAdult1_0hr"  "Lm_OlderAdult1_2hr"  "Lm_OlderAdult1_6hr"  "Lm_OlderAdult2_0hr" 
+[50] "Lm_OlderAdult2_2hr"  "Lm_OlderAdult2_6hr"  "Lm_OlderAdult3_0hr"  "Lm_OlderAdult3_2hr"  "Lm_OlderAdult3_6hr" 
+
+$total_sample_count
+[1] 54
