@@ -4,6 +4,7 @@
 #https://docs.google.com/document/d/1jm1sJtHgJkSV7hEjMC_VK7l7gzshMQzr4T7NdgY9rGE/edit#heading=h.skn982pchl79
 #https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4930834/
 
+setwd("/Users/mingyoungshin/git/PFOCRInPathwayAnalyses")
 # Check for dependencies and install if missing
 packages <- c("rhdf5","pkgconfig")
 if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
@@ -96,7 +97,7 @@ dieases=c("Renal cell carcinoma","Alzheimer’s disease","Alzheimer","Thyroid ca
 ########## match additional terms
 terms=read.table("87disease",header=FALSE)
 terms=as.character(unlist((terms)))
-terms=c(terms, dieases,"knock-out", "knock out", "knockout","siRNA","knockdown", "knock down", "knock-down", "crispr-i", "variant","pathway")
+terms=c(terms, dieases,"knock-out", "knock out", "knockout","siRNA","knockdown", "knock down", "knock-down", "crispr-i", "variant","pathway")#signaling
 terms=unique(terms)
 match_gse_terms<-function(gse_id){
   print(gse_id)
@@ -300,6 +301,89 @@ group_samples7<-function(gse,titles,description,abstract){
 #results: successful results
 #among 507 disease matched samples, 75 succeeded
 start_t=Sys.time()
+
+
+histone=NULL
+matched_histone=NULL
+duplicates=NULL
+errors=NULL
+##additional fitering
+for(i in 1:length(results7)){
+  print(i)
+  print(results7[[i]]$GSE)
+  
+  if(i>1){
+    if(length(which((results7[[i-1]]$titles==results7[[i]]$titles) ==TRUE))==length(results7[[i-1]]$titles)){
+      duplicates=c(duplicates,i)
+      next
+    }
+  }
+  
+  data=NULL
+  tryCatch({
+    
+    data <- getGEO(results7[[i]]$GSE,getGPL = FALSE)
+    
+  }, error = function(err) {
+    
+    
+  }) # END 
+  
+  if(length(data)==0){ errors=c(errors,i);next}
+  titles=as.character(data[[1]]@phenoData@data$title)
+  description=data[[1]]@experimentData@title
+  abstract=data[[1]]@experimentData@abstract
+  
+
+  
+  
+  if(length(grep("histone",paste(titles,description),ignore.case = TRUE))>0 | length(grep("H[1-4]+[A-Z][0-9]+",paste(titles,description),ignore.case = TRUE))>0){
+    histone=c(histone,i)
+    if(length(grep("H[1-4]+[A-Z][0-9]+",paste(titles,description),ignore.case = TRUE))>0){
+      matched_histone=c(matched_histone,paste(paste(titles,collapse=" "),description,collapse=" "))
+    }else{
+      matched_histone=c(matched_histone,"histone")
+    }
+    
+    next
+    
+  }
+  
+  
+}
+
+histone=histone[-c(21,26)]
+keywords=c(histone,duplicates)
+
+
+results7_no_histone=list()
+for(i in 1:length(results7)){
+  if(!(i%in%keywords)){
+    results7_no_histone<-c(results7_no_histone,list(results7[[i]]))
+  }
+}
+
+#1792 ->1732 gses
+groupC=apply(as.matrix(1:length(results7_no_histone)),1,function(x) length(results7_no_histone[[x]])-6 )
+group_sampleC=apply(as.matrix(1:length(results7_no_histone)),1,function(x){groups=lengths(results7_no_histone[[x]]);max(lengths(results7_no_histone[[x]])[grep("group",names(groups))])}  )
+
+filter1=which(groupC==2)#689
+filter2=(intersect(filter1,which(group_sampleC<=40)))#671
+
+results7_noHistone_1comparison_2groups=list()
+for(i in 1:length(results7_no_histone)){
+  if((i%in%filter2)){
+    results7_noHistone_1comparison_2groups<-c(results7_noHistone_1comparison_2groups,list(results7_no_histone[[i]]))
+  }
+}
+
+false_positive=c(20)
+false_negative=c(15)
+
+
+save.image("parsing_v7.2_results7_noHistone_1comparison_2groups.RData")
+
+
 matched_count=0
 
 result_1_7=list()
@@ -307,7 +391,7 @@ result_0_7=list()
 results7=list()
 chipseq=NULL
 scRNAseq=NULL
-for(i in 501:length(unique_gse)){
+for(i in 1:length(unique_gse)){
   print(i)
   
   error_flag=0
@@ -366,9 +450,26 @@ end_t=Sys.time()
 
 save.image("parsing_v7.2.RData")
 
-false_positive=c(20)
-false_negative=c(15)
-histone=c(15)
+groupC=apply(as.matrix(1:length(results7)),1,function(x) length(results7[[x]])-6 )
+hist(groupC,200)
+hist(groupC,200,ylim=c(1,15))
+hist((groupC^2-groupC)/2,200)
+hist((groupC^2-groupC)/2,200,ylim=c(1,15))
+
+hist(groupC[which(groupC<10)],200)
+hist(groupC[which(groupC<10)],200,ylim=c(1,15))
+hist((groupC[which(groupC<10)]^2-groupC[which(groupC<10)])/2,200)
+hist((groupC[which(groupC<10)]^2-groupC[which(groupC<10)])/2,200,ylim=c(1,15))
+
+group_sampleC=apply(as.matrix(1:length(results7)),1,function(x){groups=lengths(results7[[x]]);max(lengths(results7[[x]])[grep("group",names(groups))])}  )
+hist(group_sampleC,200)
+hist(group_sampleC,200,ylim=c(1,15))
+
+filter1=which(groupC==2)
+length(intersect(filter1,which(group_sampleC<=40)))
+  false_positive=c(20)
+  false_negative=c(15)
+  histone=c(15)
 
 result_1=NULL
 result_0=list()
