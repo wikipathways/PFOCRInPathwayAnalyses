@@ -1,4 +1,20 @@
 $group1
+[1] "CD4 T cells sortted from PBMC after 3 doses of Ipi from patient 1" "CD4 T cells sortted from PBMC after 3 doses of Ipi from patient 2"
+[3] "CD4 T cells sortted from PBMC after 3 doses of Ipi from patient 3" "CD4 T cells sortted from PBMC after 3 doses of Ipi from patient 4"
+
+$group2
+[1] "CD4 T cells sorted from PBMC at baseline from patient 2" "CD4 T cells sorted from PBMC at baseline from patient 3"
+[3] "CD4 T cells sorted from PBMC at baseline from patient 4"
+
+$failed_samples
+[1] "CD4 T cells sorted from PBMC at baseline patient 1"
+
+$GSE
+[1] "GSE114716"
+
+
+
+$group1
 [1] "1_HO" "2_HO" "3_HO"
 
 $group2
@@ -7,6 +23,8 @@ $group2
 $failed_samples
 [1] "1_Tr24" "2_Tr24" "3_Tr24" "1_Tr48" "2_Tr48" "3_Tr48"
 
+$GSE
+[1] "GSE108013"
 
 
 $group1
