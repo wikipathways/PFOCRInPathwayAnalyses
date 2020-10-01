@@ -1,4 +1,20 @@
 $group1
+[1] "C2-1" "C2-2" "C2-3"
+
+$group2
+[1] "C3-1" "C3-2" "C3-4"
+
+$failed_samples
+[1] "C2A"    "C2B"    "C2C"    "C244-A" "C244-B" "C243"  
+
+$GSE
+[1] "GSE101942"
+
+
+
+
+
+$group1
 [1] "DGM-01620_lg" "DGM-11374_lg" "DGM-11852_lg"
 
 $group2
