@@ -21,7 +21,7 @@ $GSE
 [1] "GSE86064"
 
 
-
+#######time series
 
 
 
@@ -40,3 +40,17 @@ $failed_samples
 $GSE
 [1] "GSE103990"
 
+
+
+
+$group1
+[1] "GM12878 125nm SD6 at 2 h"  "GM12878 125nm SD6 at 6 h"  "GM12878 125nm SD6 at 24 h"
+
+$group2
+[1] "MEC1 125nm SD6 at 2 h"  "MEC1 125nm SD6 at 6 h"  "MEC1 125nm SD6 at 24 h"
+
+$failed_samples
+[1] "GM12878 125nm SD6 at 0 hr" "MEC1 125nm SD6 at 0 hr"   
+
+$GSE
+[1] "GSE114514"
