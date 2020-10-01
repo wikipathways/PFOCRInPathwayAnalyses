@@ -1,4 +1,16 @@
 $group1
+[1] "653" "337" "863"
+
+$group2
+[1] "HA28" "HA26" "HA25" "HA29"
+
+$failed_samples
+[1] "C1"      "A15-015" "TA1628" 
+
+$GSE
+[1] "GSE101824"
+
+$group1
 [1] "C2-1" "C2-2" "C2-3"
 
 $group2
@@ -13,6 +25,7 @@ $GSE
 
 
 
+##################discussed
 
 $group1
 [1] "DGM-01620_lg" "DGM-11374_lg" "DGM-11852_lg"
