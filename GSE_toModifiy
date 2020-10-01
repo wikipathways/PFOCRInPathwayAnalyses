@@ -1,4 +1,15 @@
 $group1
+[1] "1_HO" "2_HO" "3_HO"
+
+$group2
+[1] "1_NO" "2_NO" "3_NO"
+
+$failed_samples
+[1] "1_Tr24" "2_Tr24" "3_Tr24" "1_Tr48" "2_Tr48" "3_Tr48"
+
+
+
+$group1
 [1] "CS1 BAL_Control"  "CS2 BAL_Control"  "CS4 BAL_Control"  "CS5 BAL_Control"  "CS23 BAL_Control" "CS24 BAL_Control" "CS25 BAL_Control"
 
 $group2
@@ -10,3 +21,5 @@ $failed_samples
 
 $GSE
 [1] "GSE79544"
+
+
