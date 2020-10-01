@@ -19,3 +19,24 @@ $failed_samples
 
 $GSE
 [1] "GSE86064"
+
+
+
+
+
+
+$group1
+[1] "SCBO-5_orgP10" "SCBO-5_orgP13" "SCBO-5_orgP3" 
+
+$group2
+[1] "SCBO-16_tumor" "SCBO-5_tumor"  "SCBO-7_tumor"  "SCBO-9_tumor"  "SCBO-11_tumor" "SCBO-12_tumor" "SCBO-15_tumor"
+
+$failed_samples
+ [1] "SCBO-1_orgP7"    "SCBO-3_orgP4"    "SCBO-6_orgP4"    "SCBO-2_orgP5"    "SCBO-4_orgP10"   "SCBO-3.2_orgP1"  "SCBO-7_orgP0"    "SCBO-8_orgP3"    "SCBO-9_orgP0"   
+[10] "SCBO-10_orgP0"   "SCBO-11_orgP1"   "SCBO-12_orgP0"   "SCBO-3.2_orgP14" "SCBO-7_orgP7"    "SCBO-8_orgP11"   "SCBO-9_orgP9"    "SCBO-10_orgP9"   "SCBO-11_orgP8"  
+[19] "SCBO-12_orgP7"   "SCBO-14_orgP2"   "SCBO-15_orgP0"   "SMBO-1_orgP0"    "SMBO-2_orgP2"    "SCBO-11.2_orgP3" "SCBO-13_orgP7"   "SCBO-15_orgP8"   "SCBO-3_orgP14"  
+[28] "SCBO-16_orgP4"   "SCBO-11.3_orgP2" "SCBO-7.2_orgP1"  "SCBO-14_orgP10"  "SCBO-7.2_tumor" 
+
+$GSE
+[1] "GSE103990"
+
