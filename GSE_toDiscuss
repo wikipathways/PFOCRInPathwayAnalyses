@@ -1,0 +1,21 @@
+$group1
+[1] "DGM-01620_lg" "DGM-11374_lg" "DGM-11852_lg"
+
+$group2
+ [1] "DGM-01578_lae-bc" "DGM-01624_lae-bc" "DGM-02007_lae-bc" "DGM-10123_lae-bc" "DGM-11213_lae-bc" "DGM-11921_lae-bc" "DGM-11956_lae-bc" "DGM-11963_lae-bc"
+ [9] "DGM-12023_lae-bc" "DGM-12027_lae-bc" "DGM-12044_lae-bc" "DGM-12203_lae-bc" "DGM-12251_lae-bc" "DGM-12334_lae-bc" "DGM-12489_lae-bc" "DGM-12535_lae-bc"
+[17] "DGM-12748_lae-bc" "DGM-12825_lae-bc" "DGM-12163_lae-bc" "DGM-02019_lae-bc" "DGM-11156_lae-bc" "DGM-11280_lae-bc" "DGM-11529_lae-bc" "DGM-12005_lae-bc"
+[25] "DGM-12088_lae-bc" "DGM-00692_lae-bc" "DGM-12446_lae-bc"
+
+$failed_samples
+ [1] "DGM-01774_090416_lg"     "DGM-10123_M0_lg"         "DGM-10194_M3_lg"         "DGM-10284_M6_lg"         "DGM-10500_M0_lg"         "DGM-10503_M6_lg"        
+ [7] "DGM-10565_M6_lg"         "DGM-10447_M0_lae-bc"     "DGM-10500_M12_lae-bc"    "DGM-00342_M12_sm"        "DGM-01774_M3_sm"         "DGM-10123_M12_sm"       
+[13] "DGM-10159_M12_sm"        "DGM-10161_M12_sm"        "DGM-10194_M12_sm"        "DGM-10254_M12_sm"        "DGM-10261_M0_sm"         "DGM-10270_M12_sm"       
+[19] "DGM-10284_M12_sm"        "DGM-10288_M12_sm"        "DGM-10343_M12_sm"        "DGM-10380_M12_sm"        "DGM-10383_M12_sm"        "DGM-10475_M3_sm"        
+[25] "DGM-10500_M6_sm"         "DGM-10503_M12_sm"        "DGM-10565_M12_sm"        "DGM-10568_M0_sm"         "DGM-10707_M0_sm"         "DGM-11525_M0_sm"        
+[31] "DGM-11964_sm"            "DGM-12833_131003_sae-bc" "DGM-12833_140320_sae-bc" "DGM-12857_sae-bc"        "DGM-10201_M12_lae-bc"    "DGM-10698_M12_lae-bc"   
+[37] "DGM-00061_M28_lae-bc"    "DGM-02164_M3_lae-bc"     "DGM-10262_M6_lae-bc"     "DGM-10406_M12_lae-bc"    "DGM-10794_M3_lae-bc"     "DGM-10984_M6_lae-bc"    
+[43] "DGM-11001_M6_lae-bc"     "DGM-11007_M6_lae-bc"     "DGM-11261_M6_lae-bc"     "DGM-11270_M0_lae-bc"     "DGM-11463_M0_lae-bc"    
+
+$GSE
+[1] "GSE86064"
