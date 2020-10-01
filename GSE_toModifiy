@@ -1,0 +1,12 @@
+$group1
+[1] "CS1 BAL_Control"  "CS2 BAL_Control"  "CS4 BAL_Control"  "CS5 BAL_Control"  "CS23 BAL_Control" "CS24 BAL_Control" "CS25 BAL_Control"
+
+$group2
+ [1] "CS3 BAL_IPF"  "CS7 BAL_IPF"  "CS8 BAL_IPF"  "CS11 BAL_IPF" "CS15 BAL_IPF" "CS16 BAL_IPF" "CS6 BAL_IPF"  "CS10 BAL_IPF" "CS12 BAL_IPF" "CS13 BAL_IPF" "CS14 BAL_IPF"
+[12] "CS17 BAL_IPF" "CS19 BAL_IPF" "CS20 BAL_IPF" "CS22 BAL_IPF"
+
+$failed_samples
+[1] "CS 9 BAL_IPF"
+
+$GSE
+[1] "GSE79544"
