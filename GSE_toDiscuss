@@ -1,4 +1,19 @@
 $group1
+[1] "Huh6 1.4"  "Huh6 1.33" "Huh6 1.36" "Huh6 1.11" "Huh6 1.23" "Huh6 1.26"
+
+$group2
+[1] "Huh7 3.11" "Huh7 3.15" "Huh7 3.4"  "Huh7 3.1"  "Huh7 3.6"  "Huh7 3.12"
+
+$failed_samples
+character(0)
+
+$GSE
+[1] "GSE101061"
+
+
+
+
+$group1
 [1] "653" "337" "863"
 
 $group2
@@ -9,6 +24,10 @@ $failed_samples
 
 $GSE
 [1] "GSE101824"
+
+
+
+
 
 $group1
 [1] "C2-1" "C2-2" "C2-3"
