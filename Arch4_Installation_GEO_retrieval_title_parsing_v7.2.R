@@ -384,6 +384,54 @@ false_negative=c(15)
 save.image("parsing_v7.2_results7_noHistone_1comparison_2groups.RData")
 
 
+verifyItems <- function(list = NULL, range = NULL){
+  if(is.null(list))
+    stop("Must provide a list")
+  
+  if(is.null(range))
+    range <- 1:length(list)
+  
+  if(!is.vector(list[range]))
+    stop("Range must subset provided list.")
+  
+  sapply(list[range], function(x){
+    print(x)
+    r<-NULL
+    while(!is.logical(r) ){
+      r<-toupper(readline("Valid? (T/F): "))
+      if (r %in% c("T","F"))
+        r <- as.logical(r)
+    }
+    r
+  })
+}
+
+fruits <- verifyItems(results7_noHistone_1comparison_2groups, 225:448)
+write.table(t(fruits),file="255_448",col.names=FALSE,row.names=FALSE)
+save.image("Min_parsed1.RData")
+
+
+##### True False match
+fruits <- verifyItems(results7_noHistone_1comparison_2groups, 225:448)
+
+fruits2 <- verifyItems(results7_noHistone_1comparison_2groups[(225:448)[fruits]],1:199)
+
+save.image("Min_groups_filtered_twice.RData")
+second_set=results7_noHistone_1comparison_2groups[ ((225:448)[fruits])[fruits2] ]
+#####
+
+##### combine all indices
+third_set<-read.csv("true_positive_449_671_results7_noHistone_1comparison_2groups.csv")
+length(which(third_set$Curation=="T,N"))
+third_set=results7_noHistone_1comparison_2groups[which(third_set$Curation=="T,N")]
+
+load("true_positive_1_100.RData")
+load("true_positive_101_224.RData")
+second_set_1=results7_noHistone_1comparison_2groups[(1:100)[true_positive_1_100]]
+second_set_2=results7_noHistone_1comparison_2groups[(101:224)[true_positive_101_224]]
+
+merged_filtered_gses=c(second_set_1,second_set_2,second_set,third_set)
+
 matched_count=0
 
 result_1_7=list()
