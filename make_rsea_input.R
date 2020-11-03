@@ -186,12 +186,16 @@ colnames(pvalue_results)[i]
 
 perm_test_set1[which(perm_test_set1==10)]=NA
 
+
+
 pvalue_results_perm1=array(10,dim=c(length(genes),1000))
 dim(pvalue_results_perm1)
 rownames(pvalue_results_perm1)=genes
 colnames(pvalue_results_perm1)=paste0("set",1:1000)
 sigGene_results_perm1=array(0,dim=c(length(merged_filtered_gses)))
-logFC_results_perm1=array(0,dim=c(length(merged_filtered_gses)))
+logFC_results_perm1=array(10,dim=c(length(genes),1000))
+rownames(logFC_results_perm1)=genes
+colnames(logFC_results_perm1)=paste0("set",1:1000)
 
 geo_data<-getGEO("GSE107868",getGPL = FALSE)
 show(geo_data)
@@ -277,10 +281,11 @@ for(k in 1:1000){
   
 }
 
+logFC_results_perm1[which(pvalue_results_perm1==10)]=NA
 pvalue_results_perm1[which(pvalue_results_perm1==10)]=NA
 
 end_t=Sys.time()#started at 5:55 pm
-save.image("two_permutation_tests.RData")
+save.image("../PFOCRInPathwayAnalyses_RData/two_permutation_tests_2ndset.RData")
 
 
 
@@ -298,7 +303,9 @@ dim(pvalue_results_perm2)
 rownames(pvalue_results_perm2)=genes
 colnames(pvalue_results_perm2)=paste0("set",1:1000)
 sigGene_results_perm2=array(0,dim=c(length(merged_filtered_gses)))
-logFC_results_perm2=array(0,dim=c(length(merged_filtered_gses)))
+logFC_results_perm2=array(10,dim=c(length(genes),1000))
+rownames(logFC_results_perm2)=genes
+colnames(logFC_results_perm2)=paste0("set",1:1000)
 
 geo_data<-getGEO("GSE139061",getGPL = FALSE)
 show(geo_data)
@@ -330,12 +337,12 @@ for(k in 1:1000){
   
   ######permute samples
   
-  expression_perm1=expression[,sample(1:ncol(expression),ncol(expression),replace=FALSE)]
-  colnames(expression_perm1)=colnames(expression)
+  expression_perm2=expression[,sample(1:ncol(expression),ncol(expression),replace=FALSE)]
+  colnames(expression_perm2)=colnames(expression)
   ###DEG
   
-  filter <- apply(expression_perm1, 1, function(x) length(x[x>5])>=2) #minimum count (4) is satified in at least two conditions
-  FilterGeneCountData <- expression_perm1[filter,]
+  filter <- apply(expression_perm2, 1, function(x) length(x[x>5])>=2) #minimum count (4) is satified in at least two conditions
+  FilterGeneCountData <- expression_perm2[filter,]
   
   
   ###group GSMs
@@ -385,10 +392,13 @@ for(k in 1:1000){
   
 }
 
+
 pvalue_results_perm2[which(pvalue_results_perm2==10)]=NA
+logFC_results_perm2[which(is.na(pvalue_results_perm2)==TRUE)]=NA
 
 end_t=Sys.time()#started at 5:55 pm
-save.image("two_permutation_tests.RData")
+save.image("../PFOCRInPathwayAnalyses_RData/two_permutation_tests_2ndset.RData")
+
 
 ##################data 2
 # 
@@ -512,7 +522,7 @@ wp=unique(wp)
 wp_list=split(wp$gene,wp$wpid)
 
 
-   gene_entrez <- bitr(names(perm_test_set1), fromType = "SYMBOL",
+  gene_entrez <- bitr(names(perm_test_set1), fromType = "SYMBOL",
                       toType = c("ENTREZID"),
                       OrgDb = org.Hs.eg.db, drop=FALSE)
   head(gene_entrez)
@@ -537,9 +547,7 @@ wp_list=split(wp$gene,wp$wpid)
   
 
   
-  
-  
-  ###################################################################################################################run rSEA function  
+####################################################################################################################run rSEA function  
 run_rSEA<-function(data,list_result){
   
   na_row=which(is.na(data)==TRUE)
@@ -569,6 +577,17 @@ run_rSEA<-function(data,list_result){
   
 }
 
+#check whether wpids are reported in the same order
+for(i in 1:length(perm_test_set2_list[[i]]$wpid)){
+  wpids=NULL
+  for(j in 1:1000){
+    wpids=c(wpids,perm_test_set2_list[[j]]$wpid[i])
+  }
+  if(length(table(wpids))!=1){
+    print(paste0(i," ",j))
+  }
+}
+
 perm_test_set1_list <- vector("list", 9)
 names(perm_test_set1_list) <- c("wpid", "ID", "Size", "Coverage", "TDP.bound","TDP.estimate", "SC.adjP", "Comp.adjP", "name")
 
@@ -580,16 +599,78 @@ start_t=Sys.time()
 perm_test_set2_list=apply(as.matrix(1:ncol(pvalue_results_perm2)),1,function(x) run_rSEA(as.matrix(pvalue_results_perm2[,x]),perm_test_set2_list))
 end_t=Sys.time()
 
-save.image("../PFOCRInPathwayAnalyses_RData/permuted_rsea.RData")
+save.image("../PFOCRInPathwayAnalyses_RData/two_permutation_tests_2ndset.RData")
 
 start_t=Sys.time()
 perm_test_set1_list=apply(as.matrix(1:ncol(pvalue_results_perm1)),1,function(x) run_rSEA(as.matrix(pvalue_results_perm1[,x]),perm_test_set1_list))
 end_t=Sys.time()
 
-save.image("../PFOCRInPathwayAnalyses_RData/permuted_rsea.RData")
-
+save.image("../PFOCRInPathwayAnalyses_RData/two_permutation_tests_2ndset.RData")
 head(perm2_rsea_result$wpid)
 head(perm2_rsea_result$Comp.adjP)
+
+SC_sig=array(0,dim=c(nrow(perm_test_set1_list[[1]]$wpid),1))
+for(i in 1:1000){
+  
+  sigs=which(perm_test_set1_list[[i]]$SC.adjP< 0.05)
+  if(length(sigs)>0){
+    SC_sig[sigs]=SC_sig[sigs]+1
+  }
+}  
+
+length(which(SC_sig >= 50))
+#View(as.matrix(SC_sig))
+jpeg("SC.adjP_permutation_GSE107868.jpeg")
+print(hist(SC_sig,breaks=100))
+dev.off()
+
+Comp_sig=array(0,dim=c(nrow(perm_test_set1_list[[1]]$wpid),1))
+for(i in 1:1000){
+  
+  sigs=which(perm_test_set1_list[[i]]$Comp.adjP< 0.05)
+  if(length(sigs)>0){
+    Comp_sig[sigs]=Comp_sig[sigs]+1
+  }
+}  
+
+length(which(Comp_sig >= 50))
+#View(as.matrix(Comp_sig))
+jpeg("Comp.adjP_permutation_GSE107868.jpeg")
+print(hist(SC_sig,breaks=100))
+dev.off()
+
+SC_sig=array(0,dim=c(nrow(perm_test_set2_list[[1]]$wpid),1))
+for(i in 1:1000){
+  
+  sigs=which(perm_test_set2_list[[i]]$SC.adjP< 0.05)
+  if(length(sigs)>0){
+    SC_sig[sigs]=SC_sig[sigs]+1
+  }
+}  
+
+length(which(SC_sig >= 50))
+77
+#View(as.matrix(SC_sig))
+jpeg("SC.adjP_permutation_GSE139061.jpeg")
+print(hist(SC_sig,breaks=100))
+dev.off()
+
+Comp_sig=array(0,dim=c(nrow(perm_test_set2_list[[1]]$wpid),1))
+for(i in 1:1000){
+  
+  sigs=which(perm_test_set2_list[[i]]$Comp.adjP< 0.05)
+  if(length(sigs)>0){
+    Comp_sig[sigs]=Comp_sig[sigs]+1
+  }
+}  
+
+length(which(Comp_sig >= 50))
+76
+#View(as.matrix(Comp_sig))
+jpeg("Comp.adjP_permutation_GSE139061.jpeg")
+print(hist(SC_sig,breaks=100))
+dev.off()
+
 
 ###################################################################################################################run ORA function#20 per GSE
 run_ORA<-function(data, list_result){
@@ -659,6 +740,51 @@ names(perm_test_set2_list_ora) <- c("GeneRatio", "BgRatio", "pvalue", "p.adjust"
 start_t=Sys.time()
 perm_test_set2_list_ora=apply(as.matrix(1:ncol(pvalue_results_perm2)),1,function(x) run_ORA(as.matrix(pvalue_results_perm2[,x]),perm_test_set2_list_ora))
 end_t=Sys.time()
+
+perm_test_set1_list_ora <- vector("list", 6)
+names(perm_test_set1_list_ora) <- c("GeneRatio", "BgRatio", "pvalue", "p.adjust", "qvalue","Count")
+
+start_t=Sys.time()
+perm_test_set1_list_ora=apply(as.matrix(1:ncol(pvalue_results_perm1)),1,function(x) run_ORA(as.matrix(pvalue_results_perm1[,x]),perm_test_set1_list_ora))
+end_t=Sys.time()
+
+save.image("../PFOCRInPathwayAnalyses_RData/two_permutation_tests_2ndset.RData")
+
+
+
+
+SC_sig=array(0,dim=c(nrow(perm_test_set1_list_ora[[1]]$p.adjust),1))
+for(i in 1:1000){
+  
+  sigs=which(perm_test_set1_list_ora[[i]]$p.adjust< 0.05)
+  if(length(sigs)>0){
+    SC_sig[sigs]=SC_sig[sigs]+1
+  }
+}  
+
+length(which(SC_sig >= 50))
+93
+#View(as.matrix(SC_sig))
+jpeg("ora_permutation_GSE107868.jpeg")
+print(hist(SC_sig,breaks=100))
+dev.off()
+
+
+SC_sig=array(0,dim=c(nrow(perm_test_set2_list_ora[[1]]$wpid),1))
+for(i in 1:1000){
+  
+  sigs=which(perm_test_set2_list_ora[[i]]$SC.adjP< 0.05)
+  if(length(sigs)>0){
+    SC_sig[sigs]=SC_sig[sigs]+1
+  }
+}  
+
+length(which(SC_sig >= 50))
+
+#View(as.matrix(SC_sig))
+jpeg("ora_permutation_GSE139061.jpeg")
+print(hist(SC_sig,breaks=100))
+dev.off()
 
 ###################################################################################################################run GSEA function
 run_gsea<-function(data){
