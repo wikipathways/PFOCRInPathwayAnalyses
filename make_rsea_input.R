@@ -551,7 +551,9 @@ wp_list=split(wp$gene,wp$wpid)
 run_rSEA<-function(data,list_result){
   
   na_row=which(is.na(data)==TRUE)
-  data=as.matrix(data[-na_row,1])
+  if(length(na_row)>0){
+    data=as.matrix(data[-na_row,1]) 
+  }
   
   data_m=as.data.frame(cbind(rownames(data),data))
   colnames(data_m)=c("Gene","pvalue")
@@ -618,10 +620,31 @@ for(i in 1:1000){
   }
 }  
 
+
+SC_sig_perm_c=array(0,dim=c(1000))
+for(i in 1:1000){
+  
+  SC_sig_perm_c[i]=sum(perm_test_set1_list[[i]]$Comp.adjP< 0.05,na.rm=TRUE)
+  
+}  
+plot.ecdf(SC_sig_perm_c)
 length(which(SC_sig >= 50))
+sum(SC_sig_perm_c>0)
+138
+
+SC_sig_perm=array(0,dim=c(1000))
+for(i in 1:1000){
+  
+  SC_sig_perm[i]=sum(perm_test_set1_list[[i]]$SC.adjP< 0.05,na.rm=TRUE)
+
+}  
+plot.ecdf(SC_sig_perm)
+length(which(SC_sig >= 50))
+sum(SC_sig_perm>0)
+138
 #View(as.matrix(SC_sig))
-jpeg("SC.adjP_permutation_GSE107868.jpeg")
-print(hist(SC_sig,breaks=100))
+jpeg("FWER_permutation_GSE107868.jpeg")
+print(hist(SC_sig_perm,breaks=100))
 dev.off()
 
 Comp_sig=array(0,dim=c(nrow(perm_test_set1_list[[1]]$wpid),1))
@@ -638,6 +661,17 @@ length(which(Comp_sig >= 50))
 jpeg("Comp.adjP_permutation_GSE107868.jpeg")
 print(hist(SC_sig,breaks=100))
 dev.off()
+
+
+SC_sig_perm=array(0,dim=c(1000))
+for(i in 1:1000){
+  
+  SC_sig_perm[i]=sum(perm_test_set2_list[[i]]$SC.adjP< 0.05,na.rm=TRUE)
+  
+}  
+plot.ecdf(SC_sig_perm)
+length(which(SC_sig >= 50))
+sum(SC_sig_perm>0)
 
 SC_sig=array(0,dim=c(nrow(perm_test_set2_list[[1]]$wpid),1))
 for(i in 1:1000){
@@ -690,7 +724,9 @@ run_ORA<-function(data, list_result){
   rownames(Count)=unique(wp$wpid)
   
   na_row=which(is.na(data)==TRUE)
-  data=as.matrix(data[-na_row,1])
+  if(length(na_row)>0){
+    data=as.matrix(data[-na_row,1]) 
+  }
   
   data_m=as.data.frame(cbind(rownames(data),data))
   colnames(data_m)=c("Gene","pvalue")
@@ -703,8 +739,8 @@ run_ORA<-function(data, list_result){
     #universe = all genes,
     pAdjustMethod = "fdr",
     pvalueCutoff = 1, #p.adjust cutoff
-    # minGSSize = 1,
-    # maxGSSize = 200,
+    minGSSize = 1,
+    maxGSSize = 100000,
     TERM2GENE = wp[,2:3],
     TERM2NAME = wp[,c(2,1)])
   
@@ -787,27 +823,125 @@ print(hist(SC_sig,breaks=100))
 dev.off()
 
 ###################################################################################################################run GSEA function
-run_gsea<-function(data){
+run_gsea<-function(data,logFC_data, list_result){
   
-  ### geneList prep
-  h1d.data.hs$rank<-with(h1d.data.hs, sign(h1d.data.hs$log2FC.GL05520) * - log10(h1d.data.hs$P.Value))
-  h1d.genelist.hs<-h1d.data.hs$rank
-  names(h1d.genelist.hs)<-h1d.data.hs$entrez.hs
-  h1d.genelist.hs = sort(h1d.genelist.hs[unique(names(h1d.genelist.hs))], decreasing = TRUE)
+   
+  na_row=which(is.na(data)==TRUE)
+  if(length(na_row)>0){
+    data=as.matrix(data[-na_row,1]) 
+    logFC_data=as.matrix(logFC_data[-na_row,1])
+  }
 
+  
+  data_m=as.data.frame(cbind(rownames(data),data))
+  colnames(data_m)=c("Gene","pvalue")
+  merged=merge(data_m,gene_entrez,by="Gene",all = "L",all.x=TRUE,all.y=FALSE)
+  
+
+  ### geneList prep
+  gene_list<-sign(logFC_data) * - log10(as.numeric(as.character(merged[,2])))
+  names(gene_list)=merged$ENTREZID
+  gene_list = sort(gene_list[unique(names(gene_list))], decreasing = TRUE)
+    
     gsewp.p <- GSEA(
-    h1d.genelist.hs,
+      gene_list,
     TERM2GENE = wp[,2:3],
     TERM2NAME = wp[,c(2,1)],
     nPerm        = 1000,
-    minGSSize    = 10,
-    maxGSSize    = 500,
-    pvalueCutoff = 0.5,
+    minGSSize = 1,
+    maxGSSize = 100000,
+    pvalueCutoff = 1,
     verbose=FALSE)
     
-  gsewp.p <- DOSE::setReadable(gsewp.p, org.Hs.eg.db, keyType = "ENTREZID")
-  head(gsewp.p, 20)
-
+#  gsewp.p <- DOSE::setReadable(gsewp.p, org.Hs.eg.db, keyType = "ENTREZID")
+ # head(gsewp.p, 20)
+  enrichment_result=as.data.frame(gsewp.p)
+  enrichment_result=enrichment_result[,-match("core_enrichment",colnames(enrichment_result))]
+  
+  enrichmentScore=matrix(NA,nrow=length(unique(wp$wpid)),ncol=1)
+  NES=matrix(NA,nrow=length(unique(wp$wpid)),ncol=1)
+  pvalue=matrix(NA,nrow=length(unique(wp$wpid)),ncol=1)
+  p.adjust=matrix(NA,nrow=length(unique(wp$wpid)),ncol=1)
+  qvalues=matrix(NA,nrow=length(unique(wp$wpid)),ncol=1)
+  rank=matrix(NA,nrow=length(unique(wp$wpid)),ncol=1)
+  rownames(enrichmentScore)=unique(wp$wpid)
+  rownames(NES)=unique(wp$wpid)
+  rownames(pvalue)=unique(wp$wpid)
+  rownames(p.adjust)=unique(wp$wpid)
+  rownames(qvalues)=unique(wp$wpid)
+  rownames(rank)=unique(wp$wpid)
+  
+  enrichmentScore[match(enrichment_result$ID,rownames(enrichmentScore))]=enrichment_result$enrichmentScore
+  NES[match(enrichment_result$ID,rownames(NES))]=enrichment_result$NES
+  pvalue[match(enrichment_result$ID,rownames(pvalue))]=enrichment_result$pvalue
+  p.adjust[match(enrichment_result$ID,rownames(p.adjust))]=enrichment_result$p.adjust
+  qvalues[match(enrichment_result$ID,rownames(qvalues))]=enrichment_result$qvalues
+  rank[match(enrichment_result$ID,rownames(rank))]=enrichment_result$rank
+  
+  list_result=modifyList(list_result, list(enrichmentScore = cbind(list_result$enrichmentScore,enrichmentScore), NES = cbind(list_result$NES,NES) ,
+                                           pvalue = cbind(list_result$pvalue,pvalue), p.adjust = cbind(list_result$p.adjust,p.adjust),  
+                                           qvalues = cbind(list_result$qvalues,qvalues), rank = cbind(list_result$rank,rank)) )
+  
+  return(list_result)
+  
+  
 
   
 }
+
+
+
+perm_test_set1_list_gsea <- vector("list", 6)
+names(perm_test_set1_list_gsea) <- c("enrichmentScore", "NES", "pvalue", "p.adjust", "qvalues","rank")
+
+start_t=Sys.time()
+perm_test_set1_list_gsea=apply(as.matrix(1:ncol(pvalue_results_perm1)),1,function(x) run_gsea(as.matrix(pvalue_results_perm1[,x]),as.matrix(logFC_results_perm1[,x]),perm_test_set1_list_gsea))
+end_t=Sys.time()
+
+save.image("../PFOCRInPathwayAnalyses_RData/two_permutation_tests_2ndset_uptoGSEA.RData")
+
+perm_test_set2_list_gsea <- vector("list", 6)
+names(perm_test_set2_list_gsea) <- c("enrichmentScore", "NES", "pvalue", "p.adjust", "qvalues","rank")
+
+start_t=Sys.time()
+perm_test_set2_list_gsea=apply(as.matrix(1:ncol(pvalue_results_perm2)),1,function(x) run_gsea(as.matrix(pvalue_results_perm2[,x]),as.matrix(logFC_results_perm2[,x]),perm_test_set2_list_gsea))
+end_t=Sys.time()
+
+save.image("../PFOCRInPathwayAnalyses_RData/two_permutation_tests_2ndset_uptoGSEA.RData")
+
+
+
+
+SC_sig=array(0,dim=c(nrow(perm_test_set1_list_gsea[[1]]$p.adjust),1))
+for(i in 1:1000){
+  
+  sigs=which(perm_test_set1_list_gsea[[i]]$p.adjust< 0.05)
+  if(length(sigs)>0){
+    SC_sig[sigs]=SC_sig[sigs]+1
+  }
+}  
+
+length(which(SC_sig >= 50))
+93
+#View(as.matrix(SC_sig))
+jpeg("gsea_permutation_GSE107868.jpeg")
+print(hist(SC_sig,breaks=100))
+dev.off()
+
+
+SC_sig=array(0,dim=c(nrow(perm_test_set2_list_gsea[[1]]$wpid),1))
+for(i in 1:1000){
+  
+  sigs=which(perm_test_set2_list_gsea[[i]]$SC.adjP< 0.05)
+  if(length(sigs)>0){
+    SC_sig[sigs]=SC_sig[sigs]+1
+  }
+}  
+
+length(which(SC_sig >= 50))
+
+#View(as.matrix(SC_sig))
+jpeg("gsea_permutation_GSE139061.jpeg")
+print(hist(SC_sig,breaks=100))
+dev.off()
+
