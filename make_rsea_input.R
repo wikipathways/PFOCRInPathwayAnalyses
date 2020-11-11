@@ -20,7 +20,6 @@ if(!file.exists(destination_file)){
   download.file(url, destination_file, quiet = FALSE)
 }
 
-
 # Retrieve information from compressed data
 samples = h5read(destination_file, "meta/Sample_geo_accession")
 tissue = h5read(destination_file, "meta/Sample_source_name_ch1")
@@ -145,7 +144,9 @@ length(passed)
 54
 
 sigGene_results[passed]=NA
+logFC_results[which(pvalue_results==10)]=NA
 pvalue_results[which(pvalue_results==10)]=NA
+
 
 jpeg("hist_number_sig_genes_human.jpeg")
 hist(sigGene_results,breaks=50)
@@ -164,7 +165,7 @@ hist(group1_counts,breaks = 50)
 head(sort(group1_counts,decreasing = TRUE))
 which(group1_counts==39)
 sigGene_results[which(group1_counts==39)]
-128#just 4 sigificant genes
+128#just 4 sigificant genes, ignore
 497
 merged_filtered_gses[[497]]
 
@@ -176,7 +177,175 @@ sigGene_results[which(group1_counts==29)]
 merged_filtered_gses[[353]]
 
 
-##################################################################################################'data 1
+#####################################################################################PCA plot
+#################data 1
+i=353
+
+geo_data<-getGEO("GSE107868",getGPL = FALSE)
+show(geo_data)
+
+pheno=pData(geo_data[[1]])
+dim(pheno)
+colnames(pheno)
+gsm_title=cbind(rownames(pheno),as.character(pheno$title))
+head(gsm_title)
+
+# Selected samples to be extracted
+samp = gsm_title[,1]
+
+# Identify columns to be extracted
+sample_locations = which(samples %in% samp)
+sample_locations
+
+# extract gene expression from compressed data
+expression = h5read(destination_file, "data/expression", index=list(1:length(genes), sample_locations))
+H5close()
+rownames(expression) = genes
+colnames(expression) = samples[sample_locations]
+
+###DEG
+
+filter <- apply(expression, 1, function(x) length(x[x>5])>=2) #minimum count (4) is satified in at least two conditions
+FilterGeneCountData <- expression[filter,]
+
+###group GSMs
+Group=gsm_title[,2]
+group_index=grep("group",names(merged_filtered_gses[[i]]))
+selected_all=NULL
+for(gi in group_index){
+  selected=which( (Group%in%unlist(merged_filtered_gses[[i]][gi])) ==TRUE)
+  Group[selected]=paste0("group",gi)
+  selected_all=c(selected_all,selected)
+}
+gsm_title1=cbind(gsm_title,Group)
+gsm_title1=gsm_title1[selected_all,]
+colnames(gsm_title1)=c("GSM","Pheno","Group")
+
+gsm_title1=as.data.frame(gsm_title1)
+gsm_title1$Group <- as.factor(gsm_title1$Group)
+
+TempIndices <- match(gsm_title1[,1], colnames(FilterGeneCountData))
+
+colN=colnames(FilterGeneCountData)
+
+FilterGeneCountData=FilterGeneCountData[,TempIndices]
+
+y <- DGEList(counts=FilterGeneCountData, group=NULL)
+y <- calcNormFactors(y)
+
+cpm <- cpm(y, log = TRUE, prior.count = 0.01)
+rv <- apply(cpm,1,var) 
+
+#Select genes with highest variance.
+keep <- order(rv, decreasing = TRUE)[1:500]
+selected <- cpm[keep, ] %>% t()
+
+#Transpose is needed to ensure that each row is a vector.
+pca <- prcomp(selected, scale=T, center = T)
+
+stddev <- pca$sdev
+pc1_var <- round(100*stddev[1]^2/sum(stddev^2))
+pc2_var <- round(100*stddev[2]^2/sum(stddev^2))
+pc3_var <- round(100*stddev[3]^2/sum(stddev^2))
+PlotData <- data.frame(cbind(PC1 = pca$x[,1], PC2 = pca$x[,2],PC3 = pca$x[,3]))
+PlotData <- gsm_title1[, c("Group")] %>%
+  cbind(PlotData, .)
+colnames(PlotData)[4]="Group"
+gp1=ggplot(PlotData, aes(x=PC1, y=PC2, color=Group, shape=Group)) + 
+  geom_point(size=4.5) +  
+  xlab(paste("PC1:", pc1_var, "% variance")) + 
+  ylab(paste("PC2:", pc2_var, "% variance"))
+
+gp1
+jpeg("PCA_GSE107868_permSet1.jpeg")
+print(gp1)
+dev.off()
+
+#################data 2
+i=497
+
+geo_data<-getGEO("GSE139061",getGPL = FALSE)
+show(geo_data)
+
+pheno=pData(geo_data[[1]])
+dim(pheno)
+colnames(pheno)
+gsm_title=cbind(rownames(pheno),as.character(pheno$title))
+head(gsm_title)
+
+# Selected samples to be extracted
+samp = gsm_title[,1]
+
+# Identify columns to be extracted
+sample_locations = which(samples %in% samp)
+sample_locations
+
+# extract gene expression from compressed data
+expression = h5read(destination_file, "data/expression", index=list(1:length(genes), sample_locations))
+H5close()
+rownames(expression) = genes
+colnames(expression) = samples[sample_locations]
+
+  ###DEG
+  
+  filter <- apply(expression, 1, function(x) length(x[x>5])>=2) #minimum count (4) is satified in at least two conditions
+  FilterGeneCountData <- expression[filter,]
+  
+  ###group GSMs
+  Group=gsm_title[,2]
+  group_index=grep("group",names(merged_filtered_gses[[i]]))
+  selected_all=NULL
+  for(gi in group_index){
+    selected=which( (Group%in%unlist(merged_filtered_gses[[i]][gi])) ==TRUE)
+    Group[selected]=paste0("group",gi)
+    selected_all=c(selected_all,selected)
+  }
+  gsm_title1=cbind(gsm_title,Group)
+  gsm_title1=gsm_title1[selected_all,]
+  colnames(gsm_title1)=c("GSM","Pheno","Group")
+  
+  gsm_title1=as.data.frame(gsm_title1)
+  gsm_title1$Group <- as.factor(gsm_title1$Group)
+  
+  TempIndices <- match(gsm_title1[,1], colnames(FilterGeneCountData))
+  
+  colN=colnames(FilterGeneCountData)
+  
+  FilterGeneCountData=FilterGeneCountData[,TempIndices]
+  
+y <- DGEList(counts=FilterGeneCountData, group=NULL)
+y <- calcNormFactors(y)
+
+cpm <- cpm(y, log = TRUE, prior.count = 0.01)
+rv <- apply(cpm,1,var) 
+
+#Select genes with highest variance.
+keep <- order(rv, decreasing = TRUE)[1:500]
+selected <- cpm[keep, ] %>% t()
+
+#Transpose is needed to ensure that each row is a vector.
+pca <- prcomp(selected, scale=T, center = T)
+
+stddev <- pca$sdev
+pc1_var <- round(100*stddev[1]^2/sum(stddev^2))
+pc2_var <- round(100*stddev[2]^2/sum(stddev^2))
+pc3_var <- round(100*stddev[3]^2/sum(stddev^2))
+PlotData <- data.frame(cbind(PC1 = pca$x[,1], PC2 = pca$x[,2],PC3 = pca$x[,3]))
+PlotData <- gsm_title1[, c("Group")] %>%
+  cbind(PlotData, .)
+colnames(PlotData)[4]="Group"
+rm(Group)
+gp1=ggplot(PlotData, aes(x=PC1, y=PC2, color=Group, shape=Group)) + 
+  geom_point(size=4.5) +  
+  xlab(paste("PC1:", pc1_var, "% variance")) + 
+  ylab(paste("PC2:", pc2_var, "% variance"))
+
+gp1
+
+jpeg("PCA_GSE139061_permSet2.jpeg")
+print(gp1)
+dev.off()
+##################################################################################################'data 1 only edgeR
 
 
 i=353
@@ -185,8 +354,6 @@ colnames(pvalue_results)[i]
 #"GSE107868"
 
 perm_test_set1[which(perm_test_set1==10)]=NA
-
-
 
 pvalue_results_perm1=array(10,dim=c(length(genes),1000))
 dim(pvalue_results_perm1)
@@ -284,10 +451,155 @@ for(k in 1:1000){
 logFC_results_perm1[which(pvalue_results_perm1==10)]=NA
 pvalue_results_perm1[which(pvalue_results_perm1==10)]=NA
 
-end_t=Sys.time()#started at 5:55 pm
+sum(pvalue_results_perm1==10,na.rm=TRUE)
+0
+sum(logFC_results_perm1==10,na.rm=TRUE)
+0
+
+end_t=Sys.time()#6 hours
 save.image("../PFOCRInPathwayAnalyses_RData/two_permutation_tests_2ndset.RData")
 
+#https://www.r-bloggers.com/2020/09/exact-tests-and-plots-with-aedger-basic-differential-expression-analysis/
+#https://ucdavis-bioinformatics-training.github.io/2018-June-RNA-Seq-Workshop/thursday/DE.html
+##################################################################################################'data 1 only voom and exact
 
+
+i=353
+colnames(pvalue_results)[i]
+#"GSE107868"
+
+pvalue_results_perm1_voom=array(NA,dim=c(length(genes),1000))
+dim(pvalue_results_perm1_voom)
+rownames(pvalue_results_perm1_voom)=genes
+colnames(pvalue_results_perm1_voom)=paste0("set",1:1000)
+sigGene_results_perm1_voom=array(NA,dim=c(length(merged_filtered_gses)))
+logFC_results_perm1_voom=array(NA,dim=c(length(genes),1000))
+rownames(logFC_results_perm1_voom)=genes
+colnames(logFC_results_perm1_voom)=paste0("set",1:1000)
+
+pvalue_results_perm1_exact=array(NA,dim=c(length(genes),1000))
+dim(pvalue_results_perm1_exact)
+rownames(pvalue_results_perm1_exact)=genes
+colnames(pvalue_results_perm1_exact)=paste0("set",1:1000)
+sigGene_results_perm1_exact=array(NA,dim=c(length(merged_filtered_gses)))
+logFC_results_perm1_exact=array(NA,dim=c(length(genes),1000))
+rownames(logFC_results_perm1_exact)=genes
+colnames(logFC_results_perm1_exact)=paste0("set",1:1000)
+
+geo_data<-getGEO("GSE107868",getGPL = FALSE)
+show(geo_data)
+
+pheno=pData(geo_data[[1]])
+dim(pheno)
+colnames(pheno)
+gsm_title=cbind(rownames(pheno),as.character(pheno$title))
+head(gsm_title)
+merged_filtered_gses[[i]]
+
+# Selected samples to be extracted
+samp = gsm_title[,1]
+
+# Identify columns to be extracted
+sample_locations = which(samples %in% samp)
+sample_locations
+
+# extract gene expression from compressed data
+expression = h5read(destination_file, "data/expression", index=list(1:length(genes), sample_locations))
+H5close()
+rownames(expression) = genes
+colnames(expression) = samples[sample_locations]
+
+start_t=Sys.time()
+
+set.seed(511)
+for(k in 1:1000){
+  
+  ######permute samples
+  
+  expression_perm1=expression[,sample(1:ncol(expression),ncol(expression),replace=FALSE)]
+  colnames(expression_perm1)=colnames(expression)
+  
+  filter <- apply(expression_perm1, 1, function(x) length(x[x>5])>=2) #minimum count (4) is satified in at least two conditions
+  FilterGeneCountData <- expression_perm1[filter,]
+  
+  ###group GSMs
+  Group=gsm_title[,2]
+  group_index=grep("group",names(merged_filtered_gses[[i]]))
+  selected_all=NULL
+  for(gi in group_index){
+    selected=which( (Group%in%unlist(merged_filtered_gses[[i]][gi])) ==TRUE)
+    Group[selected]=paste0("group",gi)
+    selected_all=c(selected_all,selected)
+  }
+  gsm_title1=cbind(gsm_title,Group)
+  gsm_title1=gsm_title1[selected_all,]
+  colnames(gsm_title1)=c("GSM","Pheno","Group")
+  
+  gsm_title1=as.data.frame(gsm_title1)
+  gsm_title1$Group <- as.factor(gsm_title1$Group)
+  
+  TempIndices <- match(gsm_title1[,1], colnames(FilterGeneCountData))
+  
+  FilterGeneCountData=FilterGeneCountData[,TempIndices]
+  cbind(gsm_title1[,1],colnames(FilterGeneCountData))
+  
+  Group_p <- gsm_title1$Group
+  print(levels(Group_p))
+  
+  ###Create DGEList object
+  d0 <- DGEList(FilterGeneCountData,group=as.character(gsm_title1$Group))
+  
+  ###Calculate normalization factors
+  d0 <- calcNormFactors(d0)
+  d0 <- estimateDisp(d0)
+  
+  #Perform an exact test for treat vs ctrl
+  exact_result <- exactTest(d0)
+  dim(exact_result)
+  dim(FilterGeneCountData)
+  exact_result=exact_result$table
+  
+  pvalue_results_perm1_exact[match(rownames(exact_result),rownames(pvalue_results_perm1)),k]=exact_result$PValue
+  sigGene_results_perm1_exact[k]=sum(p.adjust(exact_result$PValue,method="BH") < 0.05)
+  logFC_results_perm1_exact[match(rownames(exact_result),rownames(pvalue_results_perm1)),k]=exact_result$logFC
+  
+  
+  design <- model.matrix(~0+Group_p)
+  design
+  
+  y <- voom(d0, design, plot = F)
+  
+  fit <- lmFit(y, design)
+  head(coef(fit))
+  
+  contr <- makeContrasts(Group_pgroup2-Group_pgroup1, levels = colnames(coef(fit)))
+  contr
+  
+  tmp <- contrasts.fit(fit, contr)
+  tmp <- eBayes(tmp)
+  voom_result=topTable(tmp, sort.by = "P", n = Inf)
+  
+  pvalue_results_perm1_voom[match(rownames(voom_result),rownames(pvalue_results_perm1)),k]=voom_result$P.Value
+  sigGene_results_perm1_voom[k]=sum(voom_result$adj.P.Val < 0.05)
+  logFC_results_perm1_voom[match(rownames(voom_result),rownames(pvalue_results_perm1)),k]=voom_result$logFC
+  
+  print(k)
+  
+}
+
+#logFC_results_perm1_exact[which(logFC_results_perm1_exact==10)]=NA
+#pvalue_results_perm1_exact[which(pvalue_results_perm1_exact==10)]=NA
+
+#logFC_results_perm1_voom[which(logFC_results_perm1_voom==10)]=NA
+#pvalue_results_perm1_voom[which(pvalue_results_perm1_voom==10)]=NA
+
+sum(sigGene_results_perm1_voom[1:20]>0)
+0
+sum(sigGene_results_perm1_exact[1:20]>0)
+17
+
+end_t=Sys.time()#6 hours
+save.image("../PFOCRInPathwayAnalyses_RData/two_permutation_tests_voom_exact.RData")
 
 ##################################################################################################'data 2
 
@@ -344,7 +656,6 @@ for(k in 1:1000){
   filter <- apply(expression_perm2, 1, function(x) length(x[x>5])>=2) #minimum count (4) is satified in at least two conditions
   FilterGeneCountData <- expression_perm2[filter,]
   
-  
   ###group GSMs
   Group=gsm_title[,2]
   group_index=grep("group",names(merged_filtered_gses[[i]]))
@@ -399,116 +710,158 @@ logFC_results_perm2[which(is.na(pvalue_results_perm2)==TRUE)]=NA
 end_t=Sys.time()#started at 5:55 pm
 save.image("../PFOCRInPathwayAnalyses_RData/two_permutation_tests_2ndset.RData")
 
+##################################################################################################'data 2 only voom and exact
 
-##################data 2
-# 
-# 
-# i=497
-# perm_test_set2=as.matrix(pvalue_results[,i])
-# colnames(pvalue_results)[i]
-# #"GSE139061"
-# sigGene_results[i]
-# 4
-# perm_test_set2[which(perm_test_set2==10)]=NA
-# 
-# 
-# pvalue_results_perm2=array(10,dim=c(length(genes),1000))
-# dim(pvalue_results_perm2)
-# rownames(pvalue_results_perm2)=genes
-# colnames(pvalue_results_perm2)=paste0("set",1:1000)
-# sigGene_results_perm2=array(0,dim=c(length(merged_filtered_gses)))
-# 
-# 
-# 
-# geo_data<-getGEO("GSE139061",getGPL = FALSE)
-# show(geo_data)
-# 
-# pheno=pData(geo_data[[1]])
-# dim(pheno)
-# colnames(pheno)
-# gsm_title=cbind(rownames(pheno),as.character(pheno$title))
-# head(gsm_title)
-# merged_filtered_gses[[i]]
-# 
-# # Selected samples to be extracted
-# samp = gsm_title[,1]
-# 
-# # Identify columns to be extracted
-# sample_locations = which(samples %in% samp)
-# sample_locations
-# 
-# # extract gene expression from compressed data
-# expression = h5read(destination_file, "data/expression", index=list(1:length(genes), sample_locations))
-# H5close()
-# rownames(expression) = genes
-# colnames(expression) = samples[sample_locations]
-# 
-# start_t=Sys.time()
-# 
-# set.seed(511)
-# for(k in 1:1000){
-#   
-#   ######permute samples
-#   
-#   expression_perm1=expression[,sample(1:ncol(expression),ncol(expression),replace=FALSE)]
-#   colnames(expression_perm1)=colnames(expression)
-#   ###DEG
-#   
-#   filter <- apply(expression_perm1, 1, function(x) length(x[x>5])>=2) #minimum count (4) is satified in at least two conditions
-#   FilterGeneCountData <- expression_perm1[filter,]
-#   
-#   
-#   ###group GSMs
-#   Group=gsm_title[,2]
-#   group_index=grep("group",names(merged_filtered_gses[[i]]))
-#   selected_all=NULL
-#   for(gi in group_index){
-#     selected=which( (Group%in%unlist(merged_filtered_gses[[i]][gi])) ==TRUE)
-#     Group[selected]=paste0("group",gi)
-#     selected_all=c(selected_all,selected)
-#   }
-#   gsm_title2=cbind(gsm_title,Group)
-#   gsm_title2=gsm_title2[selected_all,]
-#   colnames(gsm_title2)=c("GSM","Pheno","Group")
-#   
-#   gsm_title2=as.data.frame(gsm_title2)
-#   gsm_title2$Group <- as.factor(gsm_title2$Group)
-#   
-#   TempIndices <- match(gsm_title2[,1], colnames(FilterGeneCountData))
-#   
-#   colN=colnames(FilterGeneCountData)
-#   
-#   FilterGeneCountData=FilterGeneCountData[,TempIndices]
-#   cbind(gsm_title2,colnames(FilterGeneCountData))
-#   
-#   Group_p <- gsm_title2$Group
-#   print(levels(Group_p))
-#   
-#   design <- model.matrix(~Group_p)
-#   design
-#   
-#   y <- DGEList(counts=FilterGeneCountData, group=NULL) 
-#   y <- calcNormFactors(y)
-#   
-#   y <- estimateDisp(y, design, robust=TRUE)
-#   fit <- glmQLFit(y, design, robust=TRUE)
-#   Coef <- fit$coefficients
-#   head(Coef)
-#   
-#   lrt <- glmQLFTest(fit, coef=c(2))
-#   
-#   pvalue_results_perm2[match(rownames(lrt),rownames(pvalue_results_perm2)),k]=lrt$table$PValue
-#   sigGene_results_perm2[k]=sum(p.adjust(lrt$table$PValue,method="BH") < 0.05)
-#   
-#   print(k)
-#   
-# }
-# 
-# pvalue_results_perm2[which(pvalue_results_perm2==10)]=NA
-# 
-# end_t=Sys.time()#started at 5:55 pm
-save.image("two_permutation_tests.RData")
-###################################################################################################################rSEA
+
+i=497
+perm_test_set2=as.matrix(pvalue_results[,i])
+colnames(pvalue_results)[i]
+#"GSE139061"
+
+pvalue_results_perm2_voom=array(NA,dim=c(length(genes),1000))
+dim(pvalue_results_perm2_voom)
+rownames(pvalue_results_perm2_voom)=genes
+colnames(pvalue_results_perm2_voom)=paste0("set",1:1000)
+sigGene_results_perm2_voom=array(NA,dim=c(length(merged_filtered_gses)))
+logFC_results_perm2_voom=array(NA,dim=c(length(genes),1000))
+rownames(logFC_results_perm2_voom)=genes
+colnames(logFC_results_perm2_voom)=paste0("set",1:1000)
+
+pvalue_results_perm2_exact=array(NA,dim=c(length(genes),1000))
+dim(pvalue_results_perm2_exact)
+rownames(pvalue_results_perm2_exact)=genes
+colnames(pvalue_results_perm2_exact)=paste0("set",1:1000)
+sigGene_results_perm2_exact=array(NA,dim=c(length(merged_filtered_gses)))
+logFC_results_perm2_exact=array(NA,dim=c(length(genes),1000))
+rownames(logFC_results_perm2_exact)=genes
+colnames(logFC_results_perm2_exact)=paste0("set",1:1000)
+
+geo_data<-getGEO("GSE139061",getGPL = FALSE)
+show(geo_data)
+
+pheno=pData(geo_data[[1]])
+dim(pheno)
+colnames(pheno)
+gsm_title=cbind(rownames(pheno),as.character(pheno$title))
+head(gsm_title)
+merged_filtered_gses[[i]]
+
+# Selected samples to be extracted
+samp = gsm_title[,1]
+
+# Identify columns to be extracted
+sample_locations = which(samples %in% samp)
+sample_locations
+
+# extract gene expression from compressed data
+expression = h5read(destination_file, "data/expression", index=list(1:length(genes), sample_locations))
+H5close()
+rownames(expression) = genes
+colnames(expression) = samples[sample_locations]
+
+start_t=Sys.time()
+
+set.seed(511)
+for(k in 1:1000){
+  
+  ######permute samples
+  
+  expression_perm1=expression[,sample(1:ncol(expression),ncol(expression),replace=FALSE)]
+  colnames(expression_perm1)=colnames(expression)
+  
+  filter <- apply(expression_perm1, 1, function(x) length(x[x>5])>=2) #minimum count (4) is satified in at least two conditions
+  FilterGeneCountData <- expression_perm1[filter,]
+  
+  ###group GSMs
+  Group=gsm_title[,2]
+  group_index=grep("group",names(merged_filtered_gses[[i]]))
+  selected_all=NULL
+  for(gi in group_index){
+    selected=which( (Group%in%unlist(merged_filtered_gses[[i]][gi])) ==TRUE)
+    Group[selected]=paste0("group",gi)
+    selected_all=c(selected_all,selected)
+  }
+  gsm_title1=cbind(gsm_title,Group)
+  gsm_title1=gsm_title1[selected_all,]
+  colnames(gsm_title1)=c("GSM","Pheno","Group")
+  
+  gsm_title1=as.data.frame(gsm_title1)
+  gsm_title1$Group <- as.factor(gsm_title1$Group)
+  
+  TempIndices <- match(gsm_title1[,1], colnames(FilterGeneCountData))
+  
+  FilterGeneCountData=FilterGeneCountData[,TempIndices]
+  cbind(gsm_title1[,1],colnames(FilterGeneCountData))
+  
+  Group_p <- gsm_title1$Group
+  print(levels(Group_p))
+  
+  ###Create DGEList object
+  d0 <- DGEList(FilterGeneCountData,group=as.character(gsm_title1$Group))
+  
+  ###Calculate normalization factors
+  d0 <- calcNormFactors(d0)
+  d0 <- estimateDisp(d0)
+  
+  #Perform an exact test for treat vs ctrl
+  exact_result <- exactTest(d0)
+  dim(exact_result)
+  dim(FilterGeneCountData)
+  exact_result=exact_result$table
+  
+  pvalue_results_perm2_exact[match(rownames(exact_result),rownames(pvalue_results_perm2)),k]=exact_result$PValue
+  sigGene_results_perm2_exact[k]=sum(p.adjust(exact_result$PValue,method="BH") < 0.05)
+  logFC_results_perm2_exact[match(rownames(exact_result),rownames(pvalue_results_perm2)),k]=exact_result$logFC
+  
+  
+  design <- model.matrix(~0+Group_p)
+  design
+  
+  y <- voom(d0, design, plot = F)
+  
+  fit <- lmFit(y, design)
+  head(coef(fit))
+  
+  contr <- makeContrasts(Group_pgroup2-Group_pgroup1, levels = colnames(coef(fit)))
+  contr
+  
+  tmp <- contrasts.fit(fit, contr)
+  tmp <- eBayes(tmp)
+  voom_result=topTable(tmp, sort.by = "P", n = Inf)
+  
+  pvalue_results_perm2_voom[match(rownames(voom_result),rownames(pvalue_results_perm2)),k]=voom_result$P.Value
+  sigGene_results_perm2_voom[k]=sum(voom_result$adj.P.Val < 0.05)
+  logFC_results_perm2_voom[match(rownames(voom_result),rownames(pvalue_results_perm2)),k]=voom_result$logFC
+  
+  print(k)
+  
+}
+
+#logFC_results_perm2_exact[which(logFC_results_perm2_exact==10)]=NA
+#pvalue_results_perm2_exact[which(pvalue_results_perm2_exact==10)]=NA
+
+#logFC_results_perm2_voom[which(logFC_results_perm2_voom==10)]=NA
+#pvalue_results_perm2_voom[which(pvalue_results_perm2_voom==10)]=NA
+
+sum(sigGene_results_perm2_voom[1:20]>0)
+1
+sum(sigGene_results_perm2_exact[1:20]>0)
+20
+
+end_t=Sys.time()#6 hours
+save.image("../PFOCRInPathwayAnalyses_RData/two_permutation_tests_voom_exact.RData")
+
+################################################################################################################### number of significant genes
+
+how_many_sig1_voom=apply(as.matrix(1:1000),1,function(i) sum(p.adjust(pvalue_results_perm1_voom[,i],method="BH") < 0.05) )
+how_many_sig1_exact=apply(as.matrix(1:1000),1,function(i) sum(p.adjust(pvalue_results_perm1_exact[,i],method="BH") < 0.05) )
+how_many_sig1=apply(as.matrix(1:1000),1,function(i) sum(p.adjust(pvalue_results_perm1[,i],method="BH") < 0.05) )
+
+how_many_sig2_voom=apply(as.matrix(1:1000),1,function(i) sum(p.adjust(pvalue_results_perm2_voom[,i],method="BH") < 0.05) )
+how_many_sig2_exact=apply(as.matrix(1:1000),1,function(i) sum(p.adjust(pvalue_results_perm2_exact[,i],method="BH") < 0.05) )
+how_many_sig2=apply(as.matrix(1:1000),1,function(i) sum(p.adjust(pvalue_results_perm2[,i],method="BH") < 0.05) )
+
+###################################################################################################################Entrez ID match
 library(rSEA)
 library("clusterProfiler")
 library("org.Hs.eg.db")
@@ -548,7 +901,7 @@ wp_list=split(wp$gene,wp$wpid)
 
   
 ####################################################################################################################run rSEA function  
-run_rSEA<-function(data,list_result){
+run_rSEA<-function(data,list_result){#limma voom + exact test + and PCA for the 2nd #wilcoxon but not for small sample size # remove patients # exact test # simulate RNAseq data
   
   na_row=which(is.na(data)==TRUE)
   if(length(na_row)>0){
@@ -579,6 +932,21 @@ run_rSEA<-function(data,list_result){
   
 }
 
+#######NA issue
+
+which(is.na(perm_test_set1_list[[1]]$SC.adjP)==TRUE)
+541
+perm_test_set1_list[[1]]$wpid[541]
+# "WP661"
+#wp[which(wp$wpid=="WP661"),]
+#name  wpid gene
+#14032 Glucose Homeostasis WP661 3630
+
+#gene_entrez[13152,]
+#Gene ENTREZID
+#13153  INS     3630
+pvalue_results_perm2[13152,]
+
 #check whether wpids are reported in the same order
 for(i in 1:length(perm_test_set2_list[[i]]$wpid)){
   wpids=NULL
@@ -590,46 +958,88 @@ for(i in 1:length(perm_test_set2_list[[i]]$wpid)){
   }
 }
 
+
+
 perm_test_set1_list <- vector("list", 9)
 names(perm_test_set1_list) <- c("wpid", "ID", "Size", "Coverage", "TDP.bound","TDP.estimate", "SC.adjP", "Comp.adjP", "name")
-
 
 perm_test_set2_list <- vector("list", 9)
 names(perm_test_set2_list) <- c("wpid", "ID", "Size", "Coverage", "TDP.bound","TDP.estimate", "SC.adjP", "Comp.adjP", "name")
 
+perm_test_set1_list_voom <- vector("list", 9)
+names(perm_test_set1_list_voom) <- c("wpid", "ID", "Size", "Coverage", "TDP.bound","TDP.estimate", "SC.adjP", "Comp.adjP", "name")
+
+perm_test_set2_list_voom <- vector("list", 9)
+names(perm_test_set2_list_voom) <- c("wpid", "ID", "Size", "Coverage", "TDP.bound","TDP.estimate", "SC.adjP", "Comp.adjP", "name")
+
+perm_test_set1_list_exact <- vector("list", 9)
+names(perm_test_set1_list_exact) <- c("wpid", "ID", "Size", "Coverage", "TDP.bound","TDP.estimate", "SC.adjP", "Comp.adjP", "name")
+
+perm_test_set2_list_exact <- vector("list", 9)
+names(perm_test_set2_list_exact) <- c("wpid", "ID", "Size", "Coverage", "TDP.bound","TDP.estimate", "SC.adjP", "Comp.adjP", "name")
+
 start_t=Sys.time()
 perm_test_set2_list=apply(as.matrix(1:ncol(pvalue_results_perm2)),1,function(x) run_rSEA(as.matrix(pvalue_results_perm2[,x]),perm_test_set2_list))
 end_t=Sys.time()
-
-save.image("../PFOCRInPathwayAnalyses_RData/two_permutation_tests_2ndset.RData")
 
 start_t=Sys.time()
 perm_test_set1_list=apply(as.matrix(1:ncol(pvalue_results_perm1)),1,function(x) run_rSEA(as.matrix(pvalue_results_perm1[,x]),perm_test_set1_list))
 end_t=Sys.time()
 
 save.image("../PFOCRInPathwayAnalyses_RData/two_permutation_tests_2ndset.RData")
-head(perm2_rsea_result$wpid)
-head(perm2_rsea_result$Comp.adjP)
 
-SC_sig=array(0,dim=c(nrow(perm_test_set1_list[[1]]$wpid),1))
+start_t=Sys.time()
+perm_test_set2_list_voom=apply(as.matrix(1:ncol(pvalue_results_perm2_voom)),1,function(x) run_rSEA(as.matrix(pvalue_results_perm2_voom[,x]),perm_test_set2_list_voom))
+end_t=Sys.time()
+
+start_t=Sys.time()
+perm_test_set1_list_voom=apply(as.matrix(1:ncol(pvalue_results_perm1_voom)),1,function(x) run_rSEA(as.matrix(pvalue_results_perm1_voom[,x]),perm_test_set1_list_voom))
+end_t=Sys.time()
+
+start_t=Sys.time()
+perm_test_set2_list_exact=apply(as.matrix(1:ncol(pvalue_results_perm2_exact)),1,function(x) run_rSEA(as.matrix(pvalue_results_perm2_exact[,x]),perm_test_set2_list_exact))
+end_t=Sys.time()
+
+start_t=Sys.time()
+perm_test_set1_list_exact=apply(as.matrix(1:ncol(pvalue_results_perm1_exact)),1,function(x) run_rSEA(as.matrix(pvalue_results_perm1_exact[,x]),perm_test_set1_list_exact))
+end_t=Sys.time()#3:20 hours
+
+save.image("../PFOCRInPathwayAnalyses_RData/two_permutation_tests_voom_exact.RData")
+# 
+# SC_sig=array(0,dim=c(nrow(perm_test_set1_list[[1]]$wpid),1))
+# for(i in 1:1000){
+#   
+#   sigs=which(perm_test_set1_list[[i]]$SC.adjP< 0.05)
+#   if(length(sigs)>0){
+#     SC_sig[sigs]=SC_sig[sigs]+1
+#   }
+# }  
+# 
+# 
+# Comp_sig=array(0,dim=c(nrow(perm_test_set1_list[[1]]$wpid),1))
+# for(i in 1:1000){
+#   
+#   sigs=which(perm_test_set1_list[[i]]$Comp.adjP< 0.05)
+#   if(length(sigs)>0){
+#     Comp_sig[sigs]=Comp_sig[sigs]+1
+#   }
+# }  
+# 
+# length(which(Comp_sig >= 50))
+# #View(as.matrix(Comp_sig))
+# jpeg("Comp.adjP_permutation_GSE107868.jpeg")
+# print(hist(SC_sig,breaks=100))
+# dev.off()
+
+
+Comp_sig_perm=array(0,dim=c(1000))
 for(i in 1:1000){
   
-  sigs=which(perm_test_set1_list[[i]]$SC.adjP< 0.05)
-  if(length(sigs)>0){
-    SC_sig[sigs]=SC_sig[sigs]+1
-  }
-}  
-
-
-SC_sig_perm_c=array(0,dim=c(1000))
-for(i in 1:1000){
-  
-  SC_sig_perm_c[i]=sum(perm_test_set1_list[[i]]$Comp.adjP< 0.05,na.rm=TRUE)
+  Comp_sig_perm[i]=sum(perm_test_set1_list[[i]]$Comp.adjP< 0.05,na.rm=TRUE)
   
 }  
-plot.ecdf(SC_sig_perm_c)
-length(which(SC_sig >= 50))
-sum(SC_sig_perm_c>0)
+plot.ecdf(Comp_sig_perm)
+sum(Comp_sig_perm>0)
 138
 
 SC_sig_perm=array(0,dim=c(1000))
@@ -639,74 +1049,151 @@ for(i in 1:1000){
 
 }  
 plot.ecdf(SC_sig_perm)
-length(which(SC_sig >= 50))
 sum(SC_sig_perm>0)
 138
 #View(as.matrix(SC_sig))
-jpeg("FWER_permutation_GSE107868.jpeg")
-print(hist(SC_sig_perm,breaks=100))
-dev.off()
 
-Comp_sig=array(0,dim=c(nrow(perm_test_set1_list[[1]]$wpid),1))
+Comp_sig_perm_voom=array(0,dim=c(1000))
 for(i in 1:1000){
   
-  sigs=which(perm_test_set1_list[[i]]$Comp.adjP< 0.05)
-  if(length(sigs)>0){
-    Comp_sig[sigs]=Comp_sig[sigs]+1
-  }
+  Comp_sig_perm_voom[i]=sum(perm_test_set1_list_voom[[i]]$Comp.adjP< 0.05,na.rm=TRUE)
+  
 }  
+plot.ecdf(Comp_sig_perm_voom)
+sum(Comp_sig_perm_voom>0)
+11
 
-length(which(Comp_sig >= 50))
-#View(as.matrix(Comp_sig))
-jpeg("Comp.adjP_permutation_GSE107868.jpeg")
-print(hist(SC_sig,breaks=100))
-dev.off()
-
-
-SC_sig_perm=array(0,dim=c(1000))
+SC_sig_perm_voom=array(0,dim=c(1000))
 for(i in 1:1000){
   
-  SC_sig_perm[i]=sum(perm_test_set2_list[[i]]$SC.adjP< 0.05,na.rm=TRUE)
+  SC_sig_perm_voom[i]=sum(perm_test_set1_list_voom[[i]]$SC.adjP< 0.05,na.rm=TRUE)
   
 }  
-plot.ecdf(SC_sig_perm)
-length(which(SC_sig >= 50))
-sum(SC_sig_perm>0)
+plot.ecdf(SC_sig_perm_voom)
+sum(SC_sig_perm_voom>0)
+12
 
-SC_sig=array(0,dim=c(nrow(perm_test_set2_list[[1]]$wpid),1))
+Comp_sig_perm_exact=array(0,dim=c(1000))
 for(i in 1:1000){
   
-  sigs=which(perm_test_set2_list[[i]]$SC.adjP< 0.05)
-  if(length(sigs)>0){
-    SC_sig[sigs]=SC_sig[sigs]+1
-  }
+  Comp_sig_perm_exact[i]=sum(perm_test_set1_list_exact[[i]]$Comp.adjP< 0.05,na.rm=TRUE)
+  
 }  
+plot.ecdf(Comp_sig_perm_exact)
+sum(Comp_sig_perm_exact>0)
+171
 
-length(which(SC_sig >= 50))
-77
-#View(as.matrix(SC_sig))
-jpeg("SC.adjP_permutation_GSE139061.jpeg")
-print(hist(SC_sig,breaks=100))
-dev.off()
-
-Comp_sig=array(0,dim=c(nrow(perm_test_set2_list[[1]]$wpid),1))
+SC_sig_perm_exact=array(0,dim=c(1000))
 for(i in 1:1000){
   
-  sigs=which(perm_test_set2_list[[i]]$Comp.adjP< 0.05)
-  if(length(sigs)>0){
-    Comp_sig[sigs]=Comp_sig[sigs]+1
-  }
+  SC_sig_perm_exact[i]=sum(perm_test_set1_list_exact[[i]]$SC.adjP< 0.05,na.rm=TRUE)
+  
 }  
-
-length(which(Comp_sig >= 50))
-76
-#View(as.matrix(Comp_sig))
-jpeg("Comp.adjP_permutation_GSE139061.jpeg")
-print(hist(SC_sig,breaks=100))
-dev.off()
+plot.ecdf(SC_sig_perm_exact)
+sum(SC_sig_perm_exact>0)
+171
 
 
-###################################################################################################################run ORA function#20 per GSE
+
+
+
+
+
+Comp_sig_perm2=array(0,dim=c(1000))
+for(i in 1:1000){
+  
+  Comp_sig_perm2[i]=sum(perm_test_set2_list[[i]]$Comp.adjP< 0.05,na.rm=TRUE)
+  
+}  
+plot.ecdf(Comp_sig_perm2)
+sum(Comp_sig_perm2>0)
+487
+
+SC_sig_perm2=array(0,dim=c(1000))
+for(i in 1:1000){
+  
+  SC_sig_perm2[i]=sum(perm_test_set2_list[[i]]$SC.adjP< 0.05,na.rm=TRUE)
+  
+}  
+plot.ecdf(SC_sig_perm2)
+sum(SC_sig_perm2>0)
+489
+# 
+# SC_sig2=array(0,dim=c(nrow(perm_test_set2_list[[1]]$wpid),1))
+# for(i in 1:1000){
+#   
+#   sigs=which(perm_test_set2_list[[i]]$SC.adjP< 0.05)
+#   if(length(sigs)>0){
+#     SC_sig2[sigs]=SC_sig2[sigs]+1
+#   }
+# }  
+# 
+# length(which(SC_sig2 >= 50))
+# 77
+#View(as.matrix(SC_sig2))
+# jpeg("SC.adjP_permutation_GSE139061.jpeg")
+# print(hist(SC_sig2,breaks=100))
+# dev.off()
+# 
+# Comp_sig2=array(0,dim=c(nrow(perm_test_set2_list[[1]]$wpid),1))
+# for(i in 1:1000){
+#   
+#   sigs=which(perm_test_set2_list[[i]]$Comp.adjP< 0.05)
+#   if(length(sigs)>0){
+#     Comp_sig2[sigs]=Comp_sig2[sigs]+1
+#   }
+# }  
+# 
+# length(which(Comp_sig2 >= 50))
+# 76
+# #View(as.matrix(Comp_sig2))
+# jpeg("Comp.adjP_permutation_GSE139061.jpeg")
+# print(hist(Comp_sig2,breaks=100))
+# dev.off()
+
+
+
+Comp_sig_perm_voom2=array(0,dim=c(1000))
+for(i in 1:1000){
+  
+  Comp_sig_perm_voom2[i]=sum(perm_test_set2_list_voom[[i]]$Comp.adjP< 0.05,na.rm=TRUE)
+  
+}  
+plot.ecdf(Comp_sig_perm_voom2)
+sum(Comp_sig_perm_voom2>0)
+44
+
+SC_sig_perm_voom2=array(0,dim=c(1000))
+for(i in 1:1000){
+  
+  SC_sig_perm_voom2[i]=sum(perm_test_set2_list_voom[[i]]$SC.adjP< 0.05,na.rm=TRUE)
+  
+}  
+plot.ecdf(SC_sig_perm_voom2)
+sum(SC_sig_perm_voom2>0)
+46
+
+Comp_sig_perm_exact2=array(0,dim=c(1000))
+for(i in 1:1000){
+  
+  Comp_sig_perm_exact2[i]=sum(perm_test_set2_list_exact[[i]]$Comp.adjP< 0.05,na.rm=TRUE)
+  
+}  
+plot.ecdf(Comp_sig_perm_exact2)
+sum(Comp_sig_perm_exact2>0)
+734
+
+SC_sig_perm_exact2=array(0,dim=c(1000))
+for(i in 1:1000){
+  
+  SC_sig_perm_exact2[i]=sum(perm_test_set2_list_exact[[i]]$SC.adjP< 0.05,na.rm=TRUE)
+  
+}  
+plot.ecdf(SC_sig_perm_exact2)
+sum(SC_sig_perm_exact2>0)
+734
+
+###################################################################################################################run ORA function
 run_ORA<-function(data, list_result){
   
   
@@ -732,11 +1219,9 @@ run_ORA<-function(data, list_result){
   colnames(data_m)=c("Gene","pvalue")
   merged=merge(data_m,gene_entrez,by="Gene",all = "L",all.x=TRUE,all.y=FALSE)
   
-
-  
   enrichment_result <- clusterProfiler::enricher(
-    merged$ENTREZID,
-    #universe = all genes,
+    merged$ENTREZID[which(p.adjust(as.numeric(as.character(merged$pvalue)),method="BH") < 0.05)],
+    universe = merged$ENTREZID,
     pAdjustMethod = "fdr",
     pvalueCutoff = 1, #p.adjust cutoff
     minGSSize = 1,
@@ -745,7 +1230,7 @@ run_ORA<-function(data, list_result){
     TERM2NAME = wp[,c(2,1)])
   
   #enrichment_result <- DOSE::setReadable(enrichment_result, org.Hs.eg.db, keyType = "ENTREZID")
-  
+  if(length(enrichment_result)>0){
   enrichment_result=as.data.frame(enrichment_result)
   enrichment_result=enrichment_result[,-match("geneID",colnames(enrichment_result))]
   
@@ -760,6 +1245,7 @@ run_ORA<-function(data, list_result){
                                            pvalue = cbind(list_result$pvalue,pvalue), p.adjust = cbind(list_result$p.adjust,p.adjust),  
                                            qvalue = cbind(list_result$qvalue,qvalue), Count = cbind(list_result$Count,Count)) )
   
+  }
   return(list_result)
   
 
@@ -768,7 +1254,14 @@ run_ORA<-function(data, list_result){
 }
 
 
+########################################################################number of significant gens
+sig_c_perm1=apply(as.matrix(1:1000),1,function(x) { sum(p.adjust(pvalue_results_perm1[,x],method="BH") < 0.05,na.rm=TRUE) } )
+sum(sig_c_perm1==0)
+157
 
+sig_c_perm2=apply(as.matrix(1:1000),1,function(x) { sum(p.adjust(pvalue_results_perm2[,x],method="BH") < 0.05,na.rm=TRUE) } )
+sum(sig_c_perm2==0)
+0
 
 perm_test_set2_list_ora <- vector("list", 6)
 names(perm_test_set2_list_ora) <- c("GeneRatio", "BgRatio", "pvalue", "p.adjust", "qvalue","Count")
@@ -777,6 +1270,13 @@ start_t=Sys.time()
 perm_test_set2_list_ora=apply(as.matrix(1:ncol(pvalue_results_perm2)),1,function(x) run_ORA(as.matrix(pvalue_results_perm2[,x]),perm_test_set2_list_ora))
 end_t=Sys.time()
 
+#start_t=Sys.time()
+#for(x in 1:1000){
+#  print(x)
+#  run_ORA(as.matrix(pvalue_results_perm2[,x]),perm_test_set2_list_ora)
+#}
+#end_t=Sys.time()
+
 perm_test_set1_list_ora <- vector("list", 6)
 names(perm_test_set1_list_ora) <- c("GeneRatio", "BgRatio", "pvalue", "p.adjust", "qvalue","Count")
 
@@ -784,43 +1284,97 @@ start_t=Sys.time()
 perm_test_set1_list_ora=apply(as.matrix(1:ncol(pvalue_results_perm1)),1,function(x) run_ORA(as.matrix(pvalue_results_perm1[,x]),perm_test_set1_list_ora))
 end_t=Sys.time()
 
-save.image("../PFOCRInPathwayAnalyses_RData/two_permutation_tests_2ndset.RData")
 
 
+perm_test_set1_list_ora_voom <- vector("list", 6)
+names(perm_test_set1_list_ora_voom) <- c("GeneRatio", "BgRatio", "pvalue", "p.adjust", "qvalue","Count")
 
+start_t=Sys.time()
+perm_test_set1_list_ora_voom=apply(as.matrix(1:ncol(pvalue_results_perm1_voom)),1,function(x) run_ORA(as.matrix(pvalue_results_perm1_voom[,x]),perm_test_set1_list_ora_voom))
+end_t=Sys.time()
 
-SC_sig=array(0,dim=c(nrow(perm_test_set1_list_ora[[1]]$p.adjust),1))
+perm_test_set2_list_ora_voom <- vector("list", 6)
+names(perm_test_set2_list_ora_voom) <- c("GeneRatio", "BgRatio", "pvalue", "p.adjust", "qvalue","Count")
+
+start_t=Sys.time()
+perm_test_set2_list_ora_voom=apply(as.matrix(1:ncol(pvalue_results_perm2_voom)),1,function(x) run_ORA(as.matrix(pvalue_results_perm2_voom[,x]),perm_test_set2_list_ora_voom))
+end_t=Sys.time()
+
+save.image("../PFOCRInPathwayAnalyses_RData/two_permutation_tests_voom_exact.RData")
+
+ora_sig_perm=array(0,dim=c(1000))
 for(i in 1:1000){
   
-  sigs=which(perm_test_set1_list_ora[[i]]$p.adjust< 0.05)
-  if(length(sigs)>0){
-    SC_sig[sigs]=SC_sig[sigs]+1
-  }
+  ora_sig_perm[i]=sum(perm_test_set1_list_ora[[i]]$p.adjust< 0.05,na.rm=TRUE)
+  
 }  
+plot.ecdf(ora_sig_perm)
+sum(ora_sig_perm>0)
+0
 
-length(which(SC_sig >= 50))
-93
-#View(as.matrix(SC_sig))
-jpeg("ora_permutation_GSE107868.jpeg")
-print(hist(SC_sig,breaks=100))
-dev.off()
-
-
-SC_sig=array(0,dim=c(nrow(perm_test_set2_list_ora[[1]]$wpid),1))
+ora_sig_perm2=array(0,dim=c(1000))
 for(i in 1:1000){
   
-  sigs=which(perm_test_set2_list_ora[[i]]$SC.adjP< 0.05)
-  if(length(sigs)>0){
-    SC_sig[sigs]=SC_sig[sigs]+1
-  }
+  ora_sig_perm2[i]=sum(perm_test_set2_list_ora[[i]]$p.adjust< 0.05,na.rm=TRUE)
+  
 }  
+plot.ecdf(ora_sig_perm2)
+sum(ora_sig_perm2>0)
+654
 
-length(which(SC_sig >= 50))
+ora_sig_perm_voom=array(0,dim=c(1000))
+for(i in 1:1000){
+  
+  ora_sig_perm_voom[i]=sum(perm_test_set1_list_ora_voom[[i]]$p.adjust< 0.05,na.rm=TRUE)
+  
+}  
+plot.ecdf(ora_sig_perm_voom)
+sum(ora_sig_perm_voom>0)
+16
 
-#View(as.matrix(SC_sig))
-jpeg("ora_permutation_GSE139061.jpeg")
-print(hist(SC_sig,breaks=100))
-dev.off()
+ora_sig_perm_voom2=array(0,dim=c(1000))
+for(i in 1:1000){
+  
+  SC_sig_perm_voom2[i]=sum(perm_test_set2_list_ora_voom[[i]]$p.adjust< 0.05,na.rm=TRUE)
+  
+}  
+plot.ecdf(SC_sig_perm_voom2)
+sum(SC_sig_perm_voom2>0)
+64
+# 
+# 
+# SC_sig=array(0,dim=c(nrow(perm_test_set1_list_ora[[1]]$p.adjust),1))
+# for(i in 1:1000){
+#   
+#   sigs=which(perm_test_set1_list_ora[[i]]$p.adjust< 0.05)
+#   if(length(sigs)>0){
+#     SC_sig[sigs]=SC_sig[sigs]+1
+#   }
+# }  
+# 
+# length(which(SC_sig >= 50))
+# 93
+# #View(as.matrix(SC_sig))
+# jpeg("ora_permutation_GSE107868.jpeg")
+# print(hist(SC_sig,breaks=100))
+# dev.off()
+# 
+# 
+# SC_sig=array(0,dim=c(nrow(perm_test_set2_list_ora[[1]]$wpid),1))
+# for(i in 1:1000){
+#   
+#   sigs=which(perm_test_set2_list_ora[[i]]$SC.adjP< 0.05)
+#   if(length(sigs)>0){
+#     SC_sig[sigs]=SC_sig[sigs]+1
+#   }
+# }  
+# 
+# length(which(SC_sig >= 50))
+# 
+# #View(as.matrix(SC_sig))
+# jpeg("ora_permutation_GSE139061.jpeg")
+# print(hist(SC_sig,breaks=100))
+# dev.off()
 
 ###################################################################################################################run GSEA function
 run_gsea<-function(data,logFC_data, list_result){
