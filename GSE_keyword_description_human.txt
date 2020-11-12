@@ -1,0 +1,537 @@
+GSE	description	keyword
+GSE64912	RNA-Sequencing of human papillary thyroid carcinomas	NA
+GSE83635	RNA-seq analysis to identify the genes regulated by p53-SET interplay	knockout/siRNA
+GSE71569	Interactions of aCPs with Cytosine-rich Polypyrimidine Tracts Enhance Splicing of Cassette Exons	NA
+GSE79666	Transcriptome sequencing reveals aberrant alternative splicing in Huntington's disease	Huntington
+GSE54511	Different molecular pathways along with pathogenesis of three subtypes of Leiomyosarcoma	pathway
+GSE79680	HEK293 Heat-shock experiment	NA
+GSE81579	Transcriptome analysis of human cumulus cells reveals hypoxia as the main determinant of follicular senescence.	NA
+GSE61674	In vitro differentiation of human low threshold mechanoreceptive (LTMR) neurons from embryonic stem cells	NA
+GSE70084	RNA sequencing of mechanically strained NHEKs and control NHEKs	NA
+GSE66446	The Cushing's disease adipose gene expression profile reveals effects of long term glucocorticoids on adipose tissue lipid, protein and glucose metabolism	pathway
+GSE80979	Opposing Effects of Cyclooxygenase-2 (COX-2) on Estrogen Receptor β (ERβ) Response to 5α-reductase Inhibition in Prostate Epithelial Cells	pathway
+GSE62982	Peroxisome Proliferator-activated Receptor gamma- Deficiency in Endothelial Cells Impairs Angiogenic Capacity by Loss-of E2F1 Mediated Wnt Effector Genes	siRNA
+GSE81062	Targeting MTHFD2 in Acute Myeloid Leukemia	Acute Myeloid Leukemia
+GSE60630	RNA-Seq to assess the transcriptional effects of G quadruplex stabilization by the G4 ligand PhenDC3 in HT-1080 cells	NA
+GSE58326	Global analysis of ZNF217 chromatin occupancy in the breast cancer cell genome reveals an association with Eralpha	Breast cancer/Cancer
+GSE81402	Analysis of chromosomal aberrations and recombination by allelic bias in RNA-Seq	NA
+GSE72141	GATA3-mediated chromatin reprogramming in breast cancer cells	Breast cancer/Cancer
+GSE74220	Transcriptome response to 4h IL-1b stimulation of primary chondrocytes	NA
+GSE71070	Treatment of prostate cancer cells with S-adenosylmethionine leads to genomewide alterations of transcription profiles	Cancer/Prostate cancer
+GSE66014	Global Gene Expression analysis of CUTLL1 cell lines after treatment with Perhexiline	NA
+GSE84186	Single-nucleotide-resolution mapping of HBV promoters using CAGE	NA
+GSE71203	Transcriptome analysis of RANK-positive and RANK-negative luminal progenitor subpopulations in the human breast	NA
+GSE83601	Dysregulated immune system networks in war veterans with PTSD	pathway
+GSE65000	Human-specific gene ARHGAP11B promotes basal progenitor amplification and neocortex expansion	NA
+GSE67070	Stem cell and neurogenic gene-expression profiles link prostate basal cells to aggressive prostate cancer	Cancer/Prostate cancer
+GSE54505	TWIST1-induced microRNA-424 drives an intermediate epithelial-to-mesenchymal transition that opposes metastasis	Breast cancer/Cancer
+GSE84322	Transcriptome Sequencing of Adipose-Derived Mesechymal Stromal Cells	NA
+GSE84639	Enriched retinal ganglion cells derived from human embryonic stem cells (RNA-seq)	NA
+GSE81478	Transcriptome sequencing wide functional analysis of human mesenchymal stem cells	NA
+GSE68925	RNAi profiling of primary human AML cells identifies ROCK1 as a therapeutic target and nominates Fasudil as an anti-leukemic drug.	Cancer/Acute Myeloid Leukemia/knockdown/pathway
+GSE56235	Effect of PRDM11 depletion in U2932 cells	Cancer
+GSE74322	Global gene expression differences between blood- and lymphatic-specific human dermal microvascular endothelial cells	NA
+GSE67333	Transcriptomics profiling of Alzheimer’s disease reveal novel molecular targets	Alzheimer’s disease/Alzheimer
+GSE58365	The BCL6 RD2 domain governs commitment of activated B-cells to form germinal centers	NA
+GSE69687	Wnt addiction of genetically defined cancers reversed by PORCN inhibition	Cancer
+GSE54729	Transcriptome profiling of a mouse model of alveolar soft part sarcoma	NA
+GSE52385	Next generation sequencing of the transcriptome in MCF-7 cells with/without SRA knockdown	knockdown
+GSE66158	Suppression of NAF-1 in Breast Cancer Cells Reduces their Tumorigenicity by Interfering with Cellular Iron Distribution and Metabolism and Ensuing ROS Formation and Apoptosis	Breast cancer/Cancer
+GSE73471	The bromodomain protein BRD4 regulates splicing during heat shock	Cancer
+GSE66573	Defective structural RNA processing in relapsing-remitting multiple sclerosis	NA
+GSE80651	RNA sequencing analysis of human podocytes reveals glucocorticoid regulated gene networks targeting non-immune pathways	pathway
+GSE72589	Transcriptome-wide Quantitative Analysis of XLPDR-derived human dermal fibroblasts with POLA1 deficiency	pathway
+GSE69092	ELAVL2-regulated transcriptional networks in human neurons link atlernative splicing, autism and human neocortical evolution	Autism spectrum disorder/knockdown
+GSE74270	RNA sequencing of Formalin-Fixed, Paraffin-Embedded Specimens for Gene Expression Quantification and Data Mining	NA
+GSE52633	MicroRNA Marker Based Prognostication of Oral Squamous Cell Carcinoma	Cancer
+GSE68452	Role of cervicovaginal microbiota in genital inflammation	NA
+GSE62974	RNA sequencing (RNA-SEQ) of EPAS1 knockdown by siRNA in endothelial cells	siRNA/knockdown
+GSE72460	Transcriptome of human ILC2s; primary vs IL-1b-primed	NA
+GSE75146	Nudt3 is a mRNA Decapping Enzyme That Modulates Cell Migration	Breast cancer/Cancer/pathway
+GSE66556	Mitochondrial phosphoenolpyruvate carboxykinase (PCK2) regulates metabolic adaptation and glucose-independent tumor cell growth	Cancer/Lung cancer/Non-small cell lung cancer/pathway
+GSE86202	Analyzing the interactions of mRNAs, miRNAs, lncRNAs and circRNAs to predict competing endogenous RNA networks in glioblastoma	Cancer/Glioma/pathway
+GSE68919	Tumor exosome integrins determine organotropic metastasis	Cancer
+GSE77682	RNA-seq of human fibroblasts after irradiation	NA
+GSE77072	Spliced synthetic genes as internal controls in RNA sequencing experiments.	Cancer
+GSE65107	Diarrhea in lymphocytic colitis: ERK1/2-dependent ENaC dysregulation and claudin-4-, -5- and -8-related barrier defects	NA
+GSE69618	An orthologous epigenetic gene expression signature derived from differentiating embryonic stem cells identifies regulators of cardiogenesis	NA
+GSE63807	Transcriptome of Stabilin-1 siRNA transfected human monocytes	siRNA
+GSE71560	Prolyl hydroxylation regulates protein degradation, synthesis, and splicing in human induced pluripotent stem cell-derived cardiomyocytes	pathway
+GSE67250	Integration of genome-wide DNA methylome and transcriptome of human intestinal fibroblasts reveals novel candidate gene signatures in Crohn’s disease-associated fibrosis	NA
+GSE78506	24hr CA treatment vs. DMSO in HCT116 cells (from 'Identification of CDK8 and CDK19 substrates in human cells using cortistatin A and quantitative phosphoproteomics')	knockdown/pathway
+GSE75215	RNA deep sequencing to compare genome-wide differences between PRMT5/knockdown and control AML cells	knockdown
+GSE83415	CD4+ T Cells Gene Expression-Based Biomarkers in Juvenile Idiopathic Arthritis (JIA)	NA
+GSE64413	HITS-CLIP analysis uncovers a link between the Kaposi's sarcoma associated herpesvirus ORF57 protein and host pre-mRNA metabolism	NA
+GSE66173	Genetic disruption of COX-1 inhibits multiple oncogenic pathways	pathway
+GSE73893	Cross-talk between PRMT1-mediated methylation and ubiquitylation on RBM15 controls RNA splicing	NA
+GSE63265	Combinatorial targeting of nuclear export and translation of RNA inhibits aggressive B-cell lymphoma	pathway
+GSE72268	Reprogramming postnatal human epidermal keratinocytes toward functional neural crest fates	NA
+GSE75291	RNA-seq analysis upon ARID1B overexpression	knockdown
+GSE77513	Capturing the biology of mild versus severe disease in a pluripotent stem cell-based model of Familial Dysautonomia	NA
+GSE89057	RNA-seq of SOX5 overexpressing primary human neuronal progenitors	NA
+GSE89714	Differential gene expressions in the heart of hypertrophic cardiomyopathy patients	Cardiomyopathy
+GSE89879	Transcriptome profiling (RNA-seq) of CREBBP+/+ and CREBBP+/- clones of U2932 DLBCL cell line	pathway
+GSE90013	HBEC-shp53-PCHD7	NA
+GSE86654	Identifying markers predicting successful graft outcome for clinical translation of hESC-based cell therapy for Parkinson’s disease	Parkinson’s disease/Parkinson
+GSE82237	The DPYSL2 gene connects mTOR and schizophrenia	Schizophrenia
+GSE69511	Transcriptome analysis of Jurkat T-ALL clones from control and CBAP-knockdown/knockout sets	knockout/knockdown
+GSE59598	mRNA expression in human DAOY cells	knockdown
+GSE80095	Transcriptome Profiling of Human Primary Monocytes	NA
+GSE75524	Activation of the IGF1 pathway mediates changes in cellular contractility and motility in single-suture craniosynostosis	Craniosynostosis/pathway
+GSE53066	Anaylsis of the effect of down-regulation of the EWS-FLI1 fusion protein in Ewing Sarcoma cells by RNA-seq.	NA
+GSE89729	Quantitative Analysis of PPARD Transcriptomes  in Colon Cancer Cells by Next Generation Sequencing (NGS)	Cancer
+GSE89479	Self-organized amniogenesis by human pluripotent stem cells in a biomimetic implantation-like niche	pathway
+GSE70404	Investigation about Monocytes in metastatic breast cancer patients under chemotherapy +/- Avastin	Breast cancer/Cancer
+GSE77649	Human blood CD1c⁺ dendritic cells encompass CD5-high and CD5-low subsets that differ significantly in phenotype, gene expression and functions	NA
+GSE78081	Immunological Imbalance in Fibrodysplasia Ossificans Progressiva Revealed by PBMC Transcriptome Analysis	NA
+GSE79613	iPSCs Reveal Protective Modifiers of the BMPR2 mutation in Pulmonary Arterial Hypertension	NA
+GSE80237	RNA-seq analysis reveals profound changes in transcript profiles between siCon- and siH19-transfected EVT cells	knockdown
+GSE81236	MicroRNA-28 replacement for non-Hodgkin lymphoma therapy	NA
+GSE83717	Identification and validation of differentially expressed transcripts by RNA-Sequencing of formalin-fixed, paraffin-embedded (FFPE) lung tissue from patients with Idiopathic Pulmonary Fibrosis	Idiopathic pulmonary fibrosis
+GSE84237	Integrated Systems Biology Analysis of KSHV Latent Infection Reveals Viral Induction and Reliance on Peroxisome Mediated Lipid Metabolism	NA
+GSE84829	Identification of mesothelial-to-mesenchymal gene signature in ascitic fluid-isolated mesothelial cells through RNA-sequencing	Cancer
+GSE85271	KANK1 inhibits cell growth by inducing apoptosis though regulating CXXC5 in human malignant peripheral nerve sheath tumors	NA
+GSE86874	KDM1A confers invasive and metastatic attributes in lung adenocarcinoma by modulating a non-canonical Integrin ß3-KRAS signaling pathway	pathway
+GSE87626	Interaction between mitoNEET and NAF-1 in cancer cells	Cancer
+GSE88848	Appropriately Differentiated ARPE-19 Cells Regain a Native Phenotype and Similar Gene Expression Profile	NA
+GSE92293	RNA-seq in neutrophils from Juvenile Idiopathic Arthritis	NA
+GSE92723	Transcriptome analysis for KDM6A mutated urothelial bladder carcinoma and EZH2 inhibitor treated KDM6A mutated urothelial bladder carcinoma	NA
+GSE93292	Gene expression changes after LOC550643 silencing	siRNA
+GSE93395	Gene expression profile of human multiple myeloma cell line MM.1S after knockdown of KDM6B	knockdown
+GSE93124	Crizotinib v. DMSO in SW480 cells	NA
+GSE94019	Transcriptomic Analysis of Endothelial Cells from Fibrovascular Membranes in Proliferative Diabetic Retinopathy	siRNA/pathway
+GSE94280	Regulation of Lipids is Central to Replicative Senescence	NA
+GSE94395	Targeted Apoptosis of Senescent Cells Restores Tissue Homeostasis in Response to Chemotoxicity and Aging	NA
+GSE94464	Gene expression of  thyroid cancer cell lines	Cancer/Thyroid cancer
+GSE94728	pSILAC mass spectrometry reveals ZFP91 as novel IMiD dependent substrate of the CRL4CRBN ligase	NA
+GSE94736	Global transcriptional profiling using RNA sequencing and DNA methylation patterns in highly enriched mesenchymal cells from young versus elderly women.	pathway
+GSE95059	Transcriptomic profiling of normal human cardiac fibroblast treated with halofuginone	NA
+GSE97100	mRNAseq of Huntington's disease and control patient iPSC-derived brain microvascular endothelial cells	Huntington
+GSE98139	Whole blood gene expression in adolescent Chronic Fatigue Syndrom (CFS) by RNA-Seq	NA
+GSE99596	SIRT7 Antagonizes TGF-β Signaling and Inhibits Breast Cancer Metastasis	Breast cancer/Cancer
+GSE71876	Survival of pancreatic cancer cells lacking KRAS function	Cancer/Pancreatic cancer
+GSE77128	EPCR Expression Defines the Most Primitive Subset of Human HSPC and Is Required for Their In Vivo Activity	NA
+GSE80819	Transcriptome analysis of ECFCs treated with GSK-343 and Panobinostat	pathway
+GSE83647	Aneuploidy triggers an immune response	Cancer/pathway
+GSE86497	miR-93 Targets in Human Endothelial Cells	NA
+GSE87456	Hypoxic transcriptome of SQ20B human head and neck cancer cells	Cancer
+GSE89799	The cohesin complex prevents Myc-induced replication stress	Cancer
+GSE92322	circRNA-sequencing	NA
+GSE95106	Gene expression in GBM with Cav3.2 inhibition	Cancer/knockdown/pathway
+GSE95412	Identification of diverse target RNAs that are functionally regulated by human Pumilio proteins	knockdown
+GSE96637	Knock-down of Ror1 in MDA-MB-231 cell line decreases cell invasiveness	knock-down
+GSE97239	High-throughput RNA sequencing on circular RNA profiles of human bladder cancer tissues and normal bladder tissues	Cancer
+GSE97259	Determination of tRNA aminoacylation levels by high throughput sequencing	NA
+GSE97806	Disrupted prenatal RNA processing and myogenesis in congenital myotonic dystrophy	knockout/pathway
+GSE98580	High capacity of the endoplasmic reticulum to prevent secretion and aggregation of amyloidgenic proteins	NA
+GSE100417	Global transcriptome analysis of WT versus HEB-/- hESCs	NA
+GSE102000	SERPINA3- a novel keratinocyte differentiation promotor mediates epidermal barrier repair response in psoriatic lesion	NA
+GSE102741	RiboZero Gold paired-end RNA-seq data from postmortem tissue of the dorsolateral prefrontal cortex of autism spectrum disorder samples and healthy control samples	Autism spectrum disorder
+GSE106170	RNA-seq analysis of umbilical cord blood cells upon knockdown of NAP1L3	knockdown
+GSE106545	Next Generation Sequencing Facilitates Quantitative Analysis of Wild Type and AXL-/- astrocytes Transcriptomes	pathway
+GSE76421	JAG1 Mediated Notch Signaling Regulates Secretory Cell Differentiation of the Human Airway Epithelium	knockdown
+GSE85671	The Genomic Landscape of Atypical Fibroxanthoma	pathway
+GSE86926	Dermal fibroblasts play a central role in skin model protection against C. albicans invasion	NA
+GSE87554	Genome-wide transcriptional profiling of YAP target genes in human endothelial cells	siRNA/pathway
+GSE87585	3D genome of multiple myeloma reveals spatial genome disorganization associated with copy number variations	Cancer
+GSE90552	In Vivo Chemical Screen Nominates Valproic Acid as Pharmacologic Modulator of Hematopoietic Stem and Progenitor Cell Activity	NA
+GSE91377	RNA-Seq comparative analysis of human neuroblastoma cells before and after their confrontation to the embryonic microenvironment	NA
+GSE94888	FUS mutant human motoneurons transcriptome analysis reveals altered pathways and impairment of microRNA function	pathway
+GSE95352	Novel SF3B1 Deletion Mutations Result in Aberrant RNA Splicing in CLL Patients	Cancer
+GSE99298	Structural basis for human respiratory syncytial virus NS1-mediated modulation of host responses	pathway
+GSE100530	Mutational landscape of splicing genes and functional consequences across 33 cancer types	Cancer
+GSE101968	Obstructed defecation – an enteric neuropathy? An exploratory study of patient samples	Neuropathy
+GSE101972	RNA-seq analysis of the role of HBO1 (KAT7/MYST2) in the ovarian cancer cell line UWB1.289.	Cancer
+GSE102185	Effect of FGF13 depletion on the H460 cell line	NA
+GSE102215	RNA-Seq in neutrophils from Antiphospholipid Syndrome	NA
+GSE102392	Transcriptome analysis of human airway epithelium infected by Human Bocavirus 1	NA
+GSE103305	Thyroid State Regulates Gene Expression in Human Whole Blood Cells	NA
+GSE104177	Global modulation of signaling pathways by SARM RAD140 in AR/ER+ breast cancer xenografts	Breast cancer/Cancer/pathway
+GSE104583	‘Naïve’ ESRRB+ iPSCs with the capacity for rapid neural differentiation	NA
+GSE106148	α Cell Function and Gene Expression Are Compromised in Type 1 Diabetes	NA
+GSE107245	Proteotranscriptomic profiling of potential E6AP targets in prostate cancer cells	Cancer/Prostate cancer
+GSE98091	Transcriptomic analysis of the HOTAIR-regulated genes	NA
+GSE98485	A SRp55-regulated alternative splicing network controls pancreatic beta cell survival and function	NA
+GSE99231	ZFR coordinates crosstalk between RNA decay and transcription in innate immunity	knockdown
+GSE103270	Transcriptional profile in dermal fibroblasts from patients with collagen VI related muscular dystrophy	pathway
+GSE108500	Knockdown of FOXP1 promotes the development of lung adenocarcinoma	knockdown
+GSE109798	Comparative Transcriptomics of Triple Negative Breast Cancer Stem Cells and Differentiated Tumor Cells Identifies Teneurin-4 as a Potential Therapeutic Target	Breast cancer/Cancer
+GSE86430	Directional RNA-Seq on CD4+ T cells collected from children with asthma with/without obesity	Obesity
+GSE86867	Expression level comparison under dividing and quiescent states in human primary fibroblasts	NA
+GSE93904	Gene expression profile of CRC-derived HILEC	NA
+GSE94332	mRNA expression profile of Lymphocytes by high-throuput sequencing	NA
+GSE107762	Identification of PRMT5-dependent genes in ESA+CD24lowCD44+ MCF7 cells	Breast cancer/Cancer
+GSE110114	A practical evaluation of alignment algorithms for RNA variant calling analysis	variant
+GSE64744	Small RNA profiling reveals deregulated PTEN/PI3K/Akt pathway in asthmatic bronchial smooth muscle cells	pathway
+GSE76663	miRNAs affected by antagomiR-17 treatment	NA
+GSE77328	OmoMYC blunts promoter invasion by oncogenic MYC to inhibit gene expression characteristic of MYC-dependent tumors	NA
+GSE77382	Arnica montana stimulates extracellular matrix gene expression in human macrophages differentiated to wound-healing phenotype.	NA
+GSE78011	RNA-Seq Analysis of Anacardic Acid Treated MCF7 and MDA-MB-231 Breast Cancer Cell Lines	Breast cancer/Cancer
+GSE82236	Whole-transcriptome profilings between a pair of HCA7-derived KRAS-wildtype cetuximab sensitive and resistant colon cancer cells from 3D culture	Cancer
+GSE87532	Tristetraprolin disables prostate cancer maintenance by impairing proliferation and metabolic function	Cancer/Prostate cancer
+GSE90884	Presence of NAD+-capped RNA in human cells: function and removal by the DXO deNADing Protein	NA
+GSE91051	Gene expression changes due to PARP knockdown in human cells	knockdown
+GSE91087	Comparing gene expression in iPSC derived RPE from control and AMD donors	NA
+GSE93813	Exploiting Prmt5-orchestrated intron detention signatures to treat splicing-addicted malignant glioma tumors	Glioma
+GSE94367	ATF4 inhibition by p62 represses stromal metabolic reprogramming and tumorigenesis II	NA
+GSE96544	Expression analysis of Mebendazole treated THP-1 cells in three paired samples	NA
+GSE97471	Differentially expressed genes from RNA-Seq and functional enrichment results are affected by the choice of single-end versus paired-end reads and stranded versus non-stranded protocols	NA
+GSE99304	The stress granule transcriptome reveals principles of mRNA accumulation in stress granules.	NA
+GSE101705	Existing blood transcriptional classifiers accurately discriminate active tuberculosis from latent infection in a South Indian cohort	NA
+GSE102460	BACH2 in human plasma cell fate decision	siRNA
+GSE103170	Neutrophils in systemic onset Juvenile Idiopathic Arthritis display sepsis-like features which can be reverted by IL-1 blockade	NA
+GSE104295	Analysis of gene expression in SKOV3 ovarian cancer cells after knockdown of the long non-coding RNA DNM3OS	Cancer/knockdown
+GSE106336	Transcriptional changes in pancreatic cancer cells associated with gemcitabine resistance	Cancer/Pancreatic cancer
+GSE109082	Sex Differences in the Late First Trimester Human Placenta Transcriptome	NA
+GSE66304	Knockout human reveal an essential role for Paternally Expressed 10 (PEG10) in JEG3 cell line development	knockout
+GSE103327	Transcriptome profiling of HepG2 cells upon treatment of the menin-MLL inhibitor MI-503 or DMSO	NA
+GSE107770	Alternative splicing of differentiated myeloid cell transcripts after infection by Anaplasma phagocytophilum impacts a selective group of cellular programs	Cancer
+GSE111168	Next Generation Sequencing Facilitates Quantitative Analysis of Retinoblastoma Transcriptomes	NA
+GSE46846	Induction of Prolonged Early G1 Arrest by CDK4/CDK6 Inhibition Reprograms Lymphoma Cells for Durable PI3Kδ Inhibition Through PIK3IP1	NA
+GSE66632	The regulartory role of ZCCHC24 in splicing machinery	NA
+GSE77879	Genetic Tagging During Human Mesoderm Differentiation Reveals Tripotent Lateral Plate Mesodermal Progenitors	NA
+GSE98836	EWSR1 influences alternative splicing through direct and indirect mechanisms	Cancer/knock-down
+GSE102187	Transcriptional Modulation of Human Endogenous Retroviruses in Primary CD4+ T Cells Following Vorinostat Treatment	NA
+GSE103940	Integration of metabolomics and transcriptomic expression profiling discloses pivotal role of arachidonic acid metabolism pathway in response to acute hypoxia exposure	pathway
+GSE106159	Next Generation Sequencing Facilitates Quantitative Analysis of Wild Type and TWIST1 knock out U87 xenograft mice transcriptomes	knock out
+GSE106500	Immune Profiling of Premalignant Lesions in Patients with Lynch Syndrome 	Lynch syndrome
+GSE112695	RNA-seq analysis of Retinoic Acid and Non-treated Control hiPSCs	NA
+GSE114553	Induction of human SST and PV neurons by expressing a single transcription factor LHX6	NA
+GSE95180	Nickel exposure induces persistent mesenchymal phenotype in human lung epithelial cells through epigenetic activation of ZEB1	Cancer
+GSE99085	Human serum and heparin-free platelet lysate as appropriate xeno-free alternatives for production of human MuStem cell batches	NA
+GSE100882	SAMHD1 is recurrently mutated in T-cell prolymphocytic leukemia [RNA-seq]	NA
+GSE102881	Transcriptomic analysis of healthy donor and Sickle Cell Disease (SCD) hematopoietic stem/progenitor cells	NA
+GSE107376	Gene expression profile of human placenta from T. Cruzi infected mothers	pathway
+GSE107980	RING-finger protein 6 amplification activates JAK/STAT3 pathway by modifying SHP-1 ubiquitylation and associates with poor outcome in colorectal cancer	Cancer/Colorectal cancer/pathway
+GSE108694	Gene expression analysis of human CD8+ T cells treated with a DOT1L inhibitor	Cancer
+GSE109870	transcriptome studies of BRD4 inhibitor BDF-1253 on renal clear carcinoma 786-O cells	Cancer/Renal cell carcinoma
+GSE110935	The role of CFTR in islet function	NA
+GSE111084	A20 regulates canonical wnt-signaling through an interaction with RIPK4	Cancer
+GSE113195	Sex differences in transcriptomic profiles in aged kidney cells of renin lineage	pathway
+GSE79544	Idiopathic pulmonary fibrosis bronchoalveolar lavage cells RNA-seq indicates macrophage expression of pro-inflammatory M1/M2 activation concomitant with radical species metabolism inhibition	Idiopathic pulmonary fibrosis
+GSE104604	Next Generation Sequencing upon siRNA-mediated knockdown of EIF5A in MCF-7 cells.	siRNA/knockdown
+GSE104756	Differential gene expression tools exhibit substandard performance for long non-coding RNA-sequencing data	NA
+GSE111538	RNA-seq data of adipocytes co-cocultured with OVCAR5 in Boyden chamber (4d)	NA
+GSE90944	RNA-seq in HT-29 colorectal cancer cells after F. nucleatum treatment	Cancer/Colorectal cancer
+GSE77261	Genome-wide expression change by SHARPIN knockdown in MCF-7 cells	knockdown
+GSE82207	Total RNA sequencing of WT intestinal orgaonids.	NA
+GSE92340	Patient iPSC-Derived Neurons for Disease Modeling of Frontotemporal Dementia with Mutation in CHMP2B	NA
+GSE92724	Dermal endothelial cells of type 2 diabetic patients	Diabetes mellitus/Obesity/Type 2 diabetes mellitus
+GSE93069	Transcriptome sequencing (RNA-Seq) of non-tumor kidney tissues from 36 patients undergoing nephrectomy for exploring the metabolic mechanism of sorafenib and identifying the major transcriptional regulation factors in sorafenib metabolism in kidney	Renal cell carcinoma
+GSE94053	A sister of NANOG regulates genes expressed in pre-implantation human development	NA
+GSE102220	Transcriptome-wide analysis of the role of HTLV-1 Tax PBM in T-Cells from infected humanized-mice (hu-Mice)	NA
+GSE103763	Genome-wide analysis of herpes simplex virus type 1 (HSV-1) infected cells	pathway
+GSE107981	Effector and regulatory T cells roll at high shear stress by inducible tether and sling formation	pathway
+GSE108013	Microenvironmental-derived Regulation of HIF-Signaling Drives Transcriptional Heterogeneity in Glioblastoma Multiforme	Glioma
+GSE110736	Next Generation Sequencing Facilitates Quantitative Analysis of transcriptomes of human cord blood CD34+ cells treated with HDAC5 inhibitor	NA
+GSE114051	Discovery of a Drug Candidate for GLIS3-Associated Diabetes	NA
+GSE114360	RNA transcriptome sequencing analysis of SGC-7901 cells transfected with tcons_00001221 shRNA or control shRNA	NA
+GSE110713	PTHrP overexpression in MCF7 cells	Breast cancer/Cancer
+GSE63015	Self-organization of polarized cerebellar plate neuroepithelium in three-dimensional culture of human pluripotent stem cells	NA
+GSE63744	Large-scale profiling of intracellular signalling pathway activation reveals major distinctions between airway smooth muscle cells of asthmatics and non-asthmatics.	pathway
+GSE67128	Comparative whole-transcriptomic analysis between normal and AKAP-Lbc-depleted human embryonic stem cells	NA
+GSE71862	Differential Gene Expression between MCF10A and MCF7 cells	Breast cancer/Cancer
+GSE77938	Transcriptome profiling of human keratoconus corneas through RNA sequencing identifies collagen synthesis disruption and downregulation of core elements of TGF-β, Hippo, and Wnt pathways	pathway
+GSE79395	Knockdown of ADNP in HCT116 colon cancer cells	Cancer/knockdown
+GSE79988	The myelin protein PMP2 is regulated by SOX10 and drives melanoma cell invasion	Melanoma
+GSE85857	Runx1 stabilizes the mammary epithelial cell phenotype and prevents epithelial to mesenchymal transition	Breast cancer/Cancer/pathway
+GSE91000	Cystathionine-β-Synthase Promotes Colon Carcinogenesis	NA
+GSE102155	Mitotically associated long non-coding RNA, MANCR regulates cell cycle in triple negative breast cancer cells 	Breast cancer/Cancer
+GSE114685	Disruption of GRIN2B impairs differentiation in human neurons	Intellectual disability
+GSE114941	Adipocyte-derived lipids mediate melanoma progression via FATP proteins	Melanoma
+GSE52036	RNA-seq analysis reveals endogenous aryl hydrocarbon receptor regulation is highly associated with eicosanoid synthesis and tumor necrosis factor activity in MCF-7 cancer cells	Cancer
+GSE53239	RNA-sequencing of the brain transcriptome implicates dysregulation of neuroplasticity, circadian rhythms, and GTPase binding in bipolar disorder	pathway
+GSE74729	A novel RAF kinase inhibitor with DFG-out binding mode: high efficacy in BRAF-mutant tumor xenograft models in the absence of normal tissue hyperproliferation	Melanoma
+GSE77140	Gene expression profiles of rescue with wild type or SUMO double mutant TRIM24	knockdown
+GSE77383	Transcriptomic profiling discloses molecular and cellular events related to neuronal differentiation in SH-SY5Y cells	pathway
+GSE89443	RNA Seq analysis of NKX2-5 Null and Het human embryonic stem cells in cardiomyogenesis	NA
+GSE101480	Targeted inhibition of STAT/TET1 axis as a potent therapeutic strategy for acute myeloid leukemia	Acute Myeloid Leukemia
+GSE102246	mTOR kinase inhibition effectively decreases progression of a subset of neuroendocrine tumors that progress on rapalog therapy and delays cardiac impairment	NA
+GSE104853	MicroRNA-125a-5p overexpression in human macrophages	pathway
+GSE107104	Increased expression of immune regulatory mediators independently detects tuberculosis in advanced HIV	NA
+GSE100261	Transcriptional impact of MTHFD2 in Human Aortic Endothelial Cells	siRNA/knockdown
+GSE111900	Transcriptome-wide analysis of RNA binding and splicing alterations induced by SRSF2 P95 mutations in myelodysplasia	Acute Myeloid Leukemia
+GSE106699	RNA sequencing of 13 T-cell acute lymphoblastic leukemia patients (5 TCRAD-MYC translocated T-ALL_8TAL1-LMO2 T-ALL)	NA
+GSE115827	RNA-seq data from human SGBS adipocytes differentiated with marine oxohexadecenoic acids	NA
+GSE102746	Transcriptome-analysis of patient-derived normal and ulcerative colitis intestinal epithelial organoids	NA
+GSE111582	APOBEC mutation drives early-onset squamous cell carcinomas in recessive dystrophic epidermolysis bullosa	NA
+GSE116327	Gene expression changes associated with Alexander disease (AxD)	NA
+GSE116865	RNAseq of (Dimethylfumarate)DMF-induced changes in human CD8+ memory cells	pathway
+GSE95120	The arrhythmogenic cardiomyopathy-specific coding and non-coding transcriptome in human cardiac stromal cells	Cardiomyopathy
+GSE113790	RNA sequencing analysis of decidua tissues from unexplained recurrent spontaneous abortion patients and controls with induced abortions	NA
+GSE106344	Lyophilized human cells stored at room temperature preserve multiple RNA species at excellent quality for RNA sequencing	NA
+GSE110608	RNA sequencing analysis of human embryonic stem cells and axial progenitors	NA
+GSE78928	Huntingtin aggregation impairs autophagy leading to Argonaute-2 accumulation and global microRNA dysregulation	Neurodegenerative disease/Huntington
+GSE105264	Uridilation by TUT4/7 restricts retrotransposition of human Line-1s	NA
+GSE83834	RHBDF2 in Stromal Fibroblasts Mediates TGF-b Signal and Enhances Cancer Cell Invasion via Intercellular Cross-Talk	Cancer
+GSE102476	A radiolabeling-free, qPCR-based method for locus-specific pseudouridine detection	NA
+GSE107581	PD-L1 (CD274) overexpression effect on glioblastoma cell line U251	NA
+GSE110206	Amlexanox targets the IKK-ɛ/TBK1/NF-κB signaling axis to suppress the epithelial-to-mesenchymal transition and prostate cancer metastasis	Cancer/Prostate cancer
+GSE115831	Pancreatic cancer-derived exosomes induce apoptosis of T lymphocytes through the p38 MAPK signal transduction pathway	Cancer/Pancreatic cancer/pathway
+GSE117012	CD73 knockdown effect in pancreatic cancer cell lines	Cancer/Pancreatic cancer/knockdown
+GSE107685	Gene expression changes in human iPSC-derived cardiomyocytes after X-ray irradiation	NA
+GSE115650	MRI-informed muscle biopsies correlate MRI with pathology and DUX4 target gene expression in FSHD	NA
+GSE114987	RNA sequencing reveals transcriptional changes after Hippo signaling activation in podocytes	pathway
+GSE119377	Human Adipocytes Regulate Gene Expression in Triple-negative Breast Cancer Assessed by NGS  Sequencing	Breast cancer/Cancer
+GSE108933	RNA-sequencing of human tendon after injury	NA
+GSE111231	Perivascular signals alter global genomic profile of glioblastoma and response to temozolomide in a gelatin hydrogel	Cancer/pathway
+GSE112586	RNA transcriptome sequencing analysis of SGC-7901 cells transfected with ENST00000431060 shRNA or control shRNA	NA
+GSE114789	UPA-Seq: Prediction of functional lncRNAs using the sensitivities to UV-crosslinking	NA
+GSE118165	RNA-seq data	NA
+GSE120306	RNA-Seq of LRRK2 G2019S Parkinson’s iPSC-derived astrocytes	Parkinson
+GSE120337	Genomic expression analysis of K562 cells expressing shRNA targeting lncRNA-IIRX and control cells	NA
+GSE121137	Ascorbate Suppresses VEGF Expression in Retinal Pigment Epithelial Cells	NA
+GSE121241	Long non-coding RNAs are central regulators of the IL-1b-induced inflammatory response in human lung fibroblasts	Idiopathic pulmonary fibrosis/knockdown
+GSE102335	Microglia innatly develop within cerebral organoids	NA
+GSE108995	Profiling of escape kinetics of viruses subjected to RNAi	NA
+GSE110451	Profiling in vivo Bone Lesion (IVBL) and Orthotopic tumors by Next Generation Sequencing	NA
+GSE117562	STVI-120 Induction of differentiation in human epidermal stem cells followed by differential splicing analysis	NA
+GSE119827	RNA-seq analysis of control and NRDE2-depleted breast cancer cells	Breast cancer/Cancer
+GSE119954	The Genetic Landscape of Diamond-Blackfan Anemia	variant
+GSE121155	Effect of Influenza virus infection on lncRNA expression in A549 cells	NA
+GSE110193	RNA-seq analysis of BAP1-depleted uveal melanoma cells	Melanoma
+GSE111177	Identification of Transcription Factor Relationships Associated with Androgen Deprivation Therapy Response and Metastatic Progression in Prostate Cancer	Cancer/Prostate cancer
+GSE111405	Longitudinal Personal DNA Methylome Dynamics in a Human with a Chronic Condition	NA
+GSE118490	Transcriptomic analysis of trametinib-resistant HCT116 colorectal carcinoma cells compared to the parental control cells	NA
+GSE119513	Comparison of Transcriptomes between A549 and H23 Cells	Cancer/Lung cancer
+GSE121534	Differentiation enhances Zika virus infection in neuronal brain cells	NA
+GSE64341	Effect of PDZ domain binding Kinase inhibition using TOPK-32 (called PBKi) on C4-2 cell transcriptome	Cancer/Prostate cancer
+GSE88888	A monocyte gene expression signature in the early clinical course of Parkinson’s disease	Parkinson’s disease/Parkinson
+GSE114383	Expression analysis of PC3 cells treated with scramble AON or AON directed against MBNL1	NA
+GSE117444	Differential gene expression analysis between proliferating and quiescent human dermal fibroblasts	NA
+GSE120364	Next Generation Sequencing Facilitates Quantitative Analysis of Gene expression profile in CD8+ T cells with TOX-overexpression	pathway
+GSE121093	Vitamin C Promotes Apoptosis in Breast Cancer Cells by Increasing TRAIL Expression	Breast cancer/Cancer
+GSE121095	Epigenetic reprogramming of melanoma cells by vitamin C treatment	Melanoma
+GSE117143	UBC9 knockdown  in bladder cancer T24 cell lines	Cancer/knockdown
+GSE117189	Fisetin induces autophagy in pancreatic cancer cells via endoplasmic reticulum stress- and mitochondrial stress-dependent pathways	Cancer/Pancreatic cancer/pathway
+GSE120663	Transcriptome Analysis of PBMCs in peripheral blood of patients with hepatocellular carcinoma	NA
+GSE125300	TOP2B disturbed the quality of human oocytes with advanced maternal age	knockdown/pathway
+GSE125421	A comprehensive gene expression  analysis identifies novel  immune signatures in cesarean-born infants	pathway
+GSE103035	Functional role of CPPED1 in trophoblasts.	siRNA
+GSE115137	The transcriptome of human endometrial mesenchymal stem cells under TGFβR inhibition reveals improved potential for cell-based therapies	pathway
+GSE121951	polyA RNA Sequencing Analysis of HTR-8/SVneo cells after lnc-SLC4A1-1 overexpression	NA
+GSE125577	Global Gene Expression Changes in Cholangiocytes Treated with TGF-beta	NA
+GSE106617	Genome wide expression change by RNF168 knocking down in MCF-7 cells	Breast cancer/Cancer/siRNA
+GSE108632	Paclitaxel plus Cirmtuzumab Achieves Greater Clearance of Patient-derived Xenografts By Targeting ROR1+ Breast Cancer Stem Cells	Breast cancer/Cancer
+GSE110512	Gene expression analysis of dengue-infected cells	NA
+GSE115364	IDH3a KO RNA-seq	NA
+GSE118532	Genome wide expression change by RNF168 knocking down in NEC cells	Breast cancer/Cancer/siRNA
+GSE118774	Genome wide expression change in LCC2 and MCF-7 cells	Breast cancer/Cancer
+GSE119331	Molecular Pathology of adverse local tissue reaction caused by metal-on-metal implants	NA
+GSE120201	Widespread backtracking by RNA pol II is a major effector of gene activation, 5’ pause release, termination and transcription elongation rate	NA
+GSE121757	Assessing the effect of SUPT4H1 RNAi on the transcription of a repeat-containing reporter construct	Amyotrophic lateral sclerosis/Huntington’s disease/Huntington
+GSE121995	H1609088 Human RNA-Sequencing	pathway
+GSE122069	Premature polyadenylation-mediated loss of stathmin-2 is a hallmark of TDP-43-dependent neurodegeneration	Amyotrophic lateral sclerosis
+GSE122761	Acetylation of spliceosome protein PHF5A modulates stress responses and colorectal carcinogenesis through alternative splicing mediated upregulation of KDM3A	Cancer/pathway
+GSE123968	Comprehensive Transcriptome Analysis of Cerebral Cavernous Malformation Across Multiple Species and Genotypes	NA
+GSE124519	lncRNA-PCAT1 knockdown effect on the gene expression of androgen independent LNCaP (LNCaP-AI) cell line	knockdown
+GSE125222	Novel mutations segregating with Complete Androgen Insensitivity Syndrome and their molecular characteristics.	NA
+GSE126504	Next Generation Sequencing Facilitates Quantitative Analysis of SW480 cells and HPSE-knockdown SW480 cells Transcriptomes	knockdown
+GSE128392	CD8+ T cells regulate tumor ferroptosis during cancer immunotherapy	Cancer
+GSE78178	Effect of BB608 on Gene Expression in HNSCC Cell Line	NA
+GSE104425	Arrayed molecular barcoding identifies TNFSF13 as a positive regulator of acute myeloid leukemia-initiating cells	Acute Myeloid Leukemia
+GSE105253	Expression analysis of THP1 cells following shRNA knock-down of RUVBL2	knock-down
+GSE109120	Sex Differences in the Late First Trimester Human Placenta Transcriptome	NA
+GSE110525	The long non-coding RNA MALAT1 contributes to the pathogenesis of multiple sclerosis through alternative splicing and backsplicing regulation	knockdown
+GSE113861	Nascent RNA Sequencing after NMYC activation in SH-EP MYCNER cells	NA
+GSE115849	RNA seq comparison between scrambled and shGRP78 cells	Cancer/Pancreatic cancer/knockdown
+GSE116241	Identification of atheroprone shear stress responsive regulatory elements in endothelial cells	NA
+GSE118101	Next Generation Sequencing upon siRNA-mediated knockdown of DRAIC in MCF-7 cells.	siRNA/knockdown
+GSE121307	mRNA sequencing analysis of cultured human primary airway epithelial cells upon exposure to PMN exosomes	NA
+GSE121871	Multidimensional Assessment of the Host Response in Mechanically Ventilated Patients with Suspected Pneumonia	NA
+GSE122486	RNA-sequencing WT vs SOCS3 knockout Glioblastoma stem-cells	knockout
+GSE124450	Integrative analysis identifies lincRNAs up- and downstream of neuroblastoma driver genes (ALK)	Cancer/pathway
+GSE124508	MDM2 and MDM4 are Therapeutic Vulnerabilities in Malignant Rhabdoid Tumors	Cancer/pathway
+GSE125602	RNA-sequencing of fibrolamellar carcinoma (FLC) cell line treated with miR-375 mimic	Cancer
+GSE125686	Transcriptomic profiling of peripheral blood NK cells of chronic HBV, HCV and HIV patients	NA
+GSE125829	Newly defined ABCB5+ dermal mesenchymal stem cells promote healing of chronic iron overload wounds via secretion of interleukin-1 receptor antagonist	NA
+GSE126530	Next Generation Sequencing of isolated EGFR+ and HLA-G+ first trimester human trophoblasts	NA
+GSE126537	Rorc disruption in human FG pancreatic cancer cells	Cancer/Pancreatic cancer
+GSE128740	Alterations of the MEK/ERK, BMP, and Wnt/b-catenin pathways detected in the blood of individuals with lymphatic malformations	pathway
+GSE111881	Transcriptome analysis of total RNA in human osteosarcoma cell line U2OS before and after inhibition of zinc finger protein ZNF768	NA
+GSE84620	Transcriptomic changes mediated by β-amyloid in human aortic endothelial cells (HAOEC)	NA
+GSE105771	Transcriptional profile of human STAT1-/- fibroblasts expressing IFI6 or empty control vector	NA
+GSE107868	RNA-sequencing and swarm intelligence-enhanced classification algorithm development for blood-based disease diagnostics using spliced blood platelet RNA	Glioma
+GSE110278	Induction of human regulatory innate lymphoid cells from group 2 innate lymphoid cells by retinoic acid	NA
+GSE111958	Transcriptional profile of human STAT1-/- fibroblasts expressing LY6E or empty control vector	NA
+GSE114708	Transcriptomic analysis of acute mitochondrial pyruvate carrier inhibition using UK5099 in ABL prostate cancer cells	Cancer/Prostate cancer
+GSE115850	RNA deep sequencing analysis of human brain microvascular endothelial cells (ECs) treated with glioma-conditioned medium (glioma-CM)	Glioma
+GSE116943	RNA expression in BRCA2-depleted breast cancer cell lines	Breast cancer/Cancer
+GSE117875	Transcriptomic profile of intestinal epithelial cells obtained from ileal endoscopic biopsies from newly-diagnosed, pediatric Crohn's disease patients and healthy controls.	Crohn's disease
+GSE117910	Examining serotonergic neuron differentiation from human iPSCs	NA
+GSE118567	Acetyl-CoA carboxylase inhibition regulates microtubule dynamics and intracellular transport in cystic fibrosis epithelial cells	NA
+GSE120378	STX4 Over-Expression in Human islets	NA
+GSE121069	RNAseq of fluidically isolated human and mouse motor neuron somas and axons in vitro	Amyotrophic lateral sclerosis
+GSE122490	RNA-seq of HUVEC ± shRNA knockdown of SENCR	knockdown
+GSE123681	Thymine DNA Glycosylase as a novel target for melanoma: effect of TDG silencing on gene expression in SK-mel-28 melanoma cells	Melanoma
+GSE125178	Probing the Global Cellular Responses to Lipotoxicity Caused by Saturated Fatty Acids	knockdown
+GSE125917	Global gene expression profiles of cardiomyocytes differentiated from human pluripotent stem cells (hiPSC-CMs) in 3D culture exposed to ethanol	NA
+GSE126548	Potential signaling pathways and gene signatures associated with brain metastases in NSCLC patients	pathway
+GSE126840	RNA-sequencing of Wnt-dependent and Wnt-independent of Glioblastoma stem cell cultures	NA
+GSE127736	Disruption of the exocyst induces podocyte loss and dysfunction	knock down
+GSE93716	Transfection experiment with vector containing TP73-AS1 sponge region and miR-941	NA
+GSE93717	miR941 overexpression experiment	NA
+GSE95173	Human Long Intergenic Noncoding RNA Linc-ADAL Knockdown in Mature Adipocytes using Lentiviral ShRNA	knockdown
+GSE102114	Differential expression of long non‑coding RNA and mRNA in children with Henoch‑Schönlein purpura nephritis	NA
+GSE104232	NFIA is a gliogenic switch enabling rapid derivation of functional human astrocytes from pluripotent stem cells	NA
+GSE105145	Bone marrow-derived and dental pulp-derived human mesenchymal stem cell RNA-Seq	Cancer/pathway
+GSE107594	HMGA2 Promotes Long-Term Engraftment and Myelo-Erythroid Differentiation of Human Hematopoietic Stem and Progenitor Cells	knockdown
+GSE111485	Multi-omic measurements of heterogeneity in HeLa cells across laboratories	variant
+GSE115361	Expression data from miR340 overexpressing human A549 cells	NA
+GSE119001	Expression alterations induced by restoration of AXIN1 expression in SNU449 hepatocellular carcinoma cells	Cancer/pathway
+GSE119423	The SUMO Pathway as a Therapeutic Option in Pancreatic Cancer	Cancer/Pancreatic cancer/pathway
+GSE120890	Differential expression of genes in AD169-infected MRC5.	NA
+GSE121535	RNA-seq analyisis of PUM2 knockout cells	knockout
+GSE121950	RNA Sequencing Analysis of villus tissues from unexplained recurrent spontaneous abortion patients and controls with induced abortions	NA
+GSE122425	Effects of NSUN2 deficiency on the mRNA 5-methylcytosine modification and gene expression profile in HEK293 cells (RNA-Seq)	NA
+GSE124538	Induction and Therapeutic Targeting of Human NPM1c+ Myeloid Leukemia in the Presence of Autologous Immune System in Mice	NA
+GSE125024	Differetially expressed genes after hTR overexpression in U2OS cells	NA
+GSE125733	Transcriptomic analysis of frontal fibrosing alopecia	NA
+GSE133000	RNA sequence of mRNA in HUVEC cells after depleting EGFL6	pathway
+GSE118933	Immune Checkpoint Regulation of Pulmonary Fibrosis [bulk RNA-seq]	Idiopathic pulmonary fibrosis
+GSE128313	Highly-motile versus unsorted MDA-MB-231 breast cancer cells	Breast cancer/Cancer
+GSE128526	Aberrant expression of select piRNA-pathway genes does not reactivate piRNA silencing in cancer cells	Cancer/pathway
+GSE121092	Gene expression analysis in U251 and U87 cells transduced with NANEP5 vector.	NA
+GSE126475	Exploring ILF2 regulatory genes by next-generation sequencing	NA
+GSE129142	Identification of elevated A-to-I editing sites due to expression of an active ADAR3 mutant in human glioblastoma cells	NA
+GSE129241	Directly Reprogrammed Human Neurons Identify a Pathogenic Mechanism of Valproic Acid at Early Developmental Stages	pathway
+GSE129619	Disease modelling of core pre-mRNA splicing factor haploinsufficiency	knockdown
+GSE130271	Profiling of protrusion-enriched RNAs from human breast cancer cell line MDA-MB-231	Breast cancer/Cancer
+GSE107580	Activation of neuronal genes via LINE-1 elements upon global DNA demethylation in human neural progenitors	NA
+GSE112448	 Polarized B -cell functions 	NA
+GSE115659	Next generation sequencing on knockdown of AC093323.3 in lung cancer cells	Cancer/Lung cancer/knockdown
+GSE115914	Effect of hyper-and hypoactivation of Notch signaling in IL-4-stimulate THP-1	NA
+GSE123472	EGR1-controlled transcriptome of T HESCs	siRNA/knockdown
+GSE125128	SREBP1 drives Keratin 80-dependent cytoskeletal changes and invasive behavior in endocrine resistant ERα breast cancer	Breast cancer/Cancer
+GSE127081	Blocking expression of inhibitory receptor NKG2A overcomes tumor resistance to NK cells	NA
+GSE129307	Studying the selectivity of a targeted small molecule degrading a hypoxia-associated non-coding RNA	Breast cancer/Cancer
+GSE132091	Toxoplasma gondii infection of human retinal pigment epithelial cells	pathway
+GSE99724	Gene expression activation in CLL mediated by MSCs contact	NA
+GSE100322	Whole transcriptome sequencing of the human thyroid primary cells with knock-down of the NRG1 gene	knock-down
+GSE124622	Next Generation Sequencing of control (Untreated), PAN injured and Adriamycin injured human podocytes	pathway
+GSE128967	The Wnt/β-catenin and RAS-ERK Pathways were Activated  in Tissues of Chemotherapy-Resistant Gastric Cancer PDX Tumor	Cancer/pathway
+GSE131066	Transcriptomic profiling of O-GlcNAcylated mRNA-protein complexes by using OG-CLAP in HeLa cells.	NA
+GSE132082	RNA-seq of tumor cells following angiopellosis extravasation	NA
+GSE113942	Genome-wide profiling of cervical RNA-binding proteins identified HPV regulation of RNASEH2A expression by viral E7 and E2F1	Cancer/pathway
+GSE127457	IL-1β induces the rapid secretion of the antimicrobial protein IL-26 from Th17 cells	NA
+GSE108706	Transcriptome analysis in Neobractatin treated cells	Cancer
+GSE117415	RNA-seq in SUNE-1 cells after downregulation of DANCR expression	siRNA
+GSE121380	Mucosal Profiling of Pediatric-Onset Colitis and IBD Reveals Common Pathogenics and Therapeutic Pathways	pathway
+GSE121382	Transcriptome Analysis of CircMRPS35 mediated mRNA expression profiles	Cancer/siRNA
+GSE121596	Circular RNA expression signature of low-glucose-treated MIA PaCa-2 cells	Cancer
+GSE125648	RNA-sequencing analysis for gene expression profiles affected by CASC9 knockdown	knockdown
+GSE131897	Transcriptional profiling of PBMC from patients with aGvHD and patients without aGvHD after alloHSCT	pathway
+GSE136569	circNFIB suppresses lymphatic metastasis of pancreatic cancer	Cancer/Pancreatic cancer
+GSE136668	Transcriptomic analysis of differential expressed genes of human tonsillar epithelial cells UT-SCC-60B in response to EV71 infection	NA
+GSE140430	Stem and effector CD8 T-cells from human cancers	Cancer
+GSE129950	A novel lncRNA lncRNA-AK096729 promotes colorectal carcinogenesis and glucose metabolism by stabilizing and specifying the transcription modification pattern of c-Myc	Cancer/Colorectal cancer/siRNA
+GSE132154	Dual modulation of neuron specific microRNAs and the REST complex promotes functional maturation of induced human adult neurons	knockdown
+GSE136262	A combined epigenome- and transcriptome-wide association study of the oral masticatory mucosa assigns CYP1B1 a central role for epithelial health in smokers	NA
+GSE139822	RNA-seq data of small cell carcinoma of the bladder (SCCB) /urothelial carcinoma (Non-SCCB) clinical samples, and bladder-PARCB cell lines	NA
+GSE140227	RNA sequencing of lesional and nonlesional skin from patients with atopic dermatitis	NA
+GSE140380	Transcriptional differences between skin from patients with atopic dermatitis and control skin obtained from the healthy margins of Mohs surgery patients	NA
+GSE88731	Cellular response to hepatitis E virus (HEV) infection	NA
+GSE110580	High-throughput RNA sequencing on circular RNA profiles of human pancreatic cancer cell lines and gemcitabine resistant pancreatic cancer cell lines.	Cancer/Pancreatic cancer
+GSE113005	Transcriptomics-based drug repurposing approach identifies novel drugs against sorafenib-resistant hepatocellular carcinoma	NA
+GSE114311	Regulation of pre-mRNA splicing by m6A through the low-complexity protein hnRNPG and co-transcriptional pausing	NA
+GSE120174	RNA sequencing of human mammary epithelial cells	NA
+GSE127478	Mitochondrial 3243A > G mutation confers pro-atherogenic and pro-inflammatory properties in MELAS iPS derived endothelial cells	NA
+GSE128101	Subcellular pathways shared by afflicted patients and mutant mice identify a new drug treatment for aortic aneurysm in Marfan syndrome	pathway
+GSE131011	Mesenchymal stem/stromal cell engulfment reveals metastatic advantage in breast cancer	Breast cancer/Cancer
+GSE133523	Modeling Human Cancer-induced Cachexia (Human)	Cancer
+GSE134401	Effect on small molecule RBPJ inhibitor (RIN1) on gene expression in Jurkat cells compared to gamma secretase inhibition and siRNA knockdown of RBPJ	siRNA/knockdown
+GSE90469	Ribosome profiling of G2019S LRRK2 human dopamine neurons	NA
+GSE137755	FBP2 inhibits sarcoma progression by restraining mitochondrial biogenesis	NA
+GSE139249	Discovery of Specialized NK Cell Populations Infiltrating Human Melanoma Metastases	Melanoma
+GSE140150	A rare subpopulation of melanoma cells with low expression of metastasis suppressor NME1 has a neural crest-like phenotype and is highly metastatic in vivo	Melanoma
+GSE104675	Role for the Transcriptional Activator ZRF1 in Breast Cancer Progression and Endocrine Resistance	Breast cancer/Cancer
+GSE109957	Silencing p300 in MCF7 cells to study expression and alternative splicing	NA
+GSE110557	RNA-seq analysis reveals profound changes in transcript profiles between siCon- and siH19-transfected uterine smooth muscle cells (USMC)	knockdown
+GSE116127	Transcriptomic analysis of the effect of trastuzumab in human iPSC-CMs	pathway
+GSE117994	AML subtype is a major determinant of the association between prognostic gene expression signatures and their clinical significance.	Acute Myeloid Leukemia
+GSE120190	Transcriptome analyses of iPSC-derived neural stem/progenitor cells and cerebral organoids from monozygotic twins discordant for schizoaffective bipolar disorder	NA
+GSE126151	A systematic analysis of nuclear heat-shock protein 90 identifies a metazoan-specific regulatory module	Cancer
+GSE127831	Variable gene expression and parasite load predict treatment outcome in cutaneous leishmaniasis	pathway
+GSE129540	RNAseq analysis of ESRP regulated splicing events in prostate cancer	Cancer/Prostate cancer
+GSE130086	Expression data from human perivascular stem cell-derived extracellular vesicles (PSC-EVs) and PSCs	NA
+GSE130905	An improved method for circular RNA purification that efficiently removes linear RNAs containing G-quadruplexes or structured 3’ ends	NA
+GSE130985	Comparison between THP-1 cells obtained from either ATCC or DSMZ biorepository	NA
+GSE132340	Hierarchy of mono- and bi-allelic TP53 alterations in Multiple Myeloma cell fitness	pathway
+GSE132410	Indoxyl sulfate stimulates angiogenesis by regulating reactive oxygen species production via CYP1B1	NA
+GSE132868	RelA mutants 'reconstituted' and cell cycle synchronized HCT116 Colorectal Cancer Cells	Cancer/Colorectal cancer
+GSE133903	Transcriptome analyses of human pancreatic islets and pseudoislets	NA
+GSE134517	A global overview of translation efficiency and ribosome occupancy at nucleotide resolution in HEK293 cells	NA
+GSE135047	Quantitative comparison between cellular mRNAs and exosomal mRNAs in human iPSC-derived motor neurons	NA
+GSE135229	ETS family proteins bind glucocorticoid receptor: relevance for treatment of Ewing sarcoma	NA
+GSE137238	Profiling gene expression changes in primary ovarian tumors compared to matched normal fallopian tubes	Cancer
+GSE138611	Extracellular matrix hydrogel derived from decellularized tissues enables endoderm organoids culture	NA
+GSE139018	RNAseq Analysis in glioblastoma cells treated with Mepazine	NA
+GSE140483	Organelle-based therapy for immune mediated disease: mitochondrial transfer elicits Tregs reprogramming	NA
+GSE104944	Region-specific Innate Antiviral Responses of the Human Epididymis	pathway
+GSE107589	RNA-seq in transgenic cells	NA
+GSE113524	Discovery of autism/intellectual disability somatic mutations in Alzheimer's brains: mutated ADNP cytoskeletal impairments and repair as a case study	Intellectual disability/Alzheimer
+GSE113799	RNA-seq of PC3 prostate cancer cell line xenografts in mice administered the ghrelin receptor antagonist [D-Lys3]-GHRP-6 or PBS for two weeks	Cancer/Prostate cancer
+GSE115153	Biological effect of chronic mistranslation in mammalian cells	NA
+GSE115414	Discovery of lncRNA biomarkers of prostate cancer	Cancer/Prostate cancer
+GSE116142	Fibroblasts in cholesteatoma activate osteoclasts.	Rheumatoid arthritis/pathway
+GSE117523	Targets of CDK12 on ZR-75-30 breast cancer cells (RNA-seq)	Breast cancer/Cancer
+GSE118645	BCL6 confers KRAS-mutant NSCLCs resistance to BET inhibitors	NA
+GSE119916	RNA-seq of healthy CD34+ HSPCs after co-culture with myelodyplastic syndrome patient-derived mesenchymal stromal cells	NA
+GSE120521	RNA-seq of stable and unstable section of human atherosclerotic plaques	NA
+GSE121626	Overexpression of UGT2B17 in MEC1 and JVM2 leukemia cell lines	pathway
+GSE125772	ELF4 is a target of miR-124 and promotes neuroblastoma proliferation and undifferentiated state	NA
+GSE128669	RNA-seq (PolyA) of RNA from Tet-inducible SaOS2-p21 cells	NA
+GSE129194	m6A in mRNA coding regions promotes translation via the RNA helicase-containing YTHDC2	NA
+GSE131504	Characterization of Human Pegivirus Infection in Liver Transplantation Recipients	NA
+GSE132174	SLIGRL-induced gene expression changes in NHEK cells	NA
+GSE133677	LncRNA NONHSAT113026 represses renal cell carcinoma tumorigenesis through interacting with NF-κB/p50 and SLUG	Renal cell carcinoma
+GSE133976	GREB1, a novel target of Wnt signaling, promotes development of hepatoblastoma by suppressing TGFβ signaling	Breast cancer/Cancer
+GSE134122	Transcriptional responses of human insulinoma cells to acute cytokine exposure	pathway
+GSE135420	Gene expression profiling of leukemia cells following asparagine depletion	NA
+GSE135548	Human induced pluripotent stem cell-derived vocal fold mucosa mimics development and responses to smoke exposure	NA
+GSE136299	Evolved Labels of Placental Invasion in Human and Bovine Endometrial Stroma	Cancer
+GSE136366	Gene expression analysis of the impact of TDP-43 knockout in human cells.	knockout
+GSE137802	IQGAP3 interacts with Rad17 to activate the MRN/ATM/Chk2 signaling and promote radioresistance in lung cancer	Cancer/Lung cancer
+GSE137843	Gene expression changes in HSV-1 infected HeLa cells with knockdown of B2M	knockdown
+GSE138531	Aortic Valve Tissue: Stenosis vs. Sclerosis	NA
+GSE138937	Effect of CTCF and Rad21 knockdown on SLK cells and KSHV gene expression	knockdown
+GSE139061	Transcriptomic Signatures of Kidney Injury in Human Renal Biopsy Specimens	NA
+GSE139135	Molecular characterization of BRSK2 and BRSK1 kinases as negative regulators of the NRF2 transcription factor	NA
+GSE140031	RNASeq of Arg2 gRNA or scrambled gRNA CRISPR'd Tregs	NA
+GSE140275	Expression profile and potential functions of circulating long noncoding RNAs in acute ischemic stroke in the Southern Chinese Han population	pathway
+GSE140627	Urinary sediment transcriptomic and longitudinal data to investigate renal function decline in type 1 diabetes	NA
+GSE76491	Coordination of neuron production in mouse and human cerebral cortex by the homolog of Drosophila Mastermind protein	pathway
+GSE103320	Control of prostate tumour growth by the long non-coding RNA GHSROS (LNCaP)	Cancer/Prostate cancer
+GSE109281	Subclonal cooperation drives metastasis through modulating local and systemic immune microenvironments	NA
+GSE118762	Transcriptome-wide analysis of adipose circular RNAs reveals their dynamic regulation in obesity and functional role in adipogenesis	Obesity
+GSE120303	Identification of gene signature in ascitic fluid-isolated mesothelial cells from high grade serous ovarian cancer patients	Cancer
+GSE128805	Cancer-Causing Mutations in SF3B1 Alter Splicing by Disrupting Interaction with SUGP1	Cancer
+GSE129467	RNA-seq analysis of SKMEL28 melanoma cells following DIRC3 and IGFBP5 ASO knockdown	Melanoma/knockdown
+GSE133521	RNA-seq analysis of A498 cell line treated with siSETD2 or si-NC	NA
+GSE133731	RNA sequencing for PDX1, NGN3 and MAFA transduced iPSCs cell	NA
+GSE137136	The impact of pro-inflammatory cytokines on the β-cell regulatory landscape provides insights into the genetics of type 1 diabetes	variant
+GSE138219	SNHG12 knockdown in Human Umbilical Vein Cells under ROS conditions.	knockdown
+GSE138248	mRNA sequencing of highly and lowly metastatic human colorectal cancer PDXs	Cancer/Colorectal cancer
+GSE135831	Exogenous pyruvate represses histone gene expression to inhibit cancer cell proliferation via the NAMPT-NAD + -SIRT1 pathway	Cancer/pathway
+GSE141140	Transcriptomic profile of T cell acute lymphoblastic leukemia (T-ALL) cell from patients in CHCQMU	NA
+GSE141558	Effect of BRCA1 overexpression on genetic expressions of cervical cancer based on next generation sequencing	Cancer
+GSE137931	CD48-dependent protective autophagy in conventional human T cells promotes restimulation-induced cell death resistance	NA
+GSE92432	An optimization system for isolating and sequencing of single human colon cancer cells	Cancer
+GSE128328	Gene expression profile in endometrial organoids cultured in normal follicular phase vs PCOS-like hormone profile	NA
+GSE123856	A non-catalytic function of carbonic anhydrase IX contributes to the glycolytic phenotype and pH regulation in human breast cancer cells	Breast cancer/Cancer
+GSE130342	High RNA polymerase II occupancy on herpes simplex virus 1 late genes early in infection suggests progression to elongation is a critical switch to trigger late viral gene expression	NA
+GSE141797	Human Tfh cell RNA bulk sequencing	NA
+GSE76129	ZNF599 and DNMT3A coordinately control nuclear envelope organization by repression of SUN4 expression	NA
+GSE104608	Epigenetic Inactivation of Cysteine Dioxygenase Type 1 Contributes to ROS-dependent Progression of Colorectal Cancer	Cancer/Colorectal cancer
+GSE111071	Comparative Transcriptome analysis of hESCs- and iPSCs-derived lentoid body	NA
+GSE111620	RNA-seq analysis of PRMT5-regulated genes in irradiated/non-irradiated LNCaP cells	Cancer
+GSE126147	CASZ1 directly regulates expression of myogenic genes through regional epigenetic modifications to induce muscle and rhabdomyosarcoma cell differentiation	NA
+GSE131565	RNA-Seq analysis of primary human keratinocytes exposed to Cannabidiol	NA
+GSE133887	Compensatory Csf2-driven macrophage activation blunts long-term efficacy of therapeutic Csf1r inhibition in breast-to-brain metastasis	NA
+GSE136339	Whole transcriptome RNA sequencing of human cells after HCV infection (ML-1 thyroid cell line, primary thyrocytes and Huh7.5 hepatocyte cell line)	pathway
+GSE141633	The landscape of alternative splicing in aggressive prostate cancers	Cancer/Prostate cancer
+GSE118272	STRIPAK directs PP2A activity to promote oncogenic transformation	Cancer/pathway
+GSE118442	Assessing placental maturity through histological and transcriptomic analyses in idiopathic spontaneous preterm birth	NA
+GSE128054	MYT1 attenuates neuroblastoma cell differentiation by inhibiting retinoic acid signaling pathway	pathway
+GSE129263	MTR4 drives tumorigenesis of hepatocellular carcinoma by controlling alternative splicing of metabolic genes through PTBP1 recruitment	Cancer
+GSE141126	Transcriptome analysis-identified long noncoding RNA CRNDE in maintaining endothelial cell proliferation, migration, and tube formation	Obesity/knockdown/pathway
