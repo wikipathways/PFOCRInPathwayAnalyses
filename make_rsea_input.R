@@ -7,9 +7,9 @@ if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
   biocLite("rhdf5")
 }
 
-library("rhdf5")
-library("tools")
-library('edgeR')
+require("rhdf5")
+require("tools")
+require('edgeR')
 
 destination_file = "~/Dropbox (Gladstone)/Pathway-Project/human_matrix_download.h5"
 url = "https://s3.amazonaws.com/mssm-seq-matrix/human_matrix.h5"
@@ -43,7 +43,7 @@ colnames(logFC_results)=colnames(pvalue_results)
 #35238   536
 
 ##################################################################################################GSE key word match matrix 
-library(GEOquery)
+require(GEOquery)
 gse_keyword_A=matrix(NA,nrow=length(merged_filtered_gses),ncol=5)
 
 for(i in 1:length(merged_filtered_gses)){
@@ -1205,11 +1205,11 @@ colnames(expression) = samples[sample_locations]
   logFC_results_perm2_noOutlier=logFC_results_perm2
   logFC_results_perm2_noOutlier[oustliers_list2,]=NA
   
-###################################################################################################################Entrez ID match
-library(rSEA)
-library("clusterProfiler")
-library("org.Hs.eg.db")
-library(dplyr)
+###################################################################################################################call database , Entrez ID match
+require(rSEA)
+require("clusterProfiler")
+require("org.Hs.eg.db")
+require(dplyr)
 
 wp <- read.gmt("wikipathways-20200210-gmt-Homo_sapiens.gmt")
 wp <- wp %>% tidyr::separate(ont, c("name","version","wpid","org"), "%")
@@ -1218,6 +1218,43 @@ wp=unique(wp)
 
 wp_list=split(wp$gene,wp$wpid)
 
+wp_annotation=wp
+colnames(wp_annotation)[2]="set_id"
+
+
+
+pfocr <- read.gmt("/Users/mingyoungshin/git/PFOCRInPathwayAnalyses/pfocr20200224.gmt")
+pfocr <- pfocr %>% tidyr::separate(ont, c("name","file","pfocrid","org"), "%")
+pfocr=pfocr[,c("name","file","gene")]
+pfocr=unique(pfocr)
+
+pfocr_list=split(pfocr$gene,pfocr$file)
+
+pfocr_annotation=pfocr
+colnames(pfocr_annotation)[2]="set_id"
+
+
+
+require(GO.db)
+require(org.Hs.eg.db)
+
+
+go_to_entrez <- as.data.frame(org.Hs.egGO2EG)
+goegbp=go_to_entrez[go_to_entrez$Ontology=="BP",]
+goegbp=goegbp[,1:2]
+
+go_list=split(goegbp$gene_id,goegbp$go_id)
+go_dataframe <- data.frame(set_id = rep(names(go_list), sapply(go_list, length)),
+                 gene = unlist(go_list))
+
+
+go_annotation=  AnnotationDbi::select(GO.db, keys=as.character(unique(go_dataframe$set_id)), columns=c("TERM","ONTOLOGY"),
+                           keytype="GOID")
+
+colnames(go_dataframe)[1]="GOID"
+go_annotation=merge(go_dataframe,go_annotation[,c(1,2)],by="GOID")
+colnames(go_annotation)=c("set_id","gene","name")
+go_annotation=go_annotation[,c(3,1,2)]
 
   gene_entrez <- bitr(names(perm_test_set1), fromType = "SYMBOL",
                       toType = c("ENTREZID"),
@@ -1242,7 +1279,46 @@ wp_list=split(wp$gene,wp$wpid)
   
   gene_entrez=gene_entrez[-c(11401,15467,15707, 31349),]
   
-
+  #################################################################################################################### run rSEA function_ database as a parameter 
+  run_rSEA2<-function(data,list_result,database,database_annotation){#limma voom + exact test + and PCA for the 2nd #wilcoxon but not for small sample size # remove patients # exact test # simulate RNAseq data
+    
+    na_row=which(is.na(data)==TRUE)
+    if(length(na_row)>0){
+      data=as.matrix(data[-na_row,1]) 
+    }
+    
+    if(nrow(data)==0){
+      list_result=modifyList(list_result, list(set_id = cbind(list_result$set_id,NA), Coverage = cbind(list_result$Coverage,NA) ,
+                                               TDP.bound = cbind(list_result$TDP.bound,NA), TDP.estimate = cbind(list_result$TDP.estimate,NA),  
+                                               SC.adjP = cbind(list_result$SC.adjP,NA), Comp.adjP = cbind(list_result$Comp.adjP,NA),
+                                               ID = cbind(list_result$ID), Size = cbind(list_result$Size), name=list_result$name) )
+      return(list_result)
+    }
+    
+    data_m=as.data.frame(cbind(rownames(data),data))
+    colnames(data_m)=c("Gene","pvalue")
+    merged=merge(data_m,gene_entrez,by="Gene",all = "L",all.x=TRUE,all.y=FALSE)
+    
+    # head(merged)
+    
+    sea_result<-SEA(as.numeric(as.character(merged$pvalue)), merged$ENTREZID, pathlist = database)
+    colnames(sea_result)[2]="set_id"
+    #head(sea_result)
+    set_result=merge(sea_result,unique(database_annotation[,-3]),by="set_id")
+    # head(set_result)
+    
+    
+    
+    list_result=modifyList(list_result, list(set_id = cbind(list_result$set_id,set_result$set_id), Coverage = cbind(list_result$Coverage,set_result$Coverage) ,
+                                             TDP.bound = cbind(list_result$TDP.bound,set_result$TDP.bound), TDP.estimate = cbind(list_result$TDP.estimate,set_result$TDP.estimate),  
+                                             SC.adjP = cbind(list_result$SC.adjP,set_result$SC.adjP), Comp.adjP = cbind(list_result$Comp.adjP,set_result$Comp.adjP),
+                                             ID = cbind(list_result$ID), Size = cbind(list_result$Size), name=list_result$name) )
+    
+    return(list_result)
+    
+    
+  }
+  
   
 ####################################################################################################################run rSEA function  
 run_rSEA<-function(data,list_result){#limma voom + exact test + and PCA for the 2nd #wilcoxon but not for small sample size # remove patients # exact test # simulate RNAseq data
@@ -1339,10 +1415,63 @@ names(perm_test_set2_list_noOutlier) <- c("wpid", "ID", "Size", "Coverage", "TDP
 rsea_results_human_voom <- vector("list", 9)
 names(rsea_results_human_voom) <- c("wpid", "ID", "Size", "Coverage", "TDP.bound","TDP.estimate", "SC.adjP", "Comp.adjP", "name")
 
+
+rsea_results_human_voom_pfocr <- vector("list", 9)
+names(rsea_results_human_voom_pfocr) <- c("set_id", "ID", "Size", "Coverage", "TDP.bound","TDP.estimate", "SC.adjP", "Comp.adjP", "name")
+
+rsea_results_human_voom_go <- vector("list", 9)
+names(rsea_results_human_voom_go) <- c("set_id", "ID", "Size", "Coverage", "TDP.bound","TDP.estimate", "SC.adjP", "Comp.adjP", "name")
+
+rsea_results_human_voom_wp <- vector("list", 9)
+names(rsea_results_human_voom_wp) <- c("set_id", "ID", "Size", "Coverage", "TDP.bound","TDP.estimate", "SC.adjP", "Comp.adjP", "name")
+
+
+start_t=Sys.time()
+rsea_results_human_voom_wp=apply(as.matrix(1:ncol(pvalue_results_human_voom)),1,function(x) run_rSEA2(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_wp,wp_list,wp_annotation))
+end_t=Sys.time() # 20 min
+
+start_t=Sys.time()
+rsea_results_human_voom_go=apply(as.matrix(1:ncol(pvalue_results_human_voom)),1,function(x) run_rSEA2(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_go,go_list,go_annotation))
+end_t=Sys.time() # 20 min
+
+start_t=Sys.time()#started at 11:20 am 
+rsea_results_human_voom_pfocr=apply(as.matrix(1:ncol(pvalue_results_human_voom)),1,function(x){ run_rSEA2(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_pfocr,pfocr_list,pfocr_annotation);print(x)})
+end_t=Sys.time() # 20 min
+
+
+save.image("~/git/PFOCRInPathwayAnalyses_RData/human_DEG_result.RData")
+
+########printout results
+apply(as.matrix(1:length(merged_filtered_gses)),1,function(x){ dir.create(file.path(paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/", merged_filtered_gses[[x]]$GSE)), showWarnings = FALSE);
+      dir.create(file.path(paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/", merged_filtered_gses[[x]]$GSE),"/rSEA"), showWarnings = FALSE);
+  dir.create(file.path(paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/", merged_filtered_gses[[x]]$GSE),"/rSEA/WP"), showWarnings = FALSE);
+  dir.create(file.path(paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/", merged_filtered_gses[[x]]$GSE),"/rSEA/PFOCR"), showWarnings = FALSE);
+  dir.create(file.path(paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/", merged_filtered_gses[[x]]$GSE),"/rSEA/GO"), showWarnings = FALSE);
+      dir.create(file.path(paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/", merged_filtered_gses[[x]]$GSE),"/ORA"), showWarnings = FALSE);
+  dir.create(file.path(paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/", merged_filtered_gses[[x]]$GSE),"/ORA/WP"), showWarnings = FALSE);
+  dir.create(file.path(paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/", merged_filtered_gses[[x]]$GSE),"/ORA/PFOCR"), showWarnings = FALSE);
+  dir.create(file.path(paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/", merged_filtered_gses[[x]]$GSE),"/ORA/GO"), showWarnings = FALSE);
+      dir.create(file.path(paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/", merged_filtered_gses[[x]]$GSE),"/GSEA"), showWarnings = FALSE);
+  dir.create(file.path(paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/", merged_filtered_gses[[x]]$GSE),"/GSEA/WP"), showWarnings = FALSE);
+  dir.create(file.path(paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/", merged_filtered_gses[[x]]$GSE),"/GSEA/GO"), showWarnings = FALSE);
+  dir.create(file.path(paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/", merged_filtered_gses[[x]]$GSE),"/GSEA/GSEA"), showWarnings = FALSE)})
+
+apply(as.matrix(1:length(merged_filtered_gses)),1,function(x){ 
+  dir.create(file.path(paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/", merged_filtered_gses[[x]]$GSE),"/GSEA/PFOCR"), showWarnings = FALSE)})
+
+apply(as.matrix(1:length(merged_filtered_gses)),1, function(x) write.table(as.data.frame(rsea_results_human_voom_wp[[x]]),
+                                                      file=paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/",  merged_filtered_gses[[x]]$GSE, "/rSEA/WP/result.txt",
+                                                      colnames(merged_filtered_gses)[x]),col.names=names(rsea_results_human_voom_wp[[x]]),row.names=FALSE,quote=FALSE))
+apply(as.matrix(1:length(merged_filtered_gses)),1, function(x) write.table(as.data.frame(rsea_results_human_voom_go[[x]]),
+                                                     file=paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/",  merged_filtered_gses[[x]]$GSE, "/rSEA/GO/result.txt",
+                                                         colnames(merged_filtered_gses)[x]),col.names=names(rsea_results_human_voom_go[[x]]),row.names=FALSE,quote=FALSE))
+apply(as.matrix(1:length(merged_filtered_gses)),1, function(x) write.table(as.data.frame(rsea_results_human_voom_pfocr[[x]]),
+                                                     file=paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/",  merged_filtered_gses[[x]]$GSE, "/rSEA/PFOCR/result.txt",
+                                                  colnames(merged_filtered_gses)[x]),col.names=names(rsea_results_human_voom_pfocr[[x]]),row.names=FALSE,quote=FALSE))
+
 start_t=Sys.time()
 rsea_results_human_voom=apply(as.matrix(1:ncol(pvalue_results_human_voom)),1,function(x) run_rSEA(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom))
 end_t=Sys.time() # 20 mins
-
 
 start_t=Sys.time()
 perm_test_set2_list=apply(as.matrix(1:ncol(pvalue_results_perm2)),1,function(x) run_rSEA(as.matrix(pvalue_results_perm2[,x]),perm_test_set2_list))
@@ -1632,7 +1761,7 @@ sum(SC_sig_perm_noOutlier2>0)
 
 
 ######################################################pathway intersection percentage
-library(bayesbio)
+require(bayesbio)
 
 set1_sig_pathway_jaccard=array(NA,dim=c(1000))
 
@@ -1734,6 +1863,67 @@ run_ORA<-function(data, list_result){
 }
 
 
+###################################################################################################################run ORA function, databse parameter
+run_ORA2<-function(data, list_result, database, database_annotation){
+  #data=as.matrix(pvalue_results_human_voom[,1]);list_result=ora_results_human_voom_wp;database=wp_list;database_annotation=wp_annotation
+  
+  GeneRatio=matrix(NA,nrow=length(unique(database_annotation$set_id)),ncol=1)
+  BgRatio=matrix(NA,nrow=length(unique(database_annotation$set_id)),ncol=1)
+  pvalue=matrix(NA,nrow=length(unique(database_annotation$set_id)),ncol=1)
+  p.adjust=matrix(NA,nrow=length(unique(database_annotation$set_id)),ncol=1)
+  qvalue=matrix(NA,nrow=length(unique(database_annotation$set_id)),ncol=1)
+  Count=matrix(NA,nrow=length(unique(database_annotation$set_id)),ncol=1)
+  rownames(GeneRatio)=unique(database_annotation$set_id)
+  rownames(BgRatio)=unique(database_annotation$set_id)
+  rownames(pvalue)=unique(database_annotation$set_id)
+  rownames(p.adjust)=unique(database_annotation$set_id)
+  rownames(qvalue)=unique(database_annotation$set_id)
+  rownames(Count)=unique(database_annotation$set_id)
+  
+  na_row=which(is.na(data)==TRUE)
+  if(length(na_row)>0){
+    data=as.matrix(data[-na_row,1]) 
+  }
+  
+  data_m=as.data.frame(cbind(rownames(data),data))
+  colnames(data_m)=c("Gene","pvalue")
+  merged=merge(data_m,gene_entrez,by="Gene",all = "L",all.x=TRUE,all.y=FALSE)
+  
+  enrichment_result <- clusterProfiler::enricher(
+    merged$ENTREZID[which(p.adjust(as.numeric(as.character(merged$pvalue)),method="BH") < 0.05)],
+    universe = merged$ENTREZID,
+    pAdjustMethod = "holm",
+    pvalueCutoff = 1, #p.adjust cutoff
+    minGSSize = 1,
+    maxGSSize = 100000,
+    TERM2GENE = database_annotation[,2:3],
+    TERM2NAME = database_annotation[,c(2,1)])
+  
+  #enrichment_result <- DOSE::setReadable(enrichment_result, org.Hs.eg.db, keyType = "ENTREZID")
+  if(length(enrichment_result)>0){
+    enrichment_result=as.data.frame(enrichment_result)
+    enrichment_result=enrichment_result[,-match("geneID",colnames(enrichment_result))]
+    
+    GeneRatio[match(enrichment_result$ID,rownames(GeneRatio))]=enrichment_result$GeneRatio
+    BgRatio[match(enrichment_result$ID,rownames(GeneRatio))]=enrichment_result$BgRatio
+    pvalue[match(enrichment_result$ID,rownames(GeneRatio))]=enrichment_result$pvalue
+    p.adjust[match(enrichment_result$ID,rownames(GeneRatio))]=enrichment_result$p.adjust
+    qvalue[match(enrichment_result$ID,rownames(GeneRatio))]=enrichment_result$qvalue
+    Count[match(enrichment_result$ID,rownames(GeneRatio))]=enrichment_result$Count
+    
+    list_result=modifyList(list_result, list(GeneRatio = cbind(list_result$GeneRatio,GeneRatio), BgRatio = cbind(list_result$BgRatio,BgRatio) ,
+                                             pvalue = cbind(list_result$pvalue,pvalue), p.adjust = cbind(list_result$p.adjust,p.adjust),  
+                                             qvalue = cbind(list_result$qvalue,qvalue), Count = cbind(list_result$Count,Count)) )
+    
+  }
+  return(list_result)
+  
+  
+  
+  
+}
+
+
 ########################################################################number of significant gens
 sig_c_perm1=apply(as.matrix(1:1000),1,function(x) { sum(p.adjust(pvalue_results_perm1[,x],method="BH") < 0.05,na.rm=TRUE) } )
 sum(sig_c_perm1==0)
@@ -1775,6 +1965,48 @@ end_t=Sys.time()
 
 perm_test_set2_list_ora_voom <- vector("list", 6)
 names(perm_test_set2_list_ora_voom) <- c("GeneRatio", "BgRatio", "pvalue", "p.adjust", "qvalue","Count")
+
+ora_results_human_voom_wp <- vector("list", 6)
+names(ora_results_human_voom_wp) <- c("GeneRatio", "BgRatio", "pvalue", "p.adjust", "qvalue","Count")
+
+
+ora_results_human_voom_pfocr <- vector("list", 6)
+names(ora_results_human_voom_pfocr) <- c("GeneRatio", "BgRatio", "pvalue", "p.adjust", "qvalue","Count")
+
+
+ora_results_human_voom_go <- vector("list", 6)
+names(ora_results_human_voom_go) <- c("GeneRatio", "BgRatio", "pvalue", "p.adjust", "qvalue","Count")
+
+start_t=Sys.time()
+ora_results_human_voom_go=apply(as.matrix(1:ncol(pvalue_results_human_voom)),1,function(x) run_ORA2(as.matrix(pvalue_results_human_voom[,x]),ora_results_human_voom_go,go_list,go_annotation))
+end_t=Sys.time()
+
+saveRDS(ora_results_human_voom_go, file = "../PFOCRInPathwayAnalyses_RData/ora_results_human_voom_go")
+
+start_t=Sys.time()
+ora_results_human_voom_pfocr=apply(as.matrix(1:ncol(pvalue_results_human_voom)),1,function(x) run_ORA2(as.matrix(pvalue_results_human_voom[,x]),ora_results_human_voom_pfocr,pfocr_list,pfocr_annotation))
+end_t=Sys.time()
+
+saveRDS(ora_results_human_voom_pfocr, file = "../PFOCRInPathwayAnalyses_RData/ora_results_human_voom_pfocr")
+
+start_t=Sys.time()
+ora_results_human_voom_wp=apply(as.matrix(1:ncol(pvalue_results_human_voom)),1,function(x) run_ORA2(as.matrix(pvalue_results_human_voom[,x]),ora_results_human_voom_wp,wp_list,wp_annotation))
+end_t=Sys.time()
+
+saveRDS(ora_results_human_voom_wp, file = "../PFOCRInPathwayAnalyses_RData/ora_results_human_voom_wp.rds")
+
+#########################print out results
+
+apply(as.matrix(1:length(merged_filtered_gses)),1, function(x) write.table(as.data.frame(rsea_results_human_voom_wp[[x]]),
+                                                                           file=paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/",  merged_filtered_gses[[x]]$GSE, "/ORA/WP/result.txt",
+                                                                                       colnames(merged_filtered_gses)[x]),col.names=names(rsea_results_human_voom_wp[[x]]),row.names=FALSE,quote=FALSE))
+apply(as.matrix(1:length(merged_filtered_gses)),1, function(x) write.table(as.data.frame(rsea_results_human_voom_go[[x]]),
+                                                                           file=paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/",  merged_filtered_gses[[x]]$GSE, "/ORA/GO/result.txt",
+                                                                                       colnames(merged_filtered_gses)[x]),col.names=names(rsea_results_human_voom_go[[x]]),row.names=FALSE,quote=FALSE))
+apply(as.matrix(1:length(merged_filtered_gses)),1, function(x) write.table(as.data.frame(rsea_results_human_voom_pfocr[[x]]),
+                                                                           file=paste0("~/Dropbox (Gladstone)/PFOCRInPathwayAnalyses_git/GSE/",  merged_filtered_gses[[x]]$GSE, "/ORA/PFOCR/result.txt",
+                                                                                       colnames(merged_filtered_gses)[x]),col.names=names(rsea_results_human_voom_pfocr[[x]]),row.names=FALSE,quote=FALSE))
+
 
 start_t=Sys.time()
 perm_test_set2_list_ora_voom=apply(as.matrix(1:ncol(pvalue_results_perm2_voom)),1,function(x) run_ORA(as.matrix(pvalue_results_perm2_voom[,x]),perm_test_set2_list_ora_voom))
@@ -1935,6 +2167,75 @@ run_gsea<-function(data,logFC_data, list_result){
 }
 
 
+###################################################################################################################run GSEA function, database paramter
+run_gsea1<-function(data,logFC_data, list_result, database, database_annotation){
+  
+  
+  na_row=which(is.na(data)==TRUE)
+  if(length(na_row)>0){
+    data=as.matrix(data[-na_row,1]) 
+    logFC_data=as.matrix(logFC_data[-na_row,1])
+  }
+  
+  
+  data_m=as.data.frame(cbind(rownames(data),data))
+  colnames(data_m)=c("Gene","pvalue")
+  merged=merge(data_m,gene_entrez,by="Gene",all = "L",all.x=TRUE,all.y=FALSE)
+  
+  
+  ### geneList prep
+  gene_list<-sign(logFC_data) * - log10(as.numeric(as.character(merged[,2])))
+  names(gene_list)=merged$ENTREZID
+  gene_list = sort(gene_list[unique(names(gene_list))], decreasing = TRUE)
+  
+  gsedatabase_annotation.p <- GSEA(
+    gene_list,
+    pAdjustMethod="holm",
+    TERM2GENE = database_annotation[,2:3],
+    TERM2NAME = database_annotation[,c(2,1)],
+    nPerm        = 1000,
+    minGSSize = 1,
+    maxGSSize = 100000,
+    pvalueCutoff = 1,
+    verbose=FALSE)
+  
+  #  gsedatabase_annotation.p <- DOSE::setReadable(gsedatabase_annotation.p, org.Hs.eg.db, keyType = "ENTREZID")
+  # head(gsedatabase_annotation.p, 20)
+  enrichment_result=as.data.frame(gsedatabase_annotation.p)
+  enrichment_result=enrichment_result[,-match("core_enrichment",colnames(enrichment_result))]
+  
+  enrichmentScore=matrix(NA,nrow=length(unique(database_annotation$set_id)),ncol=1)
+  NES=matrix(NA,nrow=length(unique(database_annotation$set_id)),ncol=1)
+  pvalue=matrix(NA,nrow=length(unique(database_annotation$set_id)),ncol=1)
+  p.adjust=matrix(NA,nrow=length(unique(database_annotation$set_id)),ncol=1)
+  qvalues=matrix(NA,nrow=length(unique(database_annotation$set_id)),ncol=1)
+  rank=matrix(NA,nrow=length(unique(database_annotation$set_id)),ncol=1)
+  rownames(enrichmentScore)=unique(database_annotation$set_id)
+  rownames(NES)=unique(database_annotation$set_id)
+  rownames(pvalue)=unique(database_annotation$set_id)
+  rownames(p.adjust)=unique(database_annotation$set_id)
+  rownames(qvalues)=unique(database_annotation$set_id)
+  rownames(rank)=unique(database_annotation$set_id)
+  
+  enrichmentScore[match(enrichment_result$ID,rownames(enrichmentScore))]=enrichment_result$enrichmentScore
+  NES[match(enrichment_result$ID,rownames(NES))]=enrichment_result$NES
+  pvalue[match(enrichment_result$ID,rownames(pvalue))]=enrichment_result$pvalue
+  p.adjust[match(enrichment_result$ID,rownames(p.adjust))]=enrichment_result$p.adjust
+  qvalues[match(enrichment_result$ID,rownames(qvalues))]=enrichment_result$qvalues
+  rank[match(enrichment_result$ID,rownames(rank))]=enrichment_result$rank
+  
+  list_result=modifyList(list_result, list(enrichmentScore = cbind(list_result$enrichmentScore,enrichmentScore), NES = cbind(list_result$NES,NES) ,
+                                           pvalue = cbind(list_result$pvalue,pvalue), p.adjust = cbind(list_result$p.adjust,p.adjust),  
+                                           qvalues = cbind(list_result$qvalues,qvalues), rank = cbind(list_result$rank,rank)) )
+  
+  return(list_result)
+  
+  
+  
+  
+}
+
+
 
 perm_test_set1_list_gsea <- vector("list", 6)
 names(perm_test_set1_list_gsea) <- c("enrichmentScore", "NES", "pvalue", "p.adjust", "qvalues","rank")
@@ -2029,10 +2330,10 @@ sum(gsea_sig_perm2>0)
 
 ##############################################################################knockout keyword match
 
-library("clusterProfiler")
-library("org.Hs.eg.db")
-library(dplyr)
-library(readxl)
+require("clusterProfiler")
+require("org.Hs.eg.db")
+require(dplyr)
+require(readxl)
 
 
 
@@ -2091,7 +2392,7 @@ for(i in 1:nrow(result)){
       #temp=paste(temp,wp_name,collapse =';') 
       temp=names(wp_list)[j]
     }
-    if(length(temp)>0){result[i,3]=temp}
+    if(length(temp)>0){result[i,3]=paste(result[i,3],temp,sep=";")}
     
   }
 }
@@ -2102,18 +2403,14 @@ nrow(result)-sum(is.na(result[,3]))
 #
 41
 
+result=gsub("NA;","",result)
+
 colnames(result)=c("Symbol","Entrez","WP")
 colnames(data)=c("GSE","Symbol")
 merged_wp=merge(data,result,by="Symbol")
 
 write.table(merged_wp,"human_knockout_wp.txt",col.names = colnames(merged_wp),quote=FALSE)
 
-pfocr <- read.gmt("/Users/mingyoungshin/git/PFOCRInPathwayAnalyses/pfocr20200224.gmt")
-pfocr <- pfocr %>% tidyr::separate(ont, c("name","file","pfocrid","org"), "%")
-pfocr=pfocr[,c("name","pfocrid","gene")]
-pfocr=unique(pfocr)
-
-pfocr_list=split(pfocr$gene,pfocr$pfocrid)
 
 
 
@@ -2121,40 +2418,88 @@ result_pfocr=matrix(NA,nrow=nrow(gene_entrez),ncol=3)
 for(i in 1:nrow(result_pfocr)){
   result_pfocr[i,1]=gene_entrez$Gene[i]
   result_pfocr[i,2]=gene_entrez$ENTREZID[i]
-  temp=NULL
+  
   for(j in 1:length(pfocr_list)){
-    
+    temp=NULL
     if( result_pfocr[i,2]%in%pfocr_list[[j]]){
       pfocr_name=pfocr$name[which(pfocr$pfocrid==names(pfocr_list)[j])[1]]
       #temp=paste(temp,pfocr_name,collapse =';') 
       temp=names(pfocr_list)[j]
     }
-    if(length(temp)>0){result_pfocr[i,3]=temp}
+    if(length(temp)>0){result_pfocr[i,3]=paste(result_pfocr[i,3],temp,sep=";")}
     
   }
 }
+
+result_pfocr=gsub("NA;","",result_pfocr)
 
 nrow(result_pfocr)-sum(is.na(result_pfocr[,3]))
 53
 #
 55
 
-colnames(result_pfocr)=c("Symbol","Entrez","WP")
+
+colnames(result_pfocr)=c("Symbol","Entrez","PFOCR")
 merged_pfocr=merge(data,result_pfocr,by="Symbol")
 write.table(merged_pfocr,"human_knockout_pfocr.txt",col.names = colnames(merged_pfocr),quote=FALSE)
 
 dim(data)
 dim(merged_pfocr)
 
-save.image("../PFOCRInPathwayAnalyses_RData/two_permutation_tests_2ndset_uptoGSEA_voom.RData")
+save.image("../PFOCRInPathwayAnalyses_RData/updating_pfocr_match.RData")
 
-##########################################################################################run rsea on real data (knokcout)
-rsea_human_knockout <- vector("list", 9)
-names(rsea_human_knockout) <- c("wpid", "ID", "Size", "Coverage", "TDP.bound","TDP.estimate", "SC.adjP", "Comp.adjP", "name")
 
-start_t=Sys.time()
-rsea_human_knockout=apply(as.matrix(1:ncol(pvalue_results_perm2)),1,function(x) run_rSEA(as.matrix(pvalue_results_perm2[,x]),rsea_human_knockout))
-end_t=Sys.time()
+
+
+result_go=matrix(NA,nrow=nrow(gene_entrez),ncol=3)
+for(i in 1:nrow(result_go)){
+  result_go[i,1]=gene_entrez$Gene[i]
+  result_go[i,2]=gene_entrez$ENTREZID[i]
+  
+  for(j in 1:length(go_list)){
+    temp=NULL
+    if( result_go[i,2]%in%go_list[[j]]){
+      
+      #temp=paste(temp,go_name,collapse =';') 
+      temp=names(go_list)[j]
+    }
+    if(length(temp)>0){result_go[i,3]=paste(result_go[i,3],temp,sep=";")}
+    
+  }
+}
+
+result_go=gsub("NA;","",result_go)
+
+nrow(result_go)-sum(is.na(result_go[,3]))
+65
+
+colnames(result_go)=c("Symbol","Entrez","GO")
+merged_go=merge(data,result_go,by="Symbol")
+write.table(merged_go,"human_knockout_go.txt",col.names = colnames(merged_go),quote=FALSE)
+
+length(intersect(intersect(which(is.na(result[,3])==FALSE),which(is.na(result_pfocr[,3])==FALSE)),which(is.na(result_go[,3])==FALSE)))
+38
+
+dim(data)
+dim(merged_go)
+##########################################################################################knockout benchmark
+require(pROC)
+
+targets=which(is.na(merged_wp$WP)==FALSE)
+target_gses=merged_wp[targets,2]
+target_index=match(target_gses,colnames(pvalue_results_human_voom))
+
+for(i in target_index){
+  
+  true_sig=merged_wp$set_id[which(merged_wp$GSE==target_gses[i])]
+  
+  response=(rsea_results_human_voom[[i]]$set_id%in%true_sig)
+  roc_r=roc(rsea_results_human_voom[[i]]$Comp.adjP)
+  auc(roc_r)
+ 
+}
+
+
 
 
 
