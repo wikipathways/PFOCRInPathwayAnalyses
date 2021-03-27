@@ -18,7 +18,7 @@ require(bayesbio)
 require(readxl)
 require(pROC)
 
-GSE_index <- arg[1]
+GSE_index <- args[1]
 outdir <- "/wynton/group/gladstone/biocore/projects/pfocr_pathway_enrichment_evaluation/permuted_geneset_databases_results/"
 min_set_size <- 10
 max_set_size <- 500 
