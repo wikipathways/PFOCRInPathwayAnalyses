@@ -18,6 +18,8 @@ require(bayesbio)
 require(readxl)
 require(pROC)
 
+GSE_index <- arg[1]
+outdir <- "/wynton/group/gladstone/biocore/projects/pfocr_pathway_enrichment_evaluation/permuted_geneset_databases_results/"
 min_set_size <- 10
 max_set_size <- 500 
 dataDir <- "/wynton/group/gladstone/biocore/projects/PFOCR/PFOCRInPathwayAnalyses/"
@@ -40,7 +42,7 @@ pvalue_results_human_voom=readRDS("/wynton/group/gladstone/biocore/projects/PFOC
 logFC_results_human_voom=readRDS("/wynton/group/gladstone/biocore/projects/PFOCR/PFOCRInPathwayAnalyses/logFC_results_human_voom.rds")
 merged_filtered_gses=readRDS("/wynton/group/gladstone/biocore/projects/PFOCR/PFOCRInPathwayAnalyses/merged_filtered_gses.rds")
 
-load("/wynton/group/gladstone/biocore/projects/PFOCR/PFOCRInPathwayAnalyses/databases.RData")#has wp, pfocr, go
+load("/wynton/group/gladstone/biocore/projects/PFOCR/PFOCRInPathwayAnalyses/databases_pfocr_3sets.RData")#has wp, pfocr, go
 gene_entrez=readRDS("/wynton/group/gladstone/biocore/projects/PFOCR/PFOCRInPathwayAnalyses/gene_entrez.rds")
 
 gene_entrez=readRDS("/wynton/group/gladstone/biocore/projects/PFOCR/PFOCRInPathwayAnalyses/gene_entrez.rds")
@@ -80,7 +82,6 @@ PermuteDatabase <- function(p, GSE_index, path_list, path_annotation,pvalue_resu
   return(c(Nsig,TDP_bound_90))
 }
 
-GSE_index <- arg[1]
 data_m=data.frame(rownames(pvalue_results_human_voom),pvalue_results_human_voom[,GSE_index])
 colnames(data_m)=c("Gene","pvalue")
 merged=merge(data_m,gene_entrez,by="Gene",all = "L",all.x=TRUE,all.y=FALSE)
@@ -103,11 +104,11 @@ oNsig_go <- sum(rsea_results_human_voom_go[[1]]$Comp.adjP < 0.05, na.rm = TRUE)
 print(oNsig_go)
 rNsig_go <- t(sapply(1:Nperm, PermuteDatabase, GSE_index, go_list, go_annotation,pvalue_results_human_voom, run_rSEA3))
 
-rsea_results_human_voom_pfocr=apply(as.matrix(GSE_index),1,function(x){run_rSEA3(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_pfocr,pfocr_nobe0_list,pfocr_annotation_nobe0)})
+rsea_results_human_voom_pfocr=apply(as.matrix(GSE_index),1,function(x){run_rSEA3(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_pfocr,pfocr_3sets_list,pfocr_annotation_3sets)})
 oNsig_pfocr <- sum(rsea_results_human_voom_pfocr[[1]]$Comp.adjP < 0.05, na.rm = TRUE)
 print(oNsig_pfocr)
 rNsig_pfcor <- t(sapply(1:Nperm, PermuteDatabase, GSE_index, pfocr_nobe0_list, pfocr_annotation_nobe0,pvalue_results_human_voom, run_rSEA3))
 
 GSE_index_2_100_perm_res <- list(TDPbound_full=TDPbound_full, oNsig_wp=oNsig_wp, rNsig_wp=rNsig_wp, oNsig_go=oNsig_go, rNsig_go=rNsig_go, oNsig_pfocr=oNsig_pfocr, rNsig_pfcor=rNsig_pfcor)
-saveRDS(GSE_index_2_100_perm_res, file=paste0("GSE_index_",GSE_index,"_",Nperm,"_perm_result.rds"))
+saveRDS(GSE_index_2_100_perm_res, file=paste0(outdir, "GSE_index_",GSE_index,"_",Nperm,"_perm_result.rds"))
 
