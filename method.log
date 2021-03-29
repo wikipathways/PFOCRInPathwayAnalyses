@@ -1,0 +1,5 @@
+for i in {1..536}; do jobPrefix=permute_databases_gse_index_; f=$i; jobName=${jobPrefix}$f; qsub -N $jobName 50.permute_databases.sh $i; done
+for i in {1..536}; do jobPrefix=permute_databases_gse_index_pfocr_; f=$i; jobName=${jobPrefix}$f; qsub -N $jobName 50.permute_databases_pfocr.sh $i; done
+
+for i in {455..536}; do jobPrefix=permute_databases_gse_index_; f=$i; jobName=${jobPrefix}$f; qsub -N $jobName 50.permute_databases.sh $i; done
+
