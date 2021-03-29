@@ -81,9 +81,14 @@ PermuteDatabase <- function(p, GSE_index, path_list, path_annotation,pvalue_resu
   }
   res=apply(as.matrix(GSE_index),1,function(x){run_rSEA3(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_go,temp_list,temp_annotation)})
   Nsig <- sum(res[[1]]$Comp.adjP < 0.05, na.rm = TRUE)
-  TDP_bound_90 <- quantile(res[[1]]$TDP.bound, 0.9, na.rm=TRUE)
-  print(c(Nsig,TDP_bound_90))
-  return(c(Nsig,TDP_bound_90))
+  TempRes <- res[[1]]
+  TempRes %<>% filter(Comp.adjP < 0.05)
+  TDP_bound_90 <- TempRes %>%
+  	.$TDP.bound %>%
+	quantile(.,c(0.5, 0.75, 0.9, 0.95, 0.99), na.rm=TRUE)
+  Res <- append(Nsig, TDP_bound_90)
+  print(Res)
+  return(Res)
 }
 
 data_m=data.frame(rownames(pvalue_results_human_voom),pvalue_results_human_voom[,GSE_index])
