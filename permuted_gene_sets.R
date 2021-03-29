@@ -68,6 +68,8 @@ names(rsea_results_human_voom_wp) <- c("set_id", "ID", "Coverage", "TDP.bound","
 set.seed(1234)
 
 Nperm <- 100
+qLevels <- c(0.5, 0.75, 0.9, 0.95, 0.99)
+names_qLevels <- paste("quantile", round(100*qLevels), sep="_")
 PermuteDatabase <- function(p, GSE_index, path_list, path_annotation,pvalue_results_human_voom, run_rSEA3) {
   #print(p)
   temp_list <- path_list
@@ -87,6 +89,7 @@ PermuteDatabase <- function(p, GSE_index, path_list, path_annotation,pvalue_resu
   	.$TDP.bound %>%
 	quantile(.,c(0.5, 0.75, 0.9, 0.95, 0.99), na.rm=TRUE)
   Res <- append(Nsig, TDP_bound_90)
+  names(Res) <- append("Nsig", names_qLevels)
   print(Res)
   return(Res)
 }
