@@ -81,7 +81,7 @@ PermuteDatabase <- function(p, GSE_index, path_list, path_annotation,pvalue_resu
   }
   res=apply(as.matrix(GSE_index),1,function(x){run_rSEA3(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_go,temp_list,temp_annotation)})
   Nsig <- sum(res[[1]]$Comp.adjP < 0.05, na.rm = TRUE)
-  TempRes <- res[[1]]
+  TempRes <- data.frame(Comp.adjP=res[[1]]$Comp.adjP, TDP.bound=res[[1]]$TDP.bound)
   TempRes %<>% filter(Comp.adjP < 0.05)
   TDP_bound_90 <- TempRes %>%
   	.$TDP.bound %>%
