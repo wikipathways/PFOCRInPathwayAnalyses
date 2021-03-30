@@ -1,10 +1,10 @@
 #!/bin/bash
 #$ -cwd
-#$ -pe smp 2
+#$ -pe smp 1
 #$ -l mem_free=5G
 #$ -l scratch=50G
 #$ -l h_rt=24:00:00
-
+#$ -t 1-2
 scriptDir=/wynton/group/gladstone/biocore/projects/pfocr_pathway_enrichment_evaluation/PFOCRInPathwayAnalyses/
 containerDir=/wynton/group/gladstone/biocore/containers
 dataDir=/wynton/group/gladstone/biocore/projects/PFOCR/
