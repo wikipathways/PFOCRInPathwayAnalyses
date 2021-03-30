@@ -20,7 +20,7 @@ require(pROC)
 args <- commandArgs(trailingOnly=TRUE)
 
 GSE_index <- as.integer(args[1])
-outdir <- "/wynton/group/gladstone/biocore/projects/pfocr_pathway_enrichment_evaluation/permuted_geneset_databases_results/"
+outdir <- "/wynton/group/gladstone/biocore/projects/pfocr_pathway_enrichment_evaluation/permuted_geneset_databases_results_remove_rSEA3/"
 
 min_set_size <- 10
 max_set_size <- 500 
@@ -67,10 +67,10 @@ names(rsea_results_human_voom_wp) <- c("set_id", "ID", "Coverage", "TDP.bound","
 
 set.seed(1234)
 
-Nperm <- 100
+Nperm <- 2
 qLevels <- c(0.5, 0.75, 0.9, 0.95, 0.99)
 names_qLevels <- paste("quantile", round(100*qLevels), sep="_")
-PermuteDatabase <- function(p, GSE_index, path_list, path_annotation,pvalue_results_human_voom, run_rSEA3) {
+PermuteDatabase <- function(p, GSE_index, path_list, path_annotation,pvalue_results_human_voom, gene_entrez) {
   #print(p)
   temp_list <- path_list
   temp_annotation <- path_annotation
@@ -81,9 +81,17 @@ PermuteDatabase <- function(p, GSE_index, path_list, path_annotation,pvalue_resu
       pull(gene) %>%
       as.character()
   }
-  res=apply(as.matrix(GSE_index),1,function(x){run_rSEA3(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_go,temp_list,temp_annotation)})
-  Nsig <- sum(res[[1]]$Comp.adjP < 0.05, na.rm = TRUE)
-  TempRes <- data.frame(Comp.adjP=res[[1]]$Comp.adjP, TDP.bound=res[[1]]$TDP.bound)
+  
+  data_m=data.frame(rownames(pvalue_results_human_voom),pvalue_results_human_voom[,GSE_index])
+  colnames(data_m)=c("Gene","pvalue")
+  merged=merge(data_m,gene_entrez,by="Gene",all = "L",all.x=TRUE,all.y=FALSE)
+  merged <- merged[!is.na(merged$pvalue) & !is.na(merged$ENTREZID),]
+
+  res <- SEA(merged$pvalue, merged$ENTREZID, pathlist = temp_list)
+
+  # res=apply(as.matrix(GSE_index),1,function(x){run_rSEA3(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_go,temp_list,temp_annotation)})
+  Nsig <- sum(res$Comp.adjP < 0.05, na.rm = TRUE)
+  TempRes <- data.frame(Comp.adjP=res$Comp.adjP, TDP.bound=res$TDP.bound)
   TempRes %<>% filter(Comp.adjP < 0.05)
   TDP_bound_90 <- TempRes %>%
   	.$TDP.bound %>%
@@ -105,21 +113,24 @@ TDPbound_full <- setTDP(merged$pvalue, merged$ENTREZID, alpha = 0.05)$TDP.bound
 
 
 
-rsea_results_human_voom_wp=apply(as.matrix(GSE_index),1,function(x){run_rSEA3(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_wp,wp_list,wp_annotation)})
-oNsig_wp <- sum(rsea_results_human_voom_wp[[1]]$Comp.adjP < 0.05, na.rm = TRUE)
+# rsea_results_human_voom_wp=apply(as.matrix(GSE_index),1,function(x){run_rSEA3(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_wp,wp_list,wp_annotation)})
+rsea_results_human_voom_wp=SEA(merged$pvalue, merged$ENTREZID, pathlist = wp_list)
+oNsig_wp <- sum(rsea_results_human_voom_wp$Comp.adjP < 0.05, na.rm = TRUE)
 print(oNsig_wp)
-rNsig_wp <- t(sapply(1:Nperm, PermuteDatabase, GSE_index, wp_list, wp_annotation,pvalue_results_human_voom, run_rSEA3))
+rNsig_wp <- t(sapply(1:Nperm, PermuteDatabase, GSE_index, wp_list, wp_annotation,pvalue_results_human_voom, gene_entrez))
 
 
 rsea_results_human_voom_go=apply(as.matrix(GSE_index),1,function(x){run_rSEA3(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_go,go_list,go_annotation)})
-oNsig_go <- sum(rsea_results_human_voom_go[[1]]$Comp.adjP < 0.05, na.rm = TRUE)
+rsea_results_human_voom_go=SEA(merged$pvalue, merged$ENTREZID, pathlist = go_list)
+oNsig_go <- sum(rsea_results_human_voom_go$Comp.adjP < 0.05, na.rm = TRUE)
 print(oNsig_go)
-rNsig_go <- t(sapply(1:Nperm, PermuteDatabase, GSE_index, go_list, go_annotation,pvalue_results_human_voom, run_rSEA3))
+rNsig_go <- t(sapply(1:Nperm, PermuteDatabase, GSE_index, go_list, go_annotation,pvalue_results_human_voom, gene_entrez))
 
-rsea_results_human_voom_pfocr=apply(as.matrix(GSE_index),1,function(x){run_rSEA3(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_pfocr,pfocr_3sets_list,pfocr_annotation_3sets)})
-oNsig_pfocr <- sum(rsea_results_human_voom_pfocr[[1]]$Comp.adjP < 0.05, na.rm = TRUE)
+# rsea_results_human_voom_pfocr=apply(as.matrix(GSE_index),1,function(x){run_rSEA3(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_pfocr,pfocr_3sets_list,pfocr_annotation_3sets)})
+rsea_results_human_voom_pfocr=SEA(merged$pvalue, merged$ENTREZID, pathlist = pfocr_3sets_list)
+oNsig_pfocr <- sum(rsea_results_human_voom_pfocr$Comp.adjP < 0.05, na.rm = TRUE)
 print(oNsig_pfocr)
-rNsig_pfcor <- t(sapply(1:Nperm, PermuteDatabase, GSE_index, pfocr_3sets_list, pfocr_annotation_3sets,pvalue_results_human_voom, run_rSEA3))
+rNsig_pfcor <- t(sapply(1:Nperm, PermuteDatabase, GSE_index, pfocr_3sets_list, pfocr_annotation_3sets,pvalue_results_human_voom, gene_entrez))
 
 GSE_index_2_100_perm_res <- list(TDPbound_full=TDPbound_full, oNsig_wp=oNsig_wp, rNsig_wp=rNsig_wp, oNsig_go=oNsig_go, rNsig_go=rNsig_go, oNsig_pfocr=oNsig_pfocr, rNsig_pfcor=rNsig_pfcor)
 saveRDS(GSE_index_2_100_perm_res, file=paste0(outdir, "GSE_index_",GSE_index,"_",Nperm,"_perm_result.rds"))
