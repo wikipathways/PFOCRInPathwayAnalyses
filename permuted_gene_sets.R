@@ -21,7 +21,7 @@ args <- commandArgs(trailingOnly=TRUE)
 
 GSE_index <- as.integer(args[1])
 print(GSE_index)
-outdir <- "/wynton/group/gladstone/biocore/projects/pfocr_pathway_enrichment_evaluation/permuted_geneset_databases_results_results_remove_rSEA3/"
+outdir <- "/wynton/group/gladstone/biocore/projects/pfocr_pathway_enrichment_evaluation/permuted_geneset_databases_results_remove_rSEA3/"
 
 min_set_size <- 10
 max_set_size <- 500 
@@ -68,7 +68,7 @@ names(rsea_results_human_voom_wp) <- c("set_id", "ID", "Coverage", "TDP.bound","
 
 set.seed(1234)
 
-Nperm <- 2
+Nperm <- 10
 qLevels <- c(0.5, 0.75, 0.9, 0.95, 0.99)
 names_qLevels <- paste("quantile", round(100*qLevels), sep="_")
 PermuteDatabase <- function(p, GSE_index, path_list, path_annotation,pvalue_results_human_voom, gene_entrez) {
