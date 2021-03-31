@@ -115,23 +115,44 @@ TDPbound_full <- setTDP(merged$pvalue, merged$ENTREZID, alpha = 0.05)$TDP.bound
 
 # rsea_results_human_voom_wp=apply(as.matrix(GSE_index),1,function(x){run_rSEA3(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_wp,wp_list,wp_annotation)})
 rsea_results_human_voom_wp=SEA(merged$pvalue, merged$ENTREZID, pathlist = wp_list)
+TempRes <- data.frame(Comp.adjP=rsea_results_human_voom_wp$Comp.adjP, TDP.bound=rsea_results_human_voom_wp$TDP.bound)
+TempRes %<>% filter(Comp.adjP < 0.05)
+TDP_bound_90 <- TempRes %>%
+  .$TDP.bound %>%
+  quantile(.,c(0.5, 0.75, 0.9, 0.95, 0.99), na.rm=TRUE)
+oTDP_bound_90_wp <- TDP_bound_90
 oNsig_wp <- sum(rsea_results_human_voom_wp$Comp.adjP < 0.05, na.rm = TRUE)
+oTDP_bound_90_wp <- TDP_bound_90
 print(oNsig_wp)
 rNsig_wp <- t(sapply(1:Nperm, PermuteDatabase, GSE_index, wp_list, wp_annotation,pvalue_results_human_voom, gene_entrez))
 
 
 #rsea_results_human_voom_go=apply(as.matrix(GSE_index),1,function(x){run_rSEA3(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_go,go_list,go_annotation)})
 rsea_results_human_voom_go=SEA(merged$pvalue, merged$ENTREZID, pathlist = go_list)
+TempRes <- data.frame(Comp.adjP=rsea_results_human_voom_go$Comp.adjP, TDP.bound=rsea_results_human_voom_go$TDP.bound)
+TempRes %<>% filter(Comp.adjP < 0.05)
+TDP_bound_90 <- TempRes %>%
+  .$TDP.bound %>%
+  quantile(.,c(0.5, 0.75, 0.9, 0.95, 0.99), na.rm=TRUE)
+oTDP_bound_90_go <- TDP_bound_90
+
 oNsig_go <- sum(rsea_results_human_voom_go$Comp.adjP < 0.05, na.rm = TRUE)
 print(oNsig_go)
 rNsig_go <- t(sapply(1:Nperm, PermuteDatabase, GSE_index, go_list, go_annotation,pvalue_results_human_voom, gene_entrez))
 
 # rsea_results_human_voom_pfocr=apply(as.matrix(GSE_index),1,function(x){run_rSEA3(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_pfocr,pfocr_3sets_list,pfocr_annotation_3sets)})
 rsea_results_human_voom_pfocr=SEA(merged$pvalue, merged$ENTREZID, pathlist = pfocr_3sets_list)
+TempRes <- data.frame(Comp.adjP=rsea_results_human_voom_pfocr$Comp.adjP, TDP.bound=rsea_results_human_voom_pfocr$TDP.bound)
+TempRes %<>% filter(Comp.adjP < 0.05)
+TDP_bound_90 <- TempRes %>%
+  .$TDP.bound %>%
+  quantile(.,c(0.5, 0.75, 0.9, 0.95, 0.99), na.rm=TRUE)
+oTDP_bound_90_pfocr <- TDP_bound_90
+
 oNsig_pfocr <- sum(rsea_results_human_voom_pfocr$Comp.adjP < 0.05, na.rm = TRUE)
 print(oNsig_pfocr)
 rNsig_pfcor <- t(sapply(1:Nperm, PermuteDatabase, GSE_index, pfocr_3sets_list, pfocr_annotation_3sets,pvalue_results_human_voom, gene_entrez))
 
-GSE_index_2_100_perm_res <- list(TDPbound_full=TDPbound_full, oNsig_wp=oNsig_wp, rNsig_wp=rNsig_wp, oNsig_go=oNsig_go, rNsig_go=rNsig_go, oNsig_pfocr=oNsig_pfocr, rNsig_pfcor=rNsig_pfcor)
+GSE_index_2_100_perm_res <- list(TDPbound_full=TDPbound_full, oNsig_wp=oNsig_wp, rNsig_wp=rNsig_wp, oNsig_go=oNsig_go, rNsig_go=rNsig_go, oNsig_pfocr=oNsig_pfocr, rNsig_pfcor=rNsig_pfcor, oTDP_bound_90_wp=oTDP_bound_90_wp, oTDP_bound_90_go=oTDP_bound_90_go, oTDP_bound_90_pfocr=oTDP_bound_90_pfocr)
 saveRDS(GSE_index_2_100_perm_res, file=paste0(outdir, "GSE_index_",GSE_index,"_",Nperm,"_perm_result.rds"))
 
