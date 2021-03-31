@@ -20,7 +20,8 @@ require(pROC)
 args <- commandArgs(trailingOnly=TRUE)
 
 GSE_index <- as.integer(args[1])
-outdir <- "/wynton/group/gladstone/biocore/projects/pfocr_pathway_enrichment_evaluation/permuted_geneset_databases_results_remove_rSEA3/"
+print(GSE_index)
+outdir <- "/wynton/group/gladstone/biocore/projects/pfocr_pathway_enrichment_evaluation/permuted_geneset_databases_results_results_remove_rSEA3/"
 
 min_set_size <- 10
 max_set_size <- 500 
@@ -88,7 +89,6 @@ PermuteDatabase <- function(p, GSE_index, path_list, path_annotation,pvalue_resu
   merged <- merged[!is.na(merged$pvalue) & !is.na(merged$ENTREZID),]
 
   res <- SEA(merged$pvalue, merged$ENTREZID, pathlist = temp_list)
-
   # res=apply(as.matrix(GSE_index),1,function(x){run_rSEA3(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_go,temp_list,temp_annotation)})
   Nsig <- sum(res$Comp.adjP < 0.05, na.rm = TRUE)
   TempRes <- data.frame(Comp.adjP=res$Comp.adjP, TDP.bound=res$TDP.bound)
@@ -120,7 +120,7 @@ print(oNsig_wp)
 rNsig_wp <- t(sapply(1:Nperm, PermuteDatabase, GSE_index, wp_list, wp_annotation,pvalue_results_human_voom, gene_entrez))
 
 
-rsea_results_human_voom_go=apply(as.matrix(GSE_index),1,function(x){run_rSEA3(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_go,go_list,go_annotation)})
+#rsea_results_human_voom_go=apply(as.matrix(GSE_index),1,function(x){run_rSEA3(as.matrix(pvalue_results_human_voom[,x]),rsea_results_human_voom_go,go_list,go_annotation)})
 rsea_results_human_voom_go=SEA(merged$pvalue, merged$ENTREZID, pathlist = go_list)
 oNsig_go <- sum(rsea_results_human_voom_go$Comp.adjP < 0.05, na.rm = TRUE)
 print(oNsig_go)
